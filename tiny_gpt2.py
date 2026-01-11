@@ -1,0 +1,75 @@
+"""
+Tiny GPT-2 test training pipeline.
+
+Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with tiny-gpt2 (~17M params).
+This is the test configuration for fast validation of the training pipeline.
+
+Expected runtime: ~1-2 minutes for all algorithms.
+"""
+
+from algorithms import TrainingConfig
+from algorithms.grpo import GRPOExtraConfig
+from utils import CheckpointConfig
+from pipeline import run_pipeline
+
+# Tiny GPT-2 model for testing
+MODEL = "sshleifer/tiny-gpt2"
+
+# Test training configuration
+TEST_MAX_STEPS = 10
+TEST_MAX_SAMPLES = 10
+TEST_SAVE_INTERVAL_SECONDS = 10
+
+CHECKPOINT_CONFIG = CheckpointConfig.test(save_interval_seconds=TEST_SAVE_INTERVAL_SECONDS)
+
+# Common test settings
+TEST_SETTINGS = {
+    "per_device_train_batch_size": 1,
+    "gradient_accumulation_steps": 1,
+    "max_steps": TEST_MAX_STEPS,
+    "max_samples": TEST_MAX_SAMPLES,
+    "gradient_checkpointing": False,
+    "bf16": False,
+    "use_liger_kernel": False,
+    "dataloader_pin_memory": False,
+    "dataloader_num_workers": 0,
+    "checkpoint_config": CHECKPOINT_CONFIG,
+    "clean_output_dir": True,
+    "save_steps": 5,
+}
+
+configs = {
+    "sft": TrainingConfig(
+        model_name=MODEL,
+        output_dir="test-model-sft",
+        dataset_name="trl-lib/Capybara",
+        **TEST_SETTINGS,
+    ),
+    "reward": TrainingConfig(
+        model_name=MODEL,
+        output_dir="test-model-reward",
+        dataset_name="trl-lib/ultrafeedback_binarized",
+        **TEST_SETTINGS,
+    ),
+    "dpo": TrainingConfig(
+        model_name=MODEL,
+        output_dir="test-model-dpo",
+        dataset_name="trl-lib/ultrafeedback_binarized",
+        **TEST_SETTINGS,
+    ),
+    "grpo": TrainingConfig(
+        model_name=MODEL,
+        output_dir="test-model-grpo",
+        dataset_name="trl-lib/DeepMath-103K",
+        **TEST_SETTINGS,
+    ),
+}
+
+# GRPO extra config with minimal generation settings
+grpo_extra = GRPOExtraConfig(
+    num_generations=2,
+    max_completion_length=32,
+)
+
+if __name__ == "__main__":
+    run_pipeline(configs, grpo_extra=grpo_extra)

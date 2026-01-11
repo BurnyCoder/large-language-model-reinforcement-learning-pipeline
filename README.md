@@ -17,6 +17,25 @@ This project demonstrates a complete LLM training pipeline with four key trainin
 
 All scripts are optimized for **6GB VRAM GPUs** using memory-efficient techniques like Liger Kernel and gradient checkpointing.
 
+## Project Structure
+
+```
+llmrl/
+├── algorithms/              # Training algorithm implementations
+│   ├── base.py              # TrainingConfig dataclass + shared utilities
+│   ├── sft.py               # Supervised Fine-Tuning
+│   ├── reward.py            # Reward Model Training
+│   ├── dpo.py               # Direct Preference Optimization
+│   └── grpo.py              # Group Relative Policy Optimization
+├── utils/
+│   └── training_utils.py    # Checkpoint callbacks (supports minutes & seconds)
+├── pipeline.py              # Runs all algorithms for a given config
+├── qwen2.5_0.5.py           # Qwen 2.5 0.5B production configs
+├── tiny_gpt2.py             # tiny-gpt2 test configs (fast validation)
+├── run_all.py               # Main entry point
+└── requirements.txt
+```
+
 ## Training Pipeline
 
 ```
@@ -49,7 +68,8 @@ All scripts are optimized for **6GB VRAM GPUs** using memory-efficient technique
 
 - **Four Training Methods**: Complete coverage of modern LLM training techniques
 - **Memory Efficient**: Optimized for 8GB VRAM using Liger Kernel (60% memory reduction)
-- **Single Command Execution**: Run the entire pipeline with `python run_all.py`
+- **Modular Architecture**: Algorithms, configs, and utilities cleanly separated
+- **Test Pipeline**: Fast validation with tiny-gpt2 (~1-2 minutes)
 - **TensorBoard Logging**: Real-time training metrics and visualization
 - **Production-Ready Configs**: Gradient checkpointing, bf16 precision, optimized data loading
 
@@ -117,82 +137,58 @@ pip install -r requirements.txt
 
 ## Quick Start
 
-### Run the Complete Pipeline
+### Run Test Pipeline (Fast Validation)
 
-Execute all four training stages sequentially:
+Test the entire pipeline with tiny-gpt2 (~1-2 minutes):
+
+```bash
+python run_all.py --test
+```
+
+### Run Production Pipeline
+
+Train with Qwen 2.5 0.5B models:
+
+```bash
+python run_all.py --prod
+```
+
+### Run Both Pipelines
 
 ```bash
 python run_all.py
 ```
 
-### Run Individual Scripts
-
-Train specific components:
+### Run Individual Model Pipelines
 
 ```bash
-# Supervised Fine-Tuning
-python train_sft.py
+# Test pipeline (tiny-gpt2)
+python tiny_gpt2.py
 
-# Reward Model Training
-python train_reward.py
-
-# Direct Preference Optimization
-python train_dpo.py
-
-# Group Relative Policy Optimization
-python train_grpo.py
+# Production pipeline (Qwen 2.5 0.5B)
+python qwen2.5_0.5.py
 ```
 
-## Training Scripts
+## Model Configurations
 
-### `train_sft.py` - Supervised Fine-Tuning
+### Production: `qwen2.5_0.5.py`
 
-| Parameter | Value |
-|-----------|-------|
-| **Trainer** | `SFTTrainer` |
-| **Model** | `Qwen/Qwen2.5-0.5B` |
-| **Dataset** | `trl-lib/Capybara` (~16K samples) |
-| **Batch Size** | 8 per device |
-| **Output** | `Qwen2.5-0.5B-SFT/` |
+| Algorithm | Model | Dataset | Batch Size |
+|-----------|-------|---------|------------|
+| SFT | `Qwen/Qwen2.5-0.5B` | `trl-lib/Capybara` | 8 |
+| Reward | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 8 |
+| DPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 2 |
+| GRPO | `Qwen/Qwen2-0.5B-Instruct` | `trl-lib/DeepMath-103K` | 2 |
 
-Trains a base model to follow instructions using high-quality conversation data.
+### Test: `tiny_gpt2.py`
 
-### `train_reward.py` - Reward Model
-
-| Parameter | Value |
-|-----------|-------|
-| **Trainer** | `RewardTrainer` |
-| **Model** | `Qwen/Qwen2.5-0.5B-Instruct` |
-| **Dataset** | `trl-lib/ultrafeedback_binarized` (~60K samples) |
-| **Batch Size** | 8 per device |
-| **Output** | `Qwen2.5-0.5B-Reward/` |
-
-Trains a reward model to score response quality based on human preferences.
-
-### `train_dpo.py` - Direct Preference Optimization
-
-| Parameter | Value |
-|-----------|-------|
-| **Trainer** | `DPOTrainer` |
-| **Model** | `Qwen/Qwen2.5-0.5B-Instruct` |
-| **Dataset** | `trl-lib/ultrafeedback_binarized` (~60K samples) |
-| **Batch Size** | 2 per device (dual model in memory) |
-| **Output** | `Qwen2.5-0.5B-DPO/` |
-
-Aligns the model with human preferences without requiring a separate reward model during training.
-
-### `train_grpo.py` - Group Relative Policy Optimization
-
-| Parameter | Value |
-|-----------|-------|
-| **Trainer** | `GRPOTrainer` |
-| **Model** | `Qwen/Qwen2-0.5B-Instruct` |
-| **Dataset** | `trl-lib/DeepMath-103K` (~103K samples) |
-| **Reward Function** | `accuracy_reward` |
-| **Batch Size** | 2 per device (generation overhead) |
-| **Output** | `Qwen2-0.5B-GRPO/` |
-
-Advanced RL training with verifiable rewards for mathematical reasoning tasks.
+| Setting | Value |
+|---------|-------|
+| Model | `sshleifer/tiny-gpt2` (~17M params) |
+| Max Steps | 10 |
+| Max Samples | 10 |
+| Checkpoint Interval | 10 seconds |
+| Batch Size | 1 |
 
 ## Models & Datasets
 
@@ -250,41 +246,41 @@ Effective batch size = `per_device_batch_size * gradient_accumulation_steps * nu
 
 ## Configuration
 
-### Modifying Training Parameters
+### Adding a New Model Configuration
 
-Edit the `*Config` objects in each training script:
-
-```python
-args=SFTConfig(
-    output_dir="custom-output",
-    per_device_train_batch_size=4,  # Reduce if OOM
-    gradient_accumulation_steps=8,   # Increase to maintain effective batch size
-    num_train_epochs=3,              # Add for multiple epochs
-    learning_rate=2e-5,              # Customize learning rate
-    # ... other parameters
-)
-```
-
-### Using Different Models
-
-Replace the model identifier in the training scripts:
+Create a new file (e.g., `llama_1b.py`):
 
 ```python
-model="meta-llama/Llama-3.2-1B"  # Or any compatible model
+from algorithms import TrainingConfig
+from utils import CheckpointConfig
+from pipeline import run_pipeline
+
+MODEL = "meta-llama/Llama-3.2-1B"
+
+configs = {
+    "sft": TrainingConfig(
+        model_name=MODEL,
+        output_dir="Llama-1B-SFT",
+        dataset_name="trl-lib/Capybara",
+        per_device_train_batch_size=4,
+        checkpoint_config=CheckpointConfig.production(20),
+    ),
+    # ... add other algorithms
+}
+
+if __name__ == "__main__":
+    run_pipeline(configs)
 ```
 
 ### Using Custom Datasets
 
-Load your own dataset:
-
 ```python
-from datasets import load_dataset
-
-# From Hugging Face Hub
-dataset = load_dataset("your-username/your-dataset", split="train")
-
-# From local files
-dataset = load_dataset("json", data_files="data/train.jsonl", split="train")
+TrainingConfig(
+    model_name="your-model",
+    output_dir="output",
+    dataset_name="your-username/your-dataset",
+    # ...
+)
 ```
 
 ## Monitoring Training
@@ -314,7 +310,7 @@ Qwen2-0.5B-GRPO/training.log
 
 ## Output Structure
 
-After training, each script creates:
+After training, each algorithm creates:
 
 ```
 <output_dir>/
