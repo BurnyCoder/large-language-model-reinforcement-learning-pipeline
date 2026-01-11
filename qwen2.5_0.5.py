@@ -12,8 +12,9 @@ from pipeline import run_pipeline
 BASE_MODEL = "Qwen/Qwen2.5-0.5B"
 INSTRUCT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 
-# Checkpoint settings: 10 checkpoints per algorithm × 4 algorithms × ~4GB = ~160GB (under 200GB limit)
-SAVE_TOTAL_LIMIT = 10
+# Checkpoint settings: uniform save_steps=100, max 12 per algorithm × 4 × ~4GB = ~192GB (under 200GB)
+SAVE_STEPS = 100
+SAVE_TOTAL_LIMIT = 12
 
 configs = {
     "sft": TrainingConfig(
@@ -27,7 +28,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=50,  # ~500 total steps, 10 checkpoints
+        save_steps=SAVE_STEPS,
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "reward": TrainingConfig(
@@ -41,7 +42,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=187,  # ~1875 total steps, 10 checkpoints
+        save_steps=SAVE_STEPS,
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "dpo": TrainingConfig(
@@ -55,7 +56,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=750,  # ~7500 total steps, 10 checkpoints
+        save_steps=SAVE_STEPS,
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "grpo": TrainingConfig(
@@ -69,7 +70,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=1287,  # ~12875 total steps, 10 checkpoints
+        save_steps=SAVE_STEPS,
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
 }

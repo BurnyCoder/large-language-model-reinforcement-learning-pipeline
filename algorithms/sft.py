@@ -1,9 +1,20 @@
 """
 Supervised Fine-Tuning (SFT) algorithm implementation.
+
+Features:
+- Rich console progress bars and status updates
+- Detailed metric logging to files
+- GPU memory monitoring
+- Checkpoint notifications
 """
 
 from trl import SFTTrainer, SFTConfig
 
+from utils import (
+    console,
+    get_training_callbacks,
+    print_info,
+)
 from .base import (
     TrainingConfig,
     setup_logging,
@@ -34,7 +45,6 @@ def train_sft(config: TrainingConfig) -> SFTTrainer:
         config.dataset_split,
         config.max_samples,
     )
-    logger.info(f"Using {len(dataset)} samples from {config.dataset_name}")
 
     # Build training args
     training_args_kwargs = {
@@ -61,14 +71,24 @@ def train_sft(config: TrainingConfig) -> SFTTrainer:
     if config.save_total_limit is not None:
         training_args_kwargs["save_total_limit"] = config.save_total_limit
 
+    # Get training callbacks
+    callbacks = get_training_callbacks(
+        output_dir=config.output_dir,
+        algorithm_name="SFT",
+        verbose=config.verbose,
+    )
+
     # Create trainer
+    print_info("Creating SFT trainer...")
     trainer = SFTTrainer(
         model=config.model_name,
         train_dataset=dataset,
         args=SFTConfig(**training_args_kwargs),
+        callbacks=callbacks,
     )
 
     # Train
+    console.print("[bold cyan]Starting SFT training loop...[/bold cyan]")
     trainer.train()
 
     # Finalize

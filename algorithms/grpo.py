@@ -1,5 +1,12 @@
 """
 Group Relative Policy Optimization (GRPO) algorithm implementation.
+
+Features:
+- Rich console progress bars and status updates
+- Detailed metric logging to files
+- GPU memory monitoring
+- Model architecture information display
+- Generation progress tracking
 """
 
 from dataclasses import dataclass
@@ -8,7 +15,15 @@ from typing import Callable, Optional
 from trl import GRPOTrainer, GRPOConfig
 from trl.rewards import accuracy_reward
 from transformers import AutoModelForCausalLM, AutoTokenizer
+from rich.progress import Progress, SpinnerColumn, TextColumn
 
+from utils import (
+    console,
+    get_training_callbacks,
+    print_info,
+    print_model_info,
+    print_config_table,
+)
 from .base import (
     TrainingConfig,
     setup_logging,
@@ -49,19 +64,40 @@ def train_grpo(
     logger = setup_logging(config.output_dir)
     logger.info(f"Starting GRPO training with model={config.model_name}")
 
+    # Print GRPO-specific config
+    print_config_table(grpo_config, "GRPO Extra Config")
+
     # Check if test model
     is_test_model = "tiny" in config.model_name.lower()
 
     # Load model and tokenizer
     if is_test_model:
-        model = AutoModelForCausalLM.from_pretrained(config.model_name)
-        tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+        print_info(f"Loading test model: {config.model_name}")
+
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console,
+            transient=True,
+        ) as progress:
+            task = progress.add_task("[cyan]Loading model...", total=None)
+            model = AutoModelForCausalLM.from_pretrained(config.model_name)
+            progress.update(task, description="[cyan]Loading tokenizer...")
+            tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+            progress.update(task, completed=100, total=100)
+
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
             model.config.pad_token_id = tokenizer.pad_token_id
+            print_info("Set pad_token to eos_token")
+
+        # Display model info
+        print_model_info(model)
+
         model_arg = model
         processing_class = tokenizer
     else:
+        print_info(f"Using model name directly: {config.model_name}")
         model_arg = config.model_name
         processing_class = None
 
@@ -71,17 +107,19 @@ def train_grpo(
         config.dataset_split,
         config.max_samples,
     )
-    logger.info(f"Using {len(dataset)} samples from {config.dataset_name}")
 
     # Determine reward function
     if grpo_config.reward_func is not None:
         reward_func = grpo_config.reward_func
+        print_info("Using custom reward function")
     elif is_test_model:
         # Simple test reward function
         def reward_func(completions, **kwargs):
             return [len(c) / 100.0 for c in completions]
+        print_info("Using test reward function (length-based)")
     else:
         reward_func = accuracy_reward
+        print_info("Using accuracy_reward function")
 
     # Build trainer kwargs
     trainer_kwargs = {
@@ -119,13 +157,27 @@ def train_grpo(
     if config.save_total_limit is not None:
         training_args_kwargs["save_total_limit"] = config.save_total_limit
 
+    # Get training callbacks
+    callbacks = get_training_callbacks(
+        output_dir=config.output_dir,
+        algorithm_name="GRPO",
+        verbose=config.verbose,
+    )
+
     # Create trainer
+    print_info("Creating GRPO trainer...")
+    console.print(f"  [dim]num_generations:[/dim] [cyan]{grpo_config.num_generations}[/cyan]")
+    console.print(f"  [dim]max_completion_length:[/dim] [cyan]{grpo_config.max_completion_length}[/cyan]")
+
     trainer = GRPOTrainer(
         **trainer_kwargs,
         args=GRPOConfig(**training_args_kwargs),
+        callbacks=callbacks,
     )
 
     # Train
+    console.print("[bold cyan]Starting GRPO training loop...[/bold cyan]")
+    console.print("[dim]Note: GRPO generates multiple completions per sample, which may take longer.[/dim]")
     trainer.train()
 
     # Finalize

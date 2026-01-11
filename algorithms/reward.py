@@ -1,10 +1,23 @@
 """
 Reward model training algorithm implementation.
+
+Features:
+- Rich console progress bars and status updates
+- Detailed metric logging to files
+- GPU memory monitoring
+- Model architecture information display
 """
 
 from trl import RewardTrainer, RewardConfig
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
+from rich.progress import Progress, SpinnerColumn, TextColumn
 
+from utils import (
+    console,
+    get_training_callbacks,
+    print_info,
+    print_model_info,
+)
 from .base import (
     TrainingConfig,
     setup_logging,
@@ -39,21 +52,38 @@ def train_reward(config: TrainingConfig) -> RewardTrainer:
         config.dataset_split,
         config.max_samples,
     )
-    logger.info(f"Using {len(dataset)} samples from {config.dataset_name}")
 
     # Model loading - test models need explicit sequence classification loading
     is_test_model = "tiny" in config.model_name.lower() or "test" in config.model_name.lower()
 
     if is_test_model:
-        model = AutoModelForSequenceClassification.from_pretrained(
-            config.model_name, num_labels=1
-        )
-        tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+        print_info(f"Loading test model as SequenceClassification: {config.model_name}")
+
+        with Progress(
+            SpinnerColumn(),
+            TextColumn("[progress.description]{task.description}"),
+            console=console,
+            transient=True,
+        ) as progress:
+            task = progress.add_task("[cyan]Loading model...", total=None)
+            model = AutoModelForSequenceClassification.from_pretrained(
+                config.model_name, num_labels=1
+            )
+            progress.update(task, description="[cyan]Loading tokenizer...")
+            tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+            progress.update(task, completed=100, total=100)
+
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
             model.config.pad_token_id = tokenizer.pad_token_id
+            print_info("Set pad_token to eos_token")
+
+        # Display model info
+        print_model_info(model)
+
         trainer_kwargs = {"model": model, "processing_class": tokenizer}
     else:
+        print_info(f"Using model name directly: {config.model_name}")
         trainer_kwargs = {"model": config.model_name}
 
     # Build training args
@@ -81,14 +111,24 @@ def train_reward(config: TrainingConfig) -> RewardTrainer:
     if config.save_total_limit is not None:
         training_args_kwargs["save_total_limit"] = config.save_total_limit
 
+    # Get training callbacks
+    callbacks = get_training_callbacks(
+        output_dir=config.output_dir,
+        algorithm_name="Reward",
+        verbose=config.verbose,
+    )
+
     # Create trainer
+    print_info("Creating Reward trainer...")
     trainer = RewardTrainer(
         **trainer_kwargs,
         train_dataset=dataset,
         args=RewardConfig(**training_args_kwargs),
+        callbacks=callbacks,
     )
 
     # Train
+    console.print("[bold cyan]Starting Reward training loop...[/bold cyan]")
     trainer.train()
 
     # Finalize

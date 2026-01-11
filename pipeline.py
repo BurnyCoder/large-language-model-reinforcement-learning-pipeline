@@ -1,12 +1,32 @@
 """
 Training pipeline that runs all algorithms with given configs.
+
+Features:
+- Rich console output with progress bars and status indicators
+- Comprehensive logging to console and files
+- System information display (GPU, memory, etc.)
+- Beautiful result tables
 """
 
 import time
-from typing import Dict
+from typing import Dict, List, Tuple
 
 from algorithms import TrainingConfig, train_sft, train_reward, train_dpo, train_grpo
 from algorithms.grpo import GRPOExtraConfig
+from utils import (
+    console,
+    print_header,
+    print_section,
+    print_success,
+    print_error,
+    print_info,
+    print_config_table,
+    print_system_info,
+    print_training_summary,
+    create_pipeline_progress,
+    print_pipeline_results,
+    format_duration,
+)
 
 
 TRAINERS = {
@@ -29,60 +49,96 @@ def run_pipeline(
                  e.g., {"sft": sft_config, "reward": reward_config, ...}
         grpo_extra: Optional extra config for GRPO (reward func, generation params)
     """
-    print("=" * 70)
-    print("STARTING TRAINING PIPELINE")
-    print("=" * 70)
-    print(f"Algorithms to run: {', '.join(configs.keys())}")
-    print("=" * 70)
+    # Print header
+    print_header(
+        "Training Pipeline",
+        f"Running {len(configs)} algorithm(s): {', '.join(configs.keys())}"
+    )
+
+    # Print system info
+    print_section("System Information")
+    print_system_info()
+
+    # Print configuration overview
+    print_section("Pipeline Configuration")
+    for algo, config in configs.items():
+        console.print(f"[bold cyan]{algo.upper()}[/bold cyan]")
+        print_config_table(config, f"{algo.upper()} Config")
+
+    if grpo_extra is not None:
+        print_config_table(grpo_extra, "GRPO Extra Config")
+
+    # Run training with progress tracking
+    print_section("Training Progress")
 
     start_time = time.time()
-    results = []
+    results: List[Tuple[str, str, float]] = []
 
-    for algo, config in configs.items():
-        print(f"\n{'='*60}")
-        print(f"Running {algo.upper()} training")
-        print(f"Model: {config.model_name}")
-        print(f"Output: {config.output_dir}")
-        print("=" * 60)
+    # Create pipeline progress bar
+    with create_pipeline_progress() as progress:
+        pipeline_task = progress.add_task(
+            "[cyan]Pipeline Progress",
+            total=len(configs)
+        )
 
-        algo_start = time.time()
+        for algo, config in configs.items():
+            # Update progress description
+            progress.update(
+                pipeline_task,
+                description=f"[cyan]Running {algo.upper()}..."
+            )
 
-        try:
-            if algo == "grpo" and grpo_extra is not None:
-                train_grpo(config, grpo_extra)
-            else:
-                TRAINERS[algo](config)
-            status = "PASSED"
-        except Exception as e:
-            print(f"Error in {algo}: {e}")
-            status = "FAILED"
+            console.print()
+            print_section(f"{algo.upper()} Training")
+            print_info(f"Model: {config.model_name}")
+            print_info(f"Dataset: {config.dataset_name}")
+            print_info(f"Output: {config.output_dir}")
 
-        algo_duration = time.time() - algo_start
-        results.append((algo, status, algo_duration))
+            algo_start = time.time()
 
-        if status == "PASSED":
-            print(f"Completed {algo.upper()} in {algo_duration:.1f}s")
-        else:
-            print(f"Failed {algo.upper()} after {algo_duration:.1f}s")
+            try:
+                if algo == "grpo" and grpo_extra is not None:
+                    train_grpo(config, grpo_extra)
+                else:
+                    TRAINERS[algo](config)
+                status = "PASSED"
+                print_success(f"{algo.upper()} completed in {format_duration(time.time() - algo_start)}")
+            except Exception as e:
+                console.print_exception()
+                print_error(f"{algo.upper()} failed: {e}")
+                status = "FAILED"
+
+            algo_duration = time.time() - algo_start
+            results.append((algo, status, algo_duration))
+
+            # Print algorithm summary
+            print_training_summary(
+                algo,
+                algo_duration,
+                status="completed" if status == "PASSED" else "failed"
+            )
+
+            # Update pipeline progress
+            progress.advance(pipeline_task)
 
     total_duration = time.time() - start_time
 
-    # Print summary
-    print(f"\n{'='*70}")
-    print("PIPELINE RESULTS")
-    print("=" * 70)
+    # Print final results
+    print_section("Pipeline Results")
+    print_pipeline_results(results)
 
+    # Summary stats
     passed = sum(1 for _, status, _ in results if status == "PASSED")
     failed = sum(1 for _, status, _ in results if status == "FAILED")
 
-    for algo, status, duration in results:
-        status_icon = "[PASS]" if status == "PASSED" else "[FAIL]"
-        print(f"  {status_icon} {algo.upper()}: {duration:.1f}s")
+    console.print()
+    if failed == 0:
+        print_success(f"All {passed} algorithm(s) completed successfully!")
+    else:
+        print_error(f"{failed} algorithm(s) failed, {passed} passed")
 
-    print("-" * 70)
-    print(f"Total: {passed} passed, {failed} failed")
-    print(f"Total time: {total_duration:.1f}s")
-    print("=" * 70)
+    console.print(f"[dim]Total pipeline time: {format_duration(total_duration)}[/dim]")
+    console.print()
 
     if failed > 0:
         raise RuntimeError(f"{failed} algorithm(s) failed")
