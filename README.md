@@ -8,14 +8,7 @@ A complete, memory-efficient pipeline for training language models using reinfor
 
 ## Overview
 
-This project demonstrates a complete LLM training pipeline with four key training methods:
-
-- **Supervised Fine-Tuning (SFT)** - Train models on high-quality instruction data
-- **Reward Modeling** - Train models to evaluate response quality
-- **Direct Preference Optimization (DPO)** - Align models with human preferences
-- **Group Relative Policy Optimization (GRPO)** - Memory-efficient reinforcement learning
-
-All scripts are optimized for **6GB VRAM GPUs** using memory-efficient techniques like Liger Kernel and gradient checkpointing.
+A complete LLM training pipeline covering SFT, Reward Modeling, DPO, and GRPO. All scripts are optimized for **6GB VRAM GPUs** using Liger Kernel and gradient checkpointing.
 
 ## Project Structure
 
@@ -61,27 +54,21 @@ llmrl/
 
 ### Training Stages
 
-1. **SFT (Supervised Fine-Tuning)**: Teaches the model to follow instructions using the Capybara dataset (~16K high-quality conversations)
-
-2. **Reward Model**: Trains a reward model on the UltraFeedback dataset (~62K samples) to score response quality
-
-3. **DPO (Direct Preference Optimization)**: Aligns the model with human preferences using chosen/rejected pairs from UltraFeedback
-
-4. **GRPO (Group Relative Policy Optimization)**: Advanced RL training on mathematical reasoning using DeepMath-103K dataset
+1. **SFT (Supervised Fine-Tuning)**: Teaches the model to follow instructions
+2. **Reward Model**: Trains a model to score response quality
+3. **DPO (Direct Preference Optimization)**: Aligns the model with human preferences
+4. **GRPO (Group Relative Policy Optimization)**: Advanced RL for mathematical reasoning
 
 ## Features
 
-- **Four Training Methods**: Complete coverage of modern LLM training techniques (SFT, Reward, DPO, GRPO)
 - **Memory Efficient**: Optimized for 6GB+ VRAM using Liger Kernel (60% memory reduction)
 - **Modular Architecture**: Algorithms and configs cleanly separated
-- **Test Pipeline**: Fast validation with SmolLM2-135M (~1-2 minutes)
-- **Experiment Tracking**: Real-time metrics via TensorBoard, Weights & Biases, and Neptune
-- **Rich Console Output**: Beautiful progress bars, tables, and color-coded status messages using [Rich](https://rich.readthedocs.io/)
+- **Test Pipeline**: Fast validation with SmolLM2-135M
+- **Experiment Tracking**: TensorBoard, Weights & Biases, and Neptune integration
+- **Rich Console Output**: Progress bars, tables, and color-coded messages via [Rich](https://rich.readthedocs.io/)
 - **GPU Memory Monitoring**: Live GPU memory display during training
-- **Unique Run IDs**: Each run gets a timestamped ID (YYYYMMDD_HHMMSS_xxxx) to prevent overwrites
-- **Comprehensive Logging**: Training metrics saved to JSONL, events log, and console output captured
-- **System Information Display**: Shows GPU, RAM, disk, and CPU info at startup
-- **Production-Ready Configs**: Gradient checkpointing, bf16 precision, optimized data loading
+- **Unique Run IDs**: Timestamped IDs (YYYYMMDD_HHMMSS_xxxx) prevent overwrites
+- **Comprehensive Logging**: Metrics saved to JSONL, events log, and console output
 
 ## Requirements
 
@@ -184,28 +171,6 @@ python smollm2_135m.py
 python qwen2.5_0.5b.py
 ```
 
-## Model Configurations
-
-### Production: `qwen2.5_0.5b.py`
-
-| Algorithm | Model | Dataset | Batch Size |
-|-----------|-------|---------|------------|
-| SFT | `Qwen/Qwen2.5-0.5B` | `trl-lib/Capybara` | 8 |
-| Reward | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 8 |
-| DPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 2 |
-| GRPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/DeepMath-103K` | 2 |
-
-### Test: `smollm2_135m.py`
-
-| Setting | Value |
-|---------|-------|
-| Model (Base) | `HuggingFaceTB/SmolLM2-135M` (~135M params, ~724 MB) |
-| Model (Instruct) | `HuggingFaceTB/SmolLM2-135M-Instruct` (~135M params, ~724 MB) |
-| Max Steps | 10 |
-| Max Samples | 10 |
-| Save Steps | 5 |
-| Batch Size | 1 |
-
 ## Models & Datasets
 
 ### Models
@@ -252,14 +217,6 @@ bf16=True
 ```
 
 Uses bfloat16 mixed precision for reduced memory and faster training.
-
-### Batch Size Tuning
-
-- **SFT/Reward**: Batch size 8 with gradient accumulation 4
-- **DPO**: Batch size 2 (requires two models in memory)
-- **GRPO**: Batch size 2 (generation overhead)
-
-Effective batch size = `per_device_batch_size * gradient_accumulation_steps * num_gpus`
 
 ## Configuration
 
