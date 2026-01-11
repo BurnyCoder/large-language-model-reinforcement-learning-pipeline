@@ -50,7 +50,7 @@ llmrl/
 |                                                                     |
 |  +----------+    +-----------+    +----------+    +-----------+     |
 |  |   SFT    |--->|  Reward   |--->|   DPO    |--->|   GRPO    |     |
-|  | (16K)    |    |  (60K)    |    |  (60K)   |    |  (103K)   |     |
+|  | (16K)    |    |  (62K)    |    |  (62K)   |    |  (103K)   |     |
 |  +----------+    +-----------+    +----------+    +-----------+     |
 |                                                                     |
 |  Instruction     Response         Preference      Reinforcement     |
@@ -63,7 +63,7 @@ llmrl/
 
 1. **SFT (Supervised Fine-Tuning)**: Teaches the model to follow instructions using the Capybara dataset (~16K high-quality conversations)
 
-2. **Reward Model**: Trains a reward model on the UltraFeedback dataset (~60K samples) to score response quality
+2. **Reward Model**: Trains a reward model on the UltraFeedback dataset (~62K samples) to score response quality
 
 3. **DPO (Direct Preference Optimization)**: Aligns the model with human preferences using chosen/rejected pairs from UltraFeedback
 
@@ -71,11 +71,16 @@ llmrl/
 
 ## Features
 
-- **Four Training Methods**: Complete coverage of modern LLM training techniques
+- **Four Training Methods**: Complete coverage of modern LLM training techniques (SFT, Reward, DPO, GRPO)
 - **Memory Efficient**: Optimized for 6GB+ VRAM using Liger Kernel (60% memory reduction)
 - **Modular Architecture**: Algorithms and configs cleanly separated
 - **Test Pipeline**: Fast validation with SmolLM2-135M (~1-2 minutes)
 - **Experiment Tracking**: Real-time metrics via TensorBoard, Weights & Biases, and Neptune
+- **Rich Console Output**: Beautiful progress bars, tables, and color-coded status messages using [Rich](https://rich.readthedocs.io/)
+- **GPU Memory Monitoring**: Live GPU memory display during training
+- **Unique Run IDs**: Each run gets a timestamped ID (YYYYMMDD_HHMMSS_xxxx) to prevent overwrites
+- **Comprehensive Logging**: Training metrics saved to JSONL, events log, and console output captured
+- **System Information Display**: Shows GPU, RAM, disk, and CPU info at startup
 - **Production-Ready Configs**: Gradient checkpointing, bf16 precision, optimized data loading
 
 ## Requirements
@@ -217,7 +222,7 @@ python qwen2.5_0.5b.py
 | Dataset | Samples | Description |
 |---------|---------|-------------|
 | [trl-lib/Capybara](https://huggingface.co/datasets/trl-lib/Capybara) | ~16K | High-quality multi-turn conversations |
-| [trl-lib/ultrafeedback_binarized](https://huggingface.co/datasets/trl-lib/ultrafeedback_binarized) | ~60K | Preference data with chosen/rejected pairs |
+| [trl-lib/ultrafeedback_binarized](https://huggingface.co/datasets/trl-lib/ultrafeedback_binarized) | ~62K | Preference data with chosen/rejected pairs |
 | [trl-lib/DeepMath-103K](https://huggingface.co/datasets/trl-lib/DeepMath-103K) | ~103K | Mathematical reasoning problems |
 
 ## Memory Optimizations
@@ -295,6 +300,36 @@ TrainingConfig(
 )
 ```
 
+### GRPO Configuration
+
+GRPO supports custom reward functions and generation parameters:
+
+```python
+from algorithms.grpo import GRPOExtraConfig
+
+grpo_extra = GRPOExtraConfig(
+    reward_func=None,           # Uses accuracy_reward by default
+    num_generations=4,          # Completions per prompt
+    max_completion_length=256,  # Max tokens per completion
+)
+
+run_pipeline(configs, grpo_extra=grpo_extra)
+```
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and configure your API keys for experiment tracking:
+
+```bash
+# Weights & Biases
+WANDB_API_KEY=your-key
+WANDB_PROJECT=llmrl
+
+# Neptune.ai
+NEPTUNE_API_TOKEN=your-token
+NEPTUNE_PROJECT=your-workspace/llmrl
+```
+
 ## Monitoring Training
 
 ### TensorBoard
@@ -311,13 +346,16 @@ tensorboard --logdir .
 
 ### Training Logs
 
-Each script creates a `training.log` file in its output directory:
+Each run creates comprehensive logs in the `runs/` directory:
 
 ```
-Qwen2.5-0.5B-SFT/training.log
-Qwen2.5-0.5B-Reward/training.log
-Qwen2.5-0.5B-DPO/training.log
-Qwen2.5-0.5B-GRPO/training.log
+runs/
+└── 20250111_143052_ab12/     # Unique run ID
+    ├── run_info.json         # Run metadata (algorithms, timestamp)
+    ├── Qwen2.5-0.5B-SFT/     # SFT output
+    ├── Qwen2.5-0.5B-Reward/  # Reward output
+    ├── Qwen2.5-0.5B-DPO/     # DPO output
+    └── Qwen2.5-0.5B-GRPO/    # GRPO output
 ```
 
 ## Output Structure
@@ -326,12 +364,15 @@ After training, each algorithm creates:
 
 ```
 <output_dir>/
-├── training.log          # Console output log
+├── training.log           # Standard training log
+├── console_output.log     # Full Rich console output (tables, progress bars)
+├── training_metrics.jsonl # Step-by-step metrics in JSON Lines format
+├── training_events.log    # Human-readable event log
 ├── logs/                  # TensorBoard logs
-├── config.json           # Model config
-├── model.safetensors     # Model weights
-├── tokenizer.json        # Tokenizer
-└── ...                   # Other model files
+├── config.json            # Model config
+├── model.safetensors      # Model weights
+├── tokenizer.json         # Tokenizer
+└── ...                    # Other model files
 ```
 
 ## Troubleshooting
@@ -368,7 +409,7 @@ pip install -r requirements.txt --upgrade
 
 ## Acknowledgments
 
-- [Hugging Face](https://huggingface.co/) for the TRL library and transformers ecosystem
+- [Hugging Face](https://huggingface.co/) for the TRL library, transformers ecosystem, and [SmolLM2](https://huggingface.co/HuggingFaceTB/SmolLM2-135M) models
 - [Qwen Team](https://huggingface.co/Qwen) for the Qwen model family
 - [LinkedIn](https://github.com/linkedin/Liger-Kernel) for the Liger Kernel
 
