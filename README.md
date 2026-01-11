@@ -354,7 +354,7 @@ pip install -r requirements.txt --upgrade
 - [TRL Documentation](https://huggingface.co/docs/trl/index)
 - [TRL GitHub Repository](https://github.com/huggingface/trl)
 - [Hugging Face Transformers](https://huggingface.co/docs/transformers/index)
-- [GRPO Paper (DeepSeek-R1)](https://huggingface.co/papers/2402.03300)
+- [GRPO Paper (DeepSeekMath)](https://huggingface.co/papers/2402.03300)
 - [DPO Paper](https://huggingface.co/papers/2305.18290)
 - [Liger Kernel](https://github.com/linkedin/Liger-Kernel)
 
