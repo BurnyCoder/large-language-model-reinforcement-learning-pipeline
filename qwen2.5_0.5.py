@@ -12,7 +12,6 @@ from pipeline import run_pipeline
 # Qwen 2.5 0.5B models
 BASE_MODEL = "Qwen/Qwen2.5-0.5B"
 INSTRUCT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
-GRPO_MODEL = "Qwen/Qwen2-0.5B-Instruct"  # Different model for GRPO
 
 # Production training configuration
 CHECKPOINT_CONFIG = CheckpointConfig.production(save_interval_minutes=20)
@@ -58,8 +57,8 @@ configs = {
         checkpoint_config=CHECKPOINT_CONFIG,
     ),
     "grpo": TrainingConfig(
-        model_name=GRPO_MODEL,
-        output_dir="Qwen2-0.5B-GRPO",
+        model_name=INSTRUCT_MODEL,
+        output_dir="Qwen2.5-0.5B-GRPO",
         dataset_name="trl-lib/DeepMath-103K",
         per_device_train_batch_size=2,  # Reduced for 8GB VRAM (generation overhead)
         gradient_accumulation_steps=4,
