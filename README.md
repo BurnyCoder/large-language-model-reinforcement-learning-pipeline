@@ -22,18 +22,23 @@ All scripts are optimized for **6GB VRAM GPUs** using memory-efficient technique
 ```
 llmrl/
 ├── algorithms/              # Training algorithm implementations
+│   ├── __init__.py          # Module exports
 │   ├── base.py              # TrainingConfig dataclass + shared utilities
 │   ├── sft.py               # Supervised Fine-Tuning
 │   ├── reward.py            # Reward Model Training
 │   ├── dpo.py               # Direct Preference Optimization
 │   └── grpo.py              # Group Relative Policy Optimization
 ├── utils/                   # Logging and visualization utilities
-│   └── logging.py           # Rich console output and progress tracking
+│   ├── __init__.py          # Module exports
+│   ├── logging.py           # Rich console output and progress tracking
+│   └── run_id.py            # Run ID generation and directory management
+├── cache_config.py          # HuggingFace cache directory configuration
 ├── pipeline.py              # Runs all algorithms for a given config
-├── qwen2.5_0.5.py           # Qwen 2.5 0.5B production configs
-├── tiny_gpt2.py             # tiny-gpt2 test configs (fast validation)
+├── qwen2.5_0.5b.py          # Qwen 2.5 0.5B production configs
+├── smollm2_135m.py          # SmolLM2-135M test configs (fast validation)
 ├── run_all.py               # Main entry point
-└── requirements.txt
+├── requirements.txt         # Python dependencies
+└── .env.example             # Environment variable template
 ```
 
 ## Training Pipeline
@@ -69,8 +74,8 @@ llmrl/
 - **Four Training Methods**: Complete coverage of modern LLM training techniques
 - **Memory Efficient**: Optimized for 6GB+ VRAM using Liger Kernel (60% memory reduction)
 - **Modular Architecture**: Algorithms and configs cleanly separated
-- **Test Pipeline**: Fast validation with tiny-gpt2 (~1-2 minutes)
-- **TensorBoard Logging**: Real-time training metrics and visualization
+- **Test Pipeline**: Fast validation with SmolLM2-135M (~1-2 minutes)
+- **Experiment Tracking**: Real-time metrics via TensorBoard, Weights & Biases, and Neptune
 - **Production-Ready Configs**: Gradient checkpointing, bf16 precision, optimized data loading
 
 ## Requirements
@@ -98,9 +103,12 @@ llmrl/
 | peft | >=0.13.0 | Parameter-efficient fine-tuning |
 | torch | >=2.2.0 | PyTorch framework |
 | tensorboard | latest | Training visualization |
-| liger-kernel | latest | Memory-efficient CUDA kernels |
+| liger-kernel | latest | Memory-efficient Triton kernels |
 | rich | >=13.0.0 | Beautiful console output and progress bars |
 | psutil | >=5.9.0 | System resource monitoring |
+| wandb | latest | Weights & Biases experiment tracking |
+| neptune | latest | Neptune experiment tracking |
+| python-dotenv | latest | Environment variable loading |
 
 ## Installation
 
@@ -141,7 +149,7 @@ pip install -r requirements.txt
 
 ### Run Test Pipeline (Fast Validation)
 
-Test the entire pipeline with tiny-gpt2 (~1-2 minutes):
+Test the entire pipeline with SmolLM2-135M (~1-2 minutes):
 
 ```bash
 python run_all.py --test
@@ -164,16 +172,16 @@ python run_all.py
 ### Run Individual Model Pipelines
 
 ```bash
-# Test pipeline (tiny-gpt2)
-python tiny_gpt2.py
+# Test pipeline (SmolLM2-135M)
+python smollm2_135m.py
 
 # Production pipeline (Qwen 2.5 0.5B)
-python qwen2.5_0.5.py
+python qwen2.5_0.5b.py
 ```
 
 ## Model Configurations
 
-### Production: `qwen2.5_0.5.py`
+### Production: `qwen2.5_0.5b.py`
 
 | Algorithm | Model | Dataset | Batch Size |
 |-----------|-------|---------|------------|
@@ -182,11 +190,12 @@ python qwen2.5_0.5.py
 | DPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 2 |
 | GRPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/DeepMath-103K` | 2 |
 
-### Test: `tiny_gpt2.py`
+### Test: `smollm2_135m.py`
 
 | Setting | Value |
 |---------|-------|
-| Model | `sshleifer/tiny-gpt2` (~100K params, ~4.7 MB) |
+| Model (Base) | `HuggingFaceTB/SmolLM2-135M` (~135M params, ~724 MB) |
+| Model (Instruct) | `HuggingFaceTB/SmolLM2-135M-Instruct` (~135M params, ~724 MB) |
 | Max Steps | 10 |
 | Max Samples | 10 |
 | Save Steps | 5 |
@@ -200,7 +209,8 @@ python qwen2.5_0.5.py
 |-------|------------|-----------|----------|
 | [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 490M | ~988 MB | Base model for SFT |
 | [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 490M | ~988 MB | Instruction-tuned for Reward/DPO/GRPO |
-| [sshleifer/tiny-gpt2](https://huggingface.co/sshleifer/tiny-gpt2) | ~100K | ~4.7 MB | Fast testing and CI validation |
+| [HuggingFaceTB/SmolLM2-135M](https://huggingface.co/HuggingFaceTB/SmolLM2-135M) | 135M | ~724 MB | Fast testing (base for Reward) |
+| [HuggingFaceTB/SmolLM2-135M-Instruct](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct) | 135M | ~724 MB | Fast testing (SFT/DPO/GRPO) |
 
 ### Datasets
 
@@ -220,7 +230,7 @@ This project uses several techniques to minimize GPU memory usage:
 use_liger_kernel=True  # 60% memory reduction
 ```
 
-[Liger Kernel](https://github.com/linkedin/Liger-Kernel) provides memory-efficient CUDA implementations of common operations.
+[Liger Kernel](https://github.com/linkedin/Liger-Kernel) provides memory-efficient Triton kernels for LLM training operations.
 
 ### Gradient Checkpointing
 

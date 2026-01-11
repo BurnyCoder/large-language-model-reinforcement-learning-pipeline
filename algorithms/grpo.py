@@ -67,8 +67,9 @@ def train_grpo(
     # Print GRPO-specific config
     print_config_table(grpo_config, "GRPO Extra Config")
 
-    # Check if test model
-    is_test_model = "tiny" in config.model_name.lower()
+    # Check if test model (tiny-gpt2 or SmolLM2)
+    model_name_lower = config.model_name.lower()
+    is_test_model = "tiny" in model_name_lower or "smollm" in model_name_lower
 
     # Load model and tokenizer
     if is_test_model:

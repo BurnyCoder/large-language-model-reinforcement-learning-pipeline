@@ -210,13 +210,13 @@ Examples:
         "--test",
         "-t",
         action="store_true",
-        help="Run only test pipeline (tiny_gpt2)",
+        help="Run only test pipeline (smollm2_135m)",
     )
     parser.add_argument(
         "--prod",
         "-p",
         action="store_true",
-        help="Run only production pipeline (qwen2.5_0.5)",
+        help="Run only production pipeline (qwen2.5_0.5b)",
     )
     return parser.parse_args()
 
