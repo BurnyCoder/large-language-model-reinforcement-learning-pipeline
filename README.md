@@ -65,7 +65,7 @@ llmrl/
 ## Features
 
 - **Four Training Methods**: Complete coverage of modern LLM training techniques
-- **Memory Efficient**: Optimized for 8GB VRAM using Liger Kernel (60% memory reduction)
+- **Memory Efficient**: Optimized for 6GB+ VRAM using Liger Kernel (60% memory reduction)
 - **Modular Architecture**: Algorithms and configs cleanly separated
 - **Test Pipeline**: Fast validation with tiny-gpt2 (~1-2 minutes)
 - **TensorBoard Logging**: Real-time training metrics and visualization
@@ -176,7 +176,7 @@ python qwen2.5_0.5.py
 | SFT | `Qwen/Qwen2.5-0.5B` | `trl-lib/Capybara` | 8 |
 | Reward | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 8 |
 | DPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/ultrafeedback_binarized` | 2 |
-| GRPO | `Qwen/Qwen2-0.5B-Instruct` | `trl-lib/DeepMath-103K` | 2 |
+| GRPO | `Qwen/Qwen2.5-0.5B-Instruct` | `trl-lib/DeepMath-103K` | 2 |
 
 ### Test: `tiny_gpt2.py`
 
@@ -195,8 +195,7 @@ python qwen2.5_0.5.py
 | Model | Parameters | Disk Size | Use Case |
 |-------|------------|-----------|----------|
 | [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 494M | ~988 MB | Base model for SFT |
-| [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 494M | ~988 MB | Instruction-tuned for Reward/DPO |
-| [Qwen/Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) | 494M | ~988 MB | Used for GRPO training |
+| [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 494M | ~988 MB | Instruction-tuned for Reward/DPO/GRPO |
 | [sshleifer/tiny-gpt2](https://huggingface.co/sshleifer/tiny-gpt2) | ~50K | ~4.7 MB | Fast testing and CI validation |
 
 ### Datasets

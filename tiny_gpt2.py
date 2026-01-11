@@ -1,7 +1,7 @@
 """
 Tiny GPT-2 test training pipeline.
 
-Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with tiny-gpt2 (~17M params).
+Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with tiny-gpt2 (~50K params).
 This is the test configuration for fast validation of the training pipeline.
 
 Expected runtime: ~1-2 minutes for all algorithms.

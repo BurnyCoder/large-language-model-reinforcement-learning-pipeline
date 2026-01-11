@@ -2,7 +2,7 @@
 Qwen 2.5 0.5B training pipeline.
 
 Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with Qwen 2.5 0.5B models.
-This is the production configuration optimized for 8GB VRAM GPUs.
+This is the production configuration optimized for 6GB+ VRAM GPUs.
 """
 
 from algorithms import TrainingConfig
