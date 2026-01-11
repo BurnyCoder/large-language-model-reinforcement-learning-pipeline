@@ -1,8 +1,8 @@
 """
-Test training pipeline with small models.
+Test training pipeline with SmolLM2-135M models.
 
-Uses SmolLM2-135M-Instruct for SFT (requires chat template) and
-tiny-gpt2 (~50K params) for Reward, DPO, and GRPO algorithms.
+Uses SmolLM2-135M-Instruct for SFT, DPO, and GRPO (has chat template),
+and SmolLM2-135M base for Reward (adds classification head).
 
 This is the test configuration for fast validation of the training pipeline.
 """
@@ -13,8 +13,9 @@ from algorithms import TrainingConfig
 from algorithms.grpo import GRPOExtraConfig
 from pipeline import run_pipeline
 
-# Tiny GPT-2 model for algorithms that don't need chat templates
-MODEL = "sshleifer/tiny-gpt2"
+# SmolLM2 models - smallest with proper architecture for all TRL algorithms
+MODEL = "HuggingFaceTB/SmolLM2-135M-Instruct"
+MODEL_BASE = "HuggingFaceTB/SmolLM2-135M"  # Base model for reward training
 
 # Test training configuration
 TEST_MAX_STEPS = 10
@@ -39,13 +40,13 @@ TEST_SETTINGS = {
 
 configs = {
     "sft": TrainingConfig(
-        model_name="HuggingFaceTB/SmolLM2-135M-Instruct",  # Needs chat template
+        model_name=MODEL,
         output_dir="test-model-sft",
         dataset_name="trl-lib/Capybara",
         **TEST_SETTINGS,
     ),
     "reward": TrainingConfig(
-        model_name=MODEL,
+        model_name=MODEL_BASE,  # Base model for classification head
         output_dir="test-model-reward",
         dataset_name="trl-lib/ultrafeedback_binarized",
         **TEST_SETTINGS,

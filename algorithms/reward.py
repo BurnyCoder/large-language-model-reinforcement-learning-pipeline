@@ -31,10 +31,6 @@ def train_reward(config: TrainingConfig) -> RewardTrainer:
     """
     Run Reward model training with the given configuration.
 
-    Note: For test models (tiny-gpt2), we need to explicitly load as
-    sequence classification. For instruction-tuned models, the trainer
-    handles this automatically.
-
     Args:
         config: TrainingConfig with model, dataset, and training parameters
 
@@ -53,38 +49,32 @@ def train_reward(config: TrainingConfig) -> RewardTrainer:
         config.max_samples,
     )
 
-    # Model loading - test models need explicit sequence classification loading
-    is_test_model = "tiny" in config.model_name.lower() or "test" in config.model_name.lower()
+    # Always load model explicitly as SequenceClassification for reward training
+    print_info(f"Loading model as SequenceClassification: {config.model_name}")
 
-    if is_test_model:
-        print_info(f"Loading test model as SequenceClassification: {config.model_name}")
+    with Progress(
+        SpinnerColumn(),
+        TextColumn("[progress.description]{task.description}"),
+        console=console,
+        transient=True,
+    ) as progress:
+        task = progress.add_task("[cyan]Loading model...", total=None)
+        model = AutoModelForSequenceClassification.from_pretrained(
+            config.model_name, num_labels=1
+        )
+        progress.update(task, description="[cyan]Loading tokenizer...")
+        tokenizer = AutoTokenizer.from_pretrained(config.model_name)
+        progress.update(task, completed=100, total=100)
 
-        with Progress(
-            SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
-            console=console,
-            transient=True,
-        ) as progress:
-            task = progress.add_task("[cyan]Loading model...", total=None)
-            model = AutoModelForSequenceClassification.from_pretrained(
-                config.model_name, num_labels=1
-            )
-            progress.update(task, description="[cyan]Loading tokenizer...")
-            tokenizer = AutoTokenizer.from_pretrained(config.model_name)
-            progress.update(task, completed=100, total=100)
+    if tokenizer.pad_token is None:
+        tokenizer.pad_token = tokenizer.eos_token
+        model.config.pad_token_id = tokenizer.pad_token_id
+        print_info("Set pad_token to eos_token")
 
-        if tokenizer.pad_token is None:
-            tokenizer.pad_token = tokenizer.eos_token
-            model.config.pad_token_id = tokenizer.pad_token_id
-            print_info("Set pad_token to eos_token")
+    # Display model info
+    print_model_info(model)
 
-        # Display model info
-        print_model_info(model)
-
-        trainer_kwargs = {"model": model, "processing_class": tokenizer}
-    else:
-        print_info(f"Using model name directly: {config.model_name}")
-        trainer_kwargs = {"model": config.model_name}
+    trainer_kwargs = {"model": model, "processing_class": tokenizer}
 
     # Build training args
     training_args_kwargs = {
