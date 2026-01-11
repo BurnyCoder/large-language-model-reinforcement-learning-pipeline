@@ -3,7 +3,7 @@ Test training pipeline with SmolLM2-135M models.
 
 Model selection per TRL patterns:
 - SFT: Instruct (SmolLM2 base lacks chat template, unlike Qwen base)
-- Reward: Base (adds classification head)
+- Reward: Instruct (conversational datasets need chat template)
 - DPO/GRPO: Instruct
 
 This is the test configuration for fast validation of the training pipeline.
@@ -48,7 +48,7 @@ configs = {
         **TEST_SETTINGS,
     ),
     "reward": TrainingConfig(
-        model_name=MODEL_BASE,  # Reward adds classification head
+        model_name=MODEL_INSTRUCT,  # Conversational datasets need chat template
         output_dir="test-model-reward",
         dataset_name="trl-lib/ultrafeedback_binarized",
         **TEST_SETTINGS,

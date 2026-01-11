@@ -179,8 +179,7 @@ python qwen2.5_0.5b.py
 |-------|------------|-----------|----------|
 | [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 490M | ~988 MB | Base model for SFT |
 | [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 490M | ~988 MB | Instruction-tuned for Reward/DPO/GRPO |
-| [HuggingFaceTB/SmolLM2-135M](https://huggingface.co/HuggingFaceTB/SmolLM2-135M) | 135M | ~724 MB | Fast testing (base for Reward) |
-| [HuggingFaceTB/SmolLM2-135M-Instruct](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct) | 135M | ~724 MB | Fast testing (SFT/DPO/GRPO) |
+| [HuggingFaceTB/SmolLM2-135M-Instruct](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct) | 135M | ~724 MB | Fast testing (all algorithms) |
 
 ### Datasets
 
