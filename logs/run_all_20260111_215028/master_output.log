@@ -1,0 +1,610 @@
+
+╭────────────────────────────────────────────────────── Run All ───────────────────────────────────────────────────────╮
+│                                                                                                                      │
+│  LLM RL Training Pipelines                                                                                           │
+│                                                                                                                      │
+│  Mode: PRODUCTION                                                                                                    │
+│  Scripts: qwen2.5_0.5b.py                                                                                            │
+│                                                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                 System Information                                 
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property          ┃ Value                                                        ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Platform          │ Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39 │
+│ Python            │ 3.12.3                                                       │
+│ Working Directory │ /home/burny/projects/ml-playground/llmrl                     │
+│ Timestamp         │ 2026-01-11 21:50:28                                          │
+│ GPU 0             │ NVIDIA GeForce RTX 5070 Laptop GPU (8.0 GB)                  │
+└───────────────────┴──────────────────────────────────────────────────────────────┘
+
+
+─────────────────────────────────────────────── Running qwen2.5_0.5b.py ────────────────────────────────────────────────
+
+Command: python /home/burny/projects/ml-playground/llmrl/qwen2.5_0.5b.py
+Working directory: /home/burny/projects/ml-playground/llmrl
+
+2026-01-11 21:50:37.071660: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly 
+different numerical results due to floating-point round-off errors from different computation orders. To turn them off, 
+set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-11 21:50:37.265066: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to 
+use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow 
+with the appropriate compiler flags.
+2026-01-11 21:50:39.474797: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly 
+different numerical results due to floating-point round-off errors from different computation orders. To turn them off, 
+set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────────╮
+│                                                                                                                       
+│
+│  Training Pipeline                                                                                                    
+│
+│  Run ID: 20260111_215045_tddz | Running 4 algorithm(s): sft, reward, dpo, grpo                                        
+│
+│                                                                                                                       
+│
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────────╯
+
+
+───────────────────────────────────────────────────────────────────────────────── System Information 
+──────────────────────────────────────────────────────────────────────────────────
+
+                                 System Information
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Component         ┃ Details                                                      ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Platform          │ Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39 │
+│ Python            │ 3.12.3                                                       │
+│ Working Directory │ /home/burny/projects/ml-playground/llmrl                     │
+│ Timestamp         │ 2026-01-11 21:50:45                                          │
+│ GPU 0             │ NVIDIA GeForce RTX 5070 Laptop GPU (8.0 GB)                  │
+│ CUDA Version      │ 12.8                                                         │
+│ RAM               │ 15.3 GB (26.4% used)                                         │
+│ Disk              │ 1006.9 GB (9.8% used)                                        │
+│ CPU Cores         │ 16                                                           │
+└───────────────────┴──────────────────────────────────────────────────────────────┘
+
+
+─────────────────────────────────────────────────────────────────────────────── Pipeline Configuration 
+────────────────────────────────────────────────────────────────────────────────
+
+SFT
+                                 SFT Config
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                   ┃ Value                                      ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ model_name                  │ Qwen/Qwen2.5-0.5B                          │
+│ output_dir                  │ runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT │
+│ dataset_name                │ trl-lib/Capybara                           │
+│ dataset_split               │ train                                      │
+│ max_samples                 │ None                                       │
+│ per_device_train_batch_size │ 8                                          │
+│ gradient_accumulation_steps │ 4                                          │
+│ max_steps                   │ -1                                         │
+│ gradient_checkpointing      │ Yes                                        │
+│ bf16                        │ Yes                                        │
+│ use_liger_kernel            │ Yes                                        │
+│ dataloader_pin_memory       │ Yes                                        │
+│ dataloader_num_workers      │ 4                                          │
+│ logging_steps               │ 1                                          │
+│ logging_strategy            │ steps                                      │
+│ log_level                   │ info                                       │
+│ report_to                   │ wandb                                      │
+│ save_steps                  │ 42                                         │
+│ save_strategy               │ steps                                      │
+│ save_total_limit            │ 12                                         │
+│ clean_output_dir            │ No                                         │
+│ verbose                     │ Yes                                        │
+└─────────────────────────────┴────────────────────────────────────────────┘
+
+REWARD
+                                 REWARD Config
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                   ┃ Value                                         ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ model_name                  │ Qwen/Qwen2.5-0.5B-Instruct                    │
+│ output_dir                  │ runs/20260111_215045_tddz/Qwen2.5-0.5B-Reward │
+│ dataset_name                │ trl-lib/ultrafeedback_binarized               │
+│ dataset_split               │ train                                         │
+│ max_samples                 │ None                                          │
+│ per_device_train_batch_size │ 8                                             │
+│ gradient_accumulation_steps │ 4                                             │
+│ max_steps                   │ -1                                            │
+│ gradient_checkpointing      │ Yes                                           │
+│ bf16                        │ Yes                                           │
+│ use_liger_kernel            │ Yes                                           │
+│ dataloader_pin_memory       │ Yes                                           │
+│ dataloader_num_workers      │ 4                                             │
+│ logging_steps               │ 1                                             │
+│ logging_strategy            │ steps                                         │
+│ log_level                   │ info                                          │
+│ report_to                   │ wandb                                         │
+│ save_steps                  │ 156                                           │
+│ save_strategy               │ steps                                         │
+│ save_total_limit            │ 12                                            │
+│ clean_output_dir            │ No                                            │
+│ verbose                     │ Yes                                           │
+└─────────────────────────────┴───────────────────────────────────────────────┘
+
+DPO
+                                 DPO Config
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                   ┃ Value                                      ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ model_name                  │ Qwen/Qwen2.5-0.5B-Instruct                 │
+│ output_dir                  │ runs/20260111_215045_tddz/Qwen2.5-0.5B-DPO │
+│ dataset_name                │ trl-lib/ultrafeedback_binarized            │
+│ dataset_split               │ train                                      │
+│ max_samples                 │ None                                       │
+│ per_device_train_batch_size │ 2                                          │
+│ gradient_accumulation_steps │ 4                                          │
+│ max_steps                   │ -1                                         │
+│ gradient_checkpointing      │ Yes                                        │
+│ bf16                        │ Yes                                        │
+│ use_liger_kernel            │ Yes                                        │
+│ dataloader_pin_memory       │ Yes                                        │
+│ dataloader_num_workers      │ 4                                          │
+│ logging_steps               │ 1                                          │
+│ logging_strategy            │ steps                                      │
+│ log_level                   │ info                                       │
+│ report_to                   │ wandb                                      │
+│ save_steps                  │ 625                                        │
+│ save_strategy               │ steps                                      │
+│ save_total_limit            │ 12                                         │
+│ clean_output_dir            │ No                                         │
+│ verbose                     │ Yes                                        │
+└─────────────────────────────┴────────────────────────────────────────────┘
+
+GRPO
+                                 GRPO Config
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                   ┃ Value                                       ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ model_name                  │ Qwen/Qwen2.5-0.5B-Instruct                  │
+│ output_dir                  │ runs/20260111_215045_tddz/Qwen2.5-0.5B-GRPO │
+│ dataset_name                │ trl-lib/DeepMath-103K                       │
+│ dataset_split               │ train                                       │
+│ max_samples                 │ None                                        │
+│ per_device_train_batch_size │ 2                                           │
+│ gradient_accumulation_steps │ 4                                           │
+│ max_steps                   │ -1                                          │
+│ gradient_checkpointing      │ Yes                                         │
+│ bf16                        │ Yes                                         │
+│ use_liger_kernel            │ Yes                                         │
+│ dataloader_pin_memory       │ Yes                                         │
+│ dataloader_num_workers      │ 4                                           │
+│ logging_steps               │ 1                                           │
+│ logging_strategy            │ steps                                       │
+│ log_level                   │ info                                        │
+│ report_to                   │ wandb                                       │
+│ save_steps                  │ 1073                                        │
+│ save_strategy               │ steps                                       │
+│ save_total_limit            │ 12                                          │
+│ clean_output_dir            │ No                                          │
+│ verbose                     │ Yes                                         │
+└─────────────────────────────┴─────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────────────────────────────────────── Training Progress 
+──────────────────────────────────────────────────────────────────────────────────
+
+
+
+──────────────────────────────────────────────────────────────────────────────────── SFT Training 
+─────────────────────────────────────────────────────────────────────────────────────
+
+ℹ Model: Qwen/Qwen2.5-0.5B
+ℹ Dataset: trl-lib/Capybara
+ℹ Output: runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT
+ℹ Output directory ready: runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT
+[21:50:45] INFO     Starting SFT training with model=Qwen/Qwen2.5-0.5B                                                  
+sft.py:40
+Loading dataset: trl-lib/Capybara (split: train)
+
+             Dataset Information
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property    ┃ Value                       ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Dataset     │ trl-lib/Capybara            │
+│ Samples     │ 15,806                      │
+│ Columns     │ source, messages, num_turns │
+│ Sample Keys │ source, messages, num_turns │
+└─────────────┴─────────────────────────────┘
+
+ℹ Creating SFT trainer...
+[21:51:00] INFO     Applying Liger kernels to model instance with model type: qwen2 with kwargs: {}                     
+monkey_patch.py:2847
+The model is already on multiple devices. Skipping the move to device specified in `args`.
+Using auto half precision backend
+Starting SFT training loop...
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and 
+generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': 
+None, 'pad_token_id': 151643}.
+***** Running training *****
+  Num examples = 15,806
+  Num Epochs = 3
+  Instantaneous batch size per device = 8
+  Total train batch size (w. parallel, distributed & accumulation) = 32
+  Gradient Accumulation steps = 4
+  Total optimization steps = 1,482
+  Number of trainable parameters = 494,032,768
+Automatic Weights & Biases logging enabled, to disable set os.environ["WANDB_DISABLED"] = "true"
+wandb: Currently logged in as: burny (burny-burny) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run ne3tdf1a
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /home/burny/projects/ml-playground/llmrl/wandb/run-20260111_215101-ne3tdf1a
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run stellar-energy-6
+wandb: ⭐️ View project at https://wandb.ai/burny-burny/huggingface
+wandb: 🚀 View run at https://wandb.ai/burny-burny/huggingface/runs/ne3tdf1a
+
+──────────────────────────────────────────────────────────────────────────────── SFT Training Started 
+─────────────────────────────────────────────────────────────────────────────────
+
+ Max Steps:        Full epoch
+ Batch Size:       8
+ Gradient Accum:   4
+ Effective Batch:  32
+ Learning Rate:    2.00e-05
+ Warmup Steps:     0
+ Save Strategy:    SaveStrategy.STEPS (every 42)
+
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────────╮
+│ SFT Training Initialized                                                                                              
+│
+╰────────────────────────────────────────────────────────────────────────────────── Max steps: auto 
+──────────────────────────────────────────────────────────────────────────────────╯
+
+───────────────────────────────────────────────────────────────────────────────── Training Arguments 
+──────────────────────────────────────────────────────────────────────────────────
+
+                                                                                   TrainingArguments
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                               ┃ Value                                                                       
+┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ output_dir                              │ runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT                                  
+│
+│ overwrite_output_dir                    │ No                                                                          
+│
+│ do_train                                │ No                                                                          
+│
+│ do_eval                                 │ No                                                                          
+│
+│ do_predict                              │ No                                                                          
+│
+│ eval_strategy                           │ IntervalStrategy.NO                                                         
+│
+│ prediction_loss_only                    │ No                                                                          
+│
+│ per_device_train_batch_size             │ 8                                                                           
+│
+│ per_device_eval_batch_size              │ 8                                                                           
+│
+│ per_gpu_train_batch_size                │ None                                                                        
+│
+│ per_gpu_eval_batch_size                 │ None                                                                        
+│
+│ gradient_accumulation_steps             │ 4                                                                           
+│
+│ eval_accumulation_steps                 │ None                                                                        
+│
+│ eval_delay                              │ 0                                                                           
+│
+│ torch_empty_cache_steps                 │ None                                                                        
+│
+│ learning_rate                           │ 2e-05                                                                       
+│
+│ weight_decay                            │ 0.0                                                                         
+│
+│ adam_beta1                              │ 0.9                                                                         
+│
+│ adam_beta2                              │ 0.999                                                                       
+│
+│ adam_epsilon                            │ 1e-08                                                                       
+│
+│ max_grad_norm                           │ 1.0                                                                         
+│
+│ num_train_epochs                        │ 3.0                                                                         
+│
+│ max_steps                               │ -1                                                                          
+│
+│ lr_scheduler_type                       │ SchedulerType.LINEAR                                                        
+│
+│ lr_scheduler_kwargs                     │ None                                                                        
+│
+│ warmup_ratio                            │ 0.0                                                                         
+│
+│ warmup_steps                            │ 0                                                                           
+│
+│ log_level                               │ info                                                                        
+│
+│ log_level_replica                       │ warning                                                                     
+│
+│ log_on_each_node                        │ Yes                                                                         
+│
+│ logging_dir                             │ runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/logs                             
+│
+│ logging_strategy                        │ IntervalStrategy.STEPS                                                      
+│
+│ logging_first_step                      │ No                                                                          
+│
+│ logging_steps                           │ 1                                                                           
+│
+│ logging_nan_inf_filter                  │ Yes                                                                         
+│
+│ save_strategy                           │ SaveStrategy.STEPS                                                          
+│
+│ save_steps                              │ 42                                                                          
+│
+│ save_total_limit                        │ 12                                                                          
+│
+│ save_safetensors                        │ Yes                                                                         
+│
+│ save_on_each_node                       │ No                                                                          
+│
+│ save_only_model                         │ No                                                                          
+│
+│ restore_callback_states_from_checkpoint │ No                                                                          
+│
+│ no_cuda                                 │ No                                                                          
+│
+│ use_cpu                                 │ No                                                                          
+│
+│ use_mps_device                          │ No                                                                          
+│
+│ seed                                    │ 42                                                                          
+│
+│ data_seed                               │ None                                                                        
+│
+│ jit_mode_eval                           │ No                                                                          
+│
+│ bf16                                    │ Yes                                                                         
+│
+│ fp16                                    │ No                                                                          
+│
+│ fp16_opt_level                          │ O1                                                                          
+│
+│ half_precision_backend                  │ auto                                                                        
+│
+│ bf16_full_eval                          │ No                                                                          
+│
+│ fp16_full_eval                          │ No                                                                          
+│
+│ tf32                                    │ None                                                                        
+│
+│ local_rank                              │ 0                                                                           
+│
+│ ddp_backend                             │ None                                                                        
+│
+│ tpu_num_cores                           │ None                                                                        
+│
+│ tpu_metrics_debug                       │ No                                                                          
+│
+│ debug                                   │                                                                             
+│
+│ dataloader_drop_last                    │ No                                                                          
+│
+│ eval_steps                              │ None                                                                        
+│
+│ dataloader_num_workers                  │ 4                                                                           
+│
+│ dataloader_prefetch_factor              │ None                                                                        
+│
+│ past_index                              │ -1                                                                          
+│
+│ run_name                                │ None                                                                        
+│
+│ disable_tqdm                            │ No                                                                          
+│
+│ remove_unused_columns                   │ Yes                                                                         
+│
+│ label_names                             │ None                                                                        
+│
+│ load_best_model_at_end                  │ No                                                                          
+│
+│ metric_for_best_model                   │ None                                                                        
+│
+│ greater_is_better                       │ None                                                                        
+│
+│ ignore_data_skip                        │ No                                                                          
+│
+│ fsdp                                    │                                                                             
+│
+│ fsdp_min_num_params                     │ 0                                                                           
+│
+│ fsdp_config                             │ {'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 
+'xla_fsdp_grad_ckpt': False}                                                    │
+│ fsdp_transformer_layer_cls_to_wrap      │ None                                                                        
+│
+│ accelerator_config                      │ AcceleratorConfig(split_batches=False, dispatch_batches=None, 
+even_batches=True, use_seedable_sampler=True, non_blocking=False,           │
+│                                         │ gradient_accumulation_kwargs=None, use_configured_state=False)              
+│
+│ parallelism_config                      │ None                                                                        
+│
+│ deepspeed                               │ None                                                                        
+│
+│ label_smoothing_factor                  │ 0.0                                                                         
+│
+│ optim                                   │ OptimizerNames.ADAMW_TORCH_FUSED                                            
+│
+│ optim_args                              │ None                                                                        
+│
+│ adafactor                               │ No                                                                          
+│
+│ group_by_length                         │ No                                                                          
+│
+│ length_column_name                      │ length                                                                      
+│
+│ report_to                               │ wandb                                                                       
+│
+│ project                                 │ huggingface                                                                 
+│
+│ trackio_space_id                        │ trackio                                                                     
+│
+│ ddp_find_unused_parameters              │ None                                                                        
+│
+│ ddp_bucket_cap_mb                       │ None                                                                        
+│
+│ ddp_broadcast_buffers                   │ None                                                                        
+│
+│ dataloader_pin_memory                   │ Yes                                                                         
+│
+│ dataloader_persistent_workers           │ No                                                                          
+│
+│ skip_memory_metrics                     │ Yes                                                                         
+│
+│ use_legacy_prediction_loop              │ No                                                                          
+│
+│ push_to_hub                             │ No                                                                          
+│
+│ resume_from_checkpoint                  │ None                                                                        
+│
+│ hub_model_id                            │ None                                                                        
+│
+│ hub_strategy                            │ HubStrategy.EVERY_SAVE                                                      
+│
+│ hub_token                               │ None                                                                        
+│
+│ hub_private_repo                        │ None                                                                        
+│
+│ hub_always_push                         │ No                                                                          
+│
+│ hub_revision                            │ None                                                                        
+│
+│ gradient_checkpointing                  │ Yes                                                                         
+│
+│ gradient_checkpointing_kwargs           │ None                                                                        
+│
+│ include_inputs_for_metrics              │ No                                                                          
+│
+│ include_for_metrics                     │                                                                             
+│
+│ eval_do_concat_batches                  │ Yes                                                                         
+│
+│ fp16_backend                            │ auto                                                                        
+│
+│ push_to_hub_model_id                    │ None                                                                        
+│
+│ push_to_hub_organization                │ None                                                                        
+│
+│ push_to_hub_token                       │ None                                                                        
+│
+│ mp_parameters                           │                                                                             
+│
+│ auto_find_batch_size                    │ No                                                                          
+│
+│ full_determinism                        │ No                                                                          
+│
+│ torchdynamo                             │ None                                                                        
+│
+│ ray_scope                               │ last                                                                        
+│
+│ ddp_timeout                             │ 1800                                                                        
+│
+│ torch_compile                           │ No                                                                          
+│
+│ torch_compile_backend                   │ None                                                                        
+│
+│ torch_compile_mode                      │ None                                                                        
+│
+│ include_tokens_per_second               │ No                                                                          
+│
+│ include_num_input_tokens_seen           │ no                                                                          
+│
+│ neftune_noise_alpha                     │ None                                                                        
+│
+│ optim_target_modules                    │ None                                                                        
+│
+│ batch_eval_metrics                      │ No                                                                          
+│
+│ eval_on_start                           │ No                                                                          
+│
+│ use_liger_kernel                        │ Yes                                                                         
+│
+│ liger_kernel_config                     │ None                                                                        
+│
+│ eval_use_gather_object                  │ No                                                                          
+│
+│ average_tokens_across_devices           │ Yes                                                                         
+│
+│ model_init_kwargs                       │ None                                                                        
+│
+│ chat_template_path                      │ None                                                                        
+│
+│ dataset_text_field                      │ text                                                                        
+│
+│ dataset_kwargs                          │ None                                                                        
+│
+│ dataset_num_proc                        │ None                                                                        
+│
+│ eos_token                               │ None                                                                        
+│
+│ pad_token                               │ None                                                                        
+│
+│ max_length                              │ 1024                                                                        
+│
+│ shuffle_dataset                         │ No                                                                          
+│
+│ packing                                 │ No                                                                          
+│
+│ packing_strategy                        │ bfd                                                                         
+│
+│ padding_free                            │ No                                                                          
+│
+│ pad_to_multiple_of                      │ None                                                                        
+│
+│ eval_packing                            │ None                                                                        
+│
+│ completion_only_loss                    │ None                                                                        
+│
+│ assistant_only_loss                     │ No                                                                          
+│
+│ loss_type                               │ nll                                                                         
+│
+│ activation_offloading                   │ No                                                                          
+│
+│ distributed_state                       │ Distributed environment: DistributedType.NO                                 
+│
+│                                         │ Num processes: 1                                                            
+│
+│                                         │ Process index: 0                                                            
+│
+│                                         │ Local process index: 0                                                      
+│
+│                                         │ Device: cuda                                                                
+│
+│                                         │                                                                             
+│
+│ deepspeed_plugin                        │ None                                                                        
+│
+└─────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────────────────┘
+
+
+  0%|          | 0/1482 [00:00<?, ?it/s]
+  0%|          | 1/1482 [00:17<7:07:08, 17.31s/it]    Step 1: loss: 1.9030 | lr: 2.00e-05 | grad: 13.59 | epoch: 0.00 | 
+GPU: 5.5/8.0GB
+  Step 1/1,482 (0.1%) loss=1.9030 | lr=2.00e-05 | grad=13.588
+  GPU 0: 5.54GB allocated / 7.72GB reserved / 8.0GB total
+
+
+
+  0%|          | 1/1482 [00:17<7:07:08, 17.31s/it]
+  0%|          | 2/1482 [05:05<72:30:28, 176.37s/it]{'loss': 1.903, 'grad_norm': 13.587785720825195, 'learning_rate': 
+2e-05, 'num_tokens': 23998.0, 'mean_token_accuracy': 0.5894419699907303, 'epoch': 0.0}
+    Step 2: loss: 1.7773 | lr: 2.00e-05 | grad: 10.84 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 2/1,482 (0.1%) loss=1.7773 | lr=2.00e-05 | grad=10.838
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+
+
