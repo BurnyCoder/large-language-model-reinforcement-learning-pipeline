@@ -13,7 +13,6 @@ from .base import (
     TrainingConfig,
     setup_logging,
     prepare_output_dir,
-    get_callbacks,
     load_and_limit_dataset,
     finalize_training,
 )
@@ -84,15 +83,11 @@ def train_grpo(
     else:
         reward_func = accuracy_reward
 
-    # Create callbacks
-    callbacks = get_callbacks(config)
-
     # Build trainer kwargs
     trainer_kwargs = {
         "model": model_arg,
         "reward_funcs": reward_func,
         "train_dataset": dataset,
-        "callbacks": callbacks,
     }
     if processing_class is not None:
         trainer_kwargs["processing_class"] = processing_class
@@ -119,9 +114,10 @@ def train_grpo(
     if config.max_steps > 0:
         training_args_kwargs["max_steps"] = config.max_steps
 
-    if config.save_steps is not None:
-        training_args_kwargs["save_steps"] = config.save_steps
-        training_args_kwargs["save_strategy"] = "steps"
+    training_args_kwargs["save_steps"] = config.save_steps
+    training_args_kwargs["save_strategy"] = config.save_strategy
+    if config.save_total_limit is not None:
+        training_args_kwargs["save_total_limit"] = config.save_total_limit
 
     # Create trainer
     trainer = GRPOTrainer(

@@ -9,7 +9,6 @@ Expected runtime: ~1-2 minutes for all algorithms.
 
 from algorithms import TrainingConfig
 from algorithms.grpo import GRPOExtraConfig
-from utils import CheckpointConfig
 from pipeline import run_pipeline
 
 # Tiny GPT-2 model for testing
@@ -18,9 +17,6 @@ MODEL = "sshleifer/tiny-gpt2"
 # Test training configuration
 TEST_MAX_STEPS = 10
 TEST_MAX_SAMPLES = 10
-TEST_SAVE_INTERVAL_SECONDS = 10
-
-CHECKPOINT_CONFIG = CheckpointConfig.test(save_interval_seconds=TEST_SAVE_INTERVAL_SECONDS)
 
 # Common test settings
 TEST_SETTINGS = {
@@ -33,9 +29,10 @@ TEST_SETTINGS = {
     "use_liger_kernel": False,
     "dataloader_pin_memory": False,
     "dataloader_num_workers": 0,
-    "checkpoint_config": CHECKPOINT_CONFIG,
     "clean_output_dir": True,
     "save_steps": 5,
+    "save_strategy": "steps",
+    "save_total_limit": 2,
 }
 
 configs = {

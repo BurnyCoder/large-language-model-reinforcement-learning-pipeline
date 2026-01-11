@@ -8,7 +8,6 @@ from .base import (
     TrainingConfig,
     setup_logging,
     prepare_output_dir,
-    get_callbacks,
     load_and_limit_dataset,
     finalize_training,
 )
@@ -37,9 +36,6 @@ def train_sft(config: TrainingConfig) -> SFTTrainer:
     )
     logger.info(f"Using {len(dataset)} samples from {config.dataset_name}")
 
-    # Create callbacks
-    callbacks = get_callbacks(config)
-
     # Build training args
     training_args_kwargs = {
         "output_dir": config.output_dir,
@@ -60,15 +56,15 @@ def train_sft(config: TrainingConfig) -> SFTTrainer:
     if config.max_steps > 0:
         training_args_kwargs["max_steps"] = config.max_steps
 
-    if config.save_steps is not None:
-        training_args_kwargs["save_steps"] = config.save_steps
-        training_args_kwargs["save_strategy"] = "steps"
+    training_args_kwargs["save_steps"] = config.save_steps
+    training_args_kwargs["save_strategy"] = config.save_strategy
+    if config.save_total_limit is not None:
+        training_args_kwargs["save_total_limit"] = config.save_total_limit
 
     # Create trainer
     trainer = SFTTrainer(
         model=config.model_name,
         train_dataset=dataset,
-        callbacks=callbacks,
         args=SFTConfig(**training_args_kwargs),
     )
 

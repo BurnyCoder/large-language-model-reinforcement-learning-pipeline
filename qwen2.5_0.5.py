@@ -6,15 +6,15 @@ This is the production configuration optimized for 8GB VRAM GPUs.
 """
 
 from algorithms import TrainingConfig
-from utils import CheckpointConfig
 from pipeline import run_pipeline
 
 # Qwen 2.5 0.5B models
 BASE_MODEL = "Qwen/Qwen2.5-0.5B"
 INSTRUCT_MODEL = "Qwen/Qwen2.5-0.5B-Instruct"
 
-# Production training configuration
-CHECKPOINT_CONFIG = CheckpointConfig.production(save_interval_minutes=20)
+# Production training configuration - save every 500 steps, keep last 3 checkpoints
+SAVE_STEPS = 500
+SAVE_TOTAL_LIMIT = 3
 
 configs = {
     "sft": TrainingConfig(
@@ -28,7 +28,8 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        checkpoint_config=CHECKPOINT_CONFIG,
+        save_steps=SAVE_STEPS,
+        save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "reward": TrainingConfig(
         model_name=INSTRUCT_MODEL,
@@ -41,7 +42,8 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        checkpoint_config=CHECKPOINT_CONFIG,
+        save_steps=SAVE_STEPS,
+        save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "dpo": TrainingConfig(
         model_name=INSTRUCT_MODEL,
@@ -54,7 +56,8 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        checkpoint_config=CHECKPOINT_CONFIG,
+        save_steps=SAVE_STEPS,
+        save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "grpo": TrainingConfig(
         model_name=INSTRUCT_MODEL,
@@ -67,7 +70,8 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        checkpoint_config=CHECKPOINT_CONFIG,
+        save_steps=SAVE_STEPS,
+        save_total_limit=SAVE_TOTAL_LIMIT,
     ),
 }
 

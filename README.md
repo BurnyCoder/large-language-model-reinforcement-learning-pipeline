@@ -27,8 +27,6 @@ llmrl/
 │   ├── reward.py            # Reward Model Training
 │   ├── dpo.py               # Direct Preference Optimization
 │   └── grpo.py              # Group Relative Policy Optimization
-├── utils/
-│   └── training_utils.py    # Checkpoint callbacks (supports minutes & seconds)
 ├── pipeline.py              # Runs all algorithms for a given config
 ├── qwen2.5_0.5.py           # Qwen 2.5 0.5B production configs
 ├── tiny_gpt2.py             # tiny-gpt2 test configs (fast validation)
@@ -68,7 +66,7 @@ llmrl/
 
 - **Four Training Methods**: Complete coverage of modern LLM training techniques
 - **Memory Efficient**: Optimized for 8GB VRAM using Liger Kernel (60% memory reduction)
-- **Modular Architecture**: Algorithms, configs, and utilities cleanly separated
+- **Modular Architecture**: Algorithms and configs cleanly separated
 - **Test Pipeline**: Fast validation with tiny-gpt2 (~1-2 minutes)
 - **TensorBoard Logging**: Real-time training metrics and visualization
 - **Production-Ready Configs**: Gradient checkpointing, bf16 precision, optimized data loading
@@ -184,21 +182,22 @@ python qwen2.5_0.5.py
 
 | Setting | Value |
 |---------|-------|
-| Model | `sshleifer/tiny-gpt2` (~17M params) |
+| Model | `sshleifer/tiny-gpt2` (~50K params, ~4.7 MB) |
 | Max Steps | 10 |
 | Max Samples | 10 |
-| Checkpoint Interval | 10 seconds |
+| Save Steps | 5 |
 | Batch Size | 1 |
 
 ## Models & Datasets
 
 ### Models
 
-| Model | Parameters | Use Case |
-|-------|------------|----------|
-| [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 500M | Base model for SFT |
-| [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 500M | Instruction-tuned for Reward/DPO |
-| [Qwen/Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) | 500M | Used for GRPO training |
+| Model | Parameters | Disk Size | Use Case |
+|-------|------------|-----------|----------|
+| [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 494M | ~988 MB | Base model for SFT |
+| [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 494M | ~988 MB | Instruction-tuned for Reward/DPO |
+| [Qwen/Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) | 494M | ~988 MB | Used for GRPO training |
+| [sshleifer/tiny-gpt2](https://huggingface.co/sshleifer/tiny-gpt2) | ~50K | ~4.7 MB | Fast testing and CI validation |
 
 ### Datasets
 
@@ -252,7 +251,6 @@ Create a new file (e.g., `llama_1b.py`):
 
 ```python
 from algorithms import TrainingConfig
-from utils import CheckpointConfig
 from pipeline import run_pipeline
 
 MODEL = "meta-llama/Llama-3.2-1B"
@@ -263,7 +261,8 @@ configs = {
         output_dir="Llama-1B-SFT",
         dataset_name="trl-lib/Capybara",
         per_device_train_batch_size=4,
-        checkpoint_config=CheckpointConfig.production(20),
+        save_steps=500,
+        save_total_limit=3,
     ),
     # ... add other algorithms
 }

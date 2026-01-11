@@ -14,11 +14,6 @@ from pathlib import Path
 from typing import List, Optional
 
 from datasets import load_dataset
-from transformers import TrainerCallback
-
-import sys
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from utils.training_utils import CheckpointConfig, create_training_callbacks
 
 
 @dataclass
@@ -57,12 +52,10 @@ class TrainingConfig:
     log_level: str = "info"
     report_to: List[str] = field(default_factory=lambda: ["tensorboard"])
 
-    # Saving - let callbacks handle time-based saving
-    save_steps: Optional[int] = None
-    save_strategy: str = "no"
-
-    # Checkpoint callbacks
-    checkpoint_config: Optional[CheckpointConfig] = None
+    # Saving - uses built-in step-based saving
+    save_steps: int = 500
+    save_strategy: str = "steps"
+    save_total_limit: Optional[int] = 3  # Keep only last N checkpoints
 
     # Test mode
     clean_output_dir: bool = False  # If True, removes existing output_dir before training
@@ -96,18 +89,6 @@ def prepare_output_dir(output_dir: str, clean: bool = False) -> None:
     if clean and os.path.exists(output_dir):
         shutil.rmtree(output_dir)
     os.makedirs(output_dir, exist_ok=True)
-
-
-def get_callbacks(config: TrainingConfig) -> List[TrainerCallback]:
-    """Create training callbacks from config."""
-    checkpoint_config = config.checkpoint_config
-    if checkpoint_config is None:
-        checkpoint_config = CheckpointConfig.production()
-
-    return create_training_callbacks(
-        output_dir=config.output_dir,
-        config=checkpoint_config,
-    )
 
 
 def load_and_limit_dataset(
