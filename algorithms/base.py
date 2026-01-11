@@ -63,6 +63,7 @@ class TrainingConfig:
     use_liger_kernel: bool = True
     dataloader_pin_memory: bool = True
     dataloader_num_workers: int = 4
+    dataset_num_proc: int = 1  # Use 1 to avoid multiprocessing hangs on WSL
 
     # Logging
     logging_steps: int = 1

@@ -57,6 +57,7 @@ def train_sft(config: TrainingConfig) -> SFTTrainer:
         "use_liger_kernel": config.use_liger_kernel,
         "dataloader_pin_memory": config.dataloader_pin_memory,
         "dataloader_num_workers": config.dataloader_num_workers,
+        "dataset_num_proc": config.dataset_num_proc,
         "logging_steps": config.logging_steps,
         "logging_strategy": config.logging_strategy,
         "log_level": config.log_level,

@@ -28,7 +28,7 @@ configs = {
         bf16=True,
         use_liger_kernel=True,
         dataloader_pin_memory=True,
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         save_steps=42,  # ~500 steps / 12 checkpoints
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
@@ -42,7 +42,7 @@ configs = {
         bf16=True,
         use_liger_kernel=True,
         dataloader_pin_memory=True,
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         save_steps=156,  # ~1875 steps / 12 checkpoints
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
@@ -56,7 +56,7 @@ configs = {
         bf16=True,
         use_liger_kernel=True,
         dataloader_pin_memory=True,
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         save_steps=625,  # ~7500 steps / 12 checkpoints
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
@@ -70,7 +70,7 @@ configs = {
         bf16=True,
         use_liger_kernel=True,
         dataloader_pin_memory=True,
-        dataloader_num_workers=4,
+        dataloader_num_workers=0,
         save_steps=1073,  # ~12875 steps / 12 checkpoints
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
