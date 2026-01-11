@@ -1,8 +1,10 @@
 """
 Test training pipeline with SmolLM2-135M models.
 
-Uses SmolLM2-135M-Instruct for SFT, DPO, and GRPO (has chat template),
-and SmolLM2-135M base for Reward (adds classification head).
+Model selection per TRL patterns:
+- SFT: Instruct (SmolLM2 base lacks chat template, unlike Qwen base)
+- Reward: Base (adds classification head)
+- DPO/GRPO: Instruct
 
 This is the test configuration for fast validation of the training pipeline.
 """
@@ -14,8 +16,8 @@ from algorithms.grpo import GRPOExtraConfig
 from pipeline import run_pipeline
 
 # SmolLM2 models - smallest with proper architecture for all TRL algorithms
-MODEL = "HuggingFaceTB/SmolLM2-135M-Instruct"
-MODEL_BASE = "HuggingFaceTB/SmolLM2-135M"  # Base model for reward training
+MODEL_BASE = "HuggingFaceTB/SmolLM2-135M"
+MODEL_INSTRUCT = "HuggingFaceTB/SmolLM2-135M-Instruct"
 
 # Test training configuration
 TEST_MAX_STEPS = 10
@@ -40,25 +42,25 @@ TEST_SETTINGS = {
 
 configs = {
     "sft": TrainingConfig(
-        model_name=MODEL,
+        model_name=MODEL_INSTRUCT,  # SmolLM2 base lacks chat template
         output_dir="test-model-sft",
         dataset_name="trl-lib/Capybara",
         **TEST_SETTINGS,
     ),
     "reward": TrainingConfig(
-        model_name=MODEL_BASE,  # Base model for classification head
+        model_name=MODEL_BASE,  # Reward adds classification head
         output_dir="test-model-reward",
         dataset_name="trl-lib/ultrafeedback_binarized",
         **TEST_SETTINGS,
     ),
     "dpo": TrainingConfig(
-        model_name=MODEL,
+        model_name=MODEL_INSTRUCT,  # DPO uses instruct model
         output_dir="test-model-dpo",
         dataset_name="trl-lib/ultrafeedback_binarized",
         **TEST_SETTINGS,
     ),
     "grpo": TrainingConfig(
-        model_name=MODEL,
+        model_name=MODEL_INSTRUCT,  # GRPO uses instruct model
         output_dir="test-model-grpo",
         dataset_name="trl-lib/DeepMath-103K",
         **TEST_SETTINGS,
