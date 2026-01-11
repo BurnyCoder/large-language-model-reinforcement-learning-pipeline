@@ -237,16 +237,16 @@ def main():
 
     # Determine which pipelines to run
     if args.test and args.prod:
-        scripts = ["test_models.py", "qwen2.5_0.5.py"]
+        scripts = ["smollm2_135m.py", "qwen2.5_0.5.py"]
         mode = "ALL"
     elif args.test:
-        scripts = ["test_models.py"]
+        scripts = ["smollm2_135m.py"]
         mode = "TEST"
     elif args.prod:
         scripts = ["qwen2.5_0.5.py"]
         mode = "PRODUCTION"
     else:
-        scripts = ["test_models.py", "qwen2.5_0.5.py"]
+        scripts = ["smollm2_135m.py", "qwen2.5_0.5.py"]
         mode = "ALL"
 
     # Print header
