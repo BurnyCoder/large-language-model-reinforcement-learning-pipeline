@@ -15,7 +15,7 @@ This project demonstrates a complete LLM training pipeline with four key trainin
 - **Direct Preference Optimization (DPO)** - Align models with human preferences
 - **Group Relative Policy Optimization (GRPO)** - Memory-efficient reinforcement learning
 
-All scripts are optimized for **8GB VRAM GPUs** using memory-efficient techniques like Liger Kernel and gradient checkpointing.
+All scripts are optimized for **6GB VRAM GPUs** using memory-efficient techniques like Liger Kernel and gradient checkpointing.
 
 ## Training Pipeline
 
@@ -57,9 +57,9 @@ All scripts are optimized for **8GB VRAM GPUs** using memory-efficient technique
 
 ### Hardware
 
-- NVIDIA GPU with **8GB+ VRAM** (RTX 3070, RTX 4060, etc.)
-- 16GB+ system RAM recommended
-- 50GB+ disk space for models and checkpoints
+- NVIDIA GPU with **6GB+ VRAM** (RTX 3050, RTX 2060, etc.)
+- 8GB+ system RAM recommended
+- 20GB+ disk space for models and checkpoints
 
 ### Software
 
