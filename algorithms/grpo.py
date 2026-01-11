@@ -131,11 +131,24 @@ def train_grpo(
     if processing_class is not None:
         trainer_kwargs["processing_class"] = processing_class
 
+    # Ensure batch size is compatible with num_generations
+    # TRL requires: generation_batch_size % num_generations == 0
+    batch_size = config.per_device_train_batch_size
+    num_gens = grpo_config.num_generations
+
+    if batch_size % num_gens != 0:
+        adjusted_batch_size = num_gens
+        print_info(
+            f"Adjusting per_device_train_batch_size from {batch_size} to {adjusted_batch_size} "
+            f"(must be divisible by num_generations={num_gens})"
+        )
+        batch_size = adjusted_batch_size
+
     # Build training args
     training_args_kwargs = {
         "output_dir": config.output_dir,
         "logging_dir": f"{config.output_dir}/logs",
-        "per_device_train_batch_size": config.per_device_train_batch_size,
+        "per_device_train_batch_size": batch_size,
         "gradient_accumulation_steps": config.gradient_accumulation_steps,
         "gradient_checkpointing": config.gradient_checkpointing,
         "bf16": config.bf16,
