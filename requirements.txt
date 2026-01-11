@@ -10,3 +10,7 @@ liger-kernel
 # Logging and visualization
 rich>=13.0.0
 psutil>=5.9.0
+
+# Real-time monitoring
+wandb
+neptune

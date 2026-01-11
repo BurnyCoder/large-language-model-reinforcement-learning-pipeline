@@ -64,7 +64,7 @@ class TrainingConfig:
     logging_steps: int = 1
     logging_strategy: str = "steps"
     log_level: str = "info"
-    report_to: List[str] = field(default_factory=lambda: ["tensorboard"])
+    report_to: List[str] = field(default_factory=lambda: ["wandb", "neptune", "tensorboard"])
 
     # Saving - uses built-in step-based saving
     save_steps: int = 500
