@@ -1,1 +1,0 @@
-2026-01-11T06:02:10.174350 | TRAIN_START | {"event": "train_start", "timestamp": "2026-01-11T06:02:10.174335", "algorithm": "SFT", "max_steps": 10, "batch_size": 1, "gradient_accumulation": 1, "learning_rate": 2e-05}
