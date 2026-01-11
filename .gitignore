@@ -1,11 +1,16 @@
 # Saved models
 Qwen*/
-test-model-*/
 __pycache__/
+
+# Ignore checkpoints in runs folder (but keep logs and metrics)
+runs/**/checkpoint-*/
 
 # HuggingFace cache (models and datasets)
 cache/
 
 # Environment variables (contains API keys)
 .env
-runs/
+
+# Experiment tracking (local cache)
+.neptune/
+wandb/
