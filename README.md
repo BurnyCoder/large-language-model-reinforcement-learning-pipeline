@@ -2,7 +2,7 @@
 
 A complete, memory-efficient pipeline for training language models using reinforcement learning techniques. Built on [TRL (Transformer Reinforcement Learning)](https://github.com/huggingface/trl) from Hugging Face.
 
-![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)
+![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![TRL](https://img.shields.io/badge/TRL-0.26.0+-green.svg)
 
@@ -27,6 +27,8 @@ llmrl/
 │   ├── reward.py            # Reward Model Training
 │   ├── dpo.py               # Direct Preference Optimization
 │   └── grpo.py              # Group Relative Policy Optimization
+├── utils/                   # Logging and visualization utilities
+│   └── logging.py           # Rich console output and progress tracking
 ├── pipeline.py              # Runs all algorithms for a given config
 ├── qwen2.5_0.5.py           # Qwen 2.5 0.5B production configs
 ├── tiny_gpt2.py             # tiny-gpt2 test configs (fast validation)
@@ -81,7 +83,7 @@ llmrl/
 
 ### Software
 
-- Python 3.8+
+- Python 3.10+
 - CUDA 11.8+ or CUDA 12.x
 - Linux or WSL2 recommended
 
@@ -97,6 +99,8 @@ llmrl/
 | torch | >=2.2.0 | PyTorch framework |
 | tensorboard | latest | Training visualization |
 | liger-kernel | latest | Memory-efficient CUDA kernels |
+| rich | >=13.0.0 | Beautiful console output and progress bars |
+| psutil | >=5.9.0 | System resource monitoring |
 
 ## Installation
 
@@ -182,7 +186,7 @@ python qwen2.5_0.5.py
 
 | Setting | Value |
 |---------|-------|
-| Model | `sshleifer/tiny-gpt2` (~50K params, ~4.7 MB) |
+| Model | `sshleifer/tiny-gpt2` (~100K params, ~4.7 MB) |
 | Max Steps | 10 |
 | Max Samples | 10 |
 | Save Steps | 5 |
@@ -194,9 +198,9 @@ python qwen2.5_0.5.py
 
 | Model | Parameters | Disk Size | Use Case |
 |-------|------------|-----------|----------|
-| [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 494M | ~988 MB | Base model for SFT |
-| [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 494M | ~988 MB | Instruction-tuned for Reward/DPO/GRPO |
-| [sshleifer/tiny-gpt2](https://huggingface.co/sshleifer/tiny-gpt2) | ~50K | ~4.7 MB | Fast testing and CI validation |
+| [Qwen/Qwen2.5-0.5B](https://huggingface.co/Qwen/Qwen2.5-0.5B) | 490M | ~988 MB | Base model for SFT |
+| [Qwen/Qwen2.5-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct) | 490M | ~988 MB | Instruction-tuned for Reward/DPO/GRPO |
+| [sshleifer/tiny-gpt2](https://huggingface.co/sshleifer/tiny-gpt2) | ~100K | ~4.7 MB | Fast testing and CI validation |
 
 ### Datasets
 
@@ -303,7 +307,7 @@ Each script creates a `training.log` file in its output directory:
 Qwen2.5-0.5B-SFT/training.log
 Qwen2.5-0.5B-Reward/training.log
 Qwen2.5-0.5B-DPO/training.log
-Qwen2-0.5B-GRPO/training.log
+Qwen2.5-0.5B-GRPO/training.log
 ```
 
 ## Output Structure

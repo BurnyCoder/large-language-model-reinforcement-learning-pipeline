@@ -6,8 +6,10 @@ Features:
 - Comprehensive logging to console and files
 - System information display (GPU, memory, etc.)
 - Beautiful result tables
+- Unique run IDs to prevent output overwrites
 """
 
+import os
 import time
 from typing import Dict, List, Tuple
 
@@ -15,6 +17,7 @@ from algorithms import TrainingConfig, train_sft, train_reward, train_dpo, train
 from algorithms.grpo import GRPOExtraConfig
 from utils import (
     console,
+    create_run_directory,
     print_header,
     print_section,
     print_success,
@@ -26,6 +29,7 @@ from utils import (
     create_pipeline_progress,
     print_pipeline_results,
     format_duration,
+    save_run_info,
 )
 
 
@@ -49,10 +53,20 @@ def run_pipeline(
                  e.g., {"sft": sft_config, "reward": reward_config, ...}
         grpo_extra: Optional extra config for GRPO (reward func, generation params)
     """
+    # Generate unique run ID and create run directory
+    run_id, run_dir = create_run_directory()
+
+    # Prefix all output_dirs with run directory
+    for config in configs.values():
+        config.output_dir = os.path.join(run_dir, config.output_dir)
+
+    # Save run metadata
+    save_run_info(run_dir, run_id, configs)
+
     # Print header
     print_header(
         "Training Pipeline",
-        f"Running {len(configs)} algorithm(s): {', '.join(configs.keys())}"
+        f"Run ID: {run_id} | Running {len(configs)} algorithm(s): {', '.join(configs.keys())}"
     )
 
     # Print system info
