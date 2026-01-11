@@ -53,8 +53,9 @@ def main():
 
     # Determine which pipelines to run
     if args.test and args.prod:
-        print("Error: Cannot specify both --test and --prod")
-        sys.exit(1)
+        # Both specified: run both
+        scripts = ["tiny_gpt2.py", "qwen2.5_0.5.py"]
+        mode = "ALL"
     elif args.test:
         scripts = ["tiny_gpt2.py"]
         mode = "TEST"
