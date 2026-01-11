@@ -435,7 +435,7 @@ def create_pipeline_progress() -> Progress:
         MofNCompleteColumn(),
         TimeElapsedColumn(),
         TimeRemainingColumn(),
-        console=console,
+        console=console._terminal,  # Use terminal console for progress bar
         expand=False,
     )
 
@@ -496,7 +496,7 @@ class TrainingProgressCallback(TrainerCallback):
             TimeElapsedColumn(),
             TextColumn("[dim]<"),
             TimeRemainingColumn(),
-            console=console,
+            console=console._terminal,  # Use terminal console for progress bar
             expand=False,
         )
 

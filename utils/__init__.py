@@ -1,6 +1,7 @@
 from .logging import (
     # Console
     console,
+    DualConsole,
     # Setup
     setup_rich_logging,
     # Headers and sections

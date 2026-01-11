@@ -102,7 +102,11 @@ def format_duration(seconds: float) -> str:
 
 
 def run_script(script_name: str, script_dir: Path) -> Tuple[str, int, float]:
-    """Run a script and return (name, return_code, duration)."""
+    """Run a script and return (name, return_code, duration).
+
+    Captures all subprocess output to both console (terminal + master log)
+    and an individual script log file.
+    """
     console.print()
     console.print(Rule(f"[bold cyan]Running {script_name}[/bold cyan]", style="cyan"))
     console.print()
@@ -123,10 +127,23 @@ def run_script(script_name: str, script_dir: Path) -> Tuple[str, int, float]:
         bufsize=1,
     )
 
-    # Stream output in real-time
-    if process.stdout:
-        for line in process.stdout:
-            console.print(line.rstrip())
+    # Stream output to console and individual script log file
+    script_log_file = None
+    if _log_dir:
+        script_log_path = _log_dir / f"{script_name.replace('.py', '')}_output.log"
+        script_log_file = open(script_log_path, 'w', encoding='utf-8')
+
+    try:
+        if process.stdout:
+            for line in process.stdout:
+                line_stripped = line.rstrip()
+                console.print(line_stripped)  # Goes to terminal + master log
+                if script_log_file:
+                    script_log_file.write(line)
+                    script_log_file.flush()
+    finally:
+        if script_log_file:
+            script_log_file.close()
 
     process.wait()
     duration = time.time() - start
@@ -205,8 +222,18 @@ Examples:
 
 
 def main():
+    global _log_dir
+
     args = parse_args()
     script_dir = Path(__file__).parent
+
+    # Create log directory for run_all output
+    _log_dir = script_dir / "logs" / f"run_all_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+    _log_dir.mkdir(parents=True, exist_ok=True)
+
+    # Configure console to write all output to master log file
+    master_log = _log_dir / "master_output.log"
+    console.set_log_file(str(master_log))
 
     # Determine which pipelines to run
     if args.test and args.prod:
@@ -238,7 +265,7 @@ def main():
         BarColumn(),
         TextColumn("[progress.percentage]{task.percentage:>3.0f}%"),
         TimeElapsedColumn(),
-        console=console,
+        console=console._terminal,  # Use terminal console for progress bar
     ) as progress:
         overall_task = progress.add_task(f"[cyan]Running {mode} pipelines...", total=len(scripts))
 
