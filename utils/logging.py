@@ -15,6 +15,7 @@ References:
 - Transformers Callbacks: https://huggingface.co/docs/transformers/en/main_classes/callback
 """
 
+import atexit
 import logging
 import os
 import platform
@@ -58,23 +59,117 @@ except ImportError:
     HAS_TRL_RICH = False
     TRLRichProgressCallback = None
 
-# Global console instance
-console = Console()
+
+class DualConsole:
+    """
+    Console wrapper that writes to both terminal and file simultaneously.
+
+    All Rich console output (tables, panels, progress bars, etc.) will be
+    captured to the log file while still displaying in the terminal.
+    """
+
+    def __init__(self, log_file: Optional[str] = None):
+        """
+        Initialize dual console.
+
+        Args:
+            log_file: Optional path to write console output. Can be set later
+                     via set_log_file().
+        """
+        self._terminal = Console(record=True)
+        self._file_handle: Optional[Any] = None
+        self._file_console: Optional[Console] = None
+        if log_file:
+            self.set_log_file(log_file)
+
+    def set_log_file(self, log_file: str) -> None:
+        """Set or change the log file destination."""
+        self.close()
+        os.makedirs(os.path.dirname(log_file) or '.', exist_ok=True)
+        self._file_handle = open(log_file, 'w', encoding='utf-8')
+        self._file_console = Console(
+            file=self._file_handle,
+            width=120,
+            force_terminal=False,
+            record=False,
+        )
+
+    def print(self, *args, **kwargs) -> None:
+        """Print to both terminal and file."""
+        self._terminal.print(*args, **kwargs)
+        if self._file_console:
+            self._file_console.print(*args, **kwargs)
+            self._file_handle.flush()
+
+    def log(self, *args, **kwargs) -> None:
+        """Log to both terminal and file."""
+        self._terminal.log(*args, **kwargs)
+        if self._file_console:
+            self._file_console.log(*args, **kwargs)
+            self._file_handle.flush()
+
+    def print_exception(self, *args, **kwargs) -> None:
+        """Print exception traceback to both outputs."""
+        self._terminal.print_exception(*args, **kwargs)
+        if self._file_console:
+            self._file_console.print_exception(*args, **kwargs)
+            self._file_handle.flush()
+
+    def rule(self, *args, **kwargs) -> None:
+        """Print horizontal rule to both outputs."""
+        self._terminal.rule(*args, **kwargs)
+        if self._file_console:
+            self._file_console.rule(*args, **kwargs)
+            self._file_handle.flush()
+
+    def close(self) -> None:
+        """Close file handle if open."""
+        if self._file_handle:
+            self._file_handle.close()
+            self._file_handle = None
+            self._file_console = None
+
+    def __getattr__(self, name: str):
+        """Delegate unknown attributes to terminal console."""
+        return getattr(self._terminal, name)
+
+
+# Global console instance - use DualConsole for file logging support
+console = DualConsole()
+
+
+# Ensure console file handles are closed on exit
+def _cleanup_console():
+    global console
+    if hasattr(console, 'close'):
+        console.close()
+
+
+atexit.register(_cleanup_console)
 
 
 def setup_rich_logging(output_dir: str, level: int = logging.INFO) -> logging.Logger:
     """
     Configure logging with Rich handler for beautiful terminal output.
 
+    Also configures the global console to write all output to console_output.log,
+    capturing tables, panels, progress bars, and all Rich visual elements.
+
     Args:
-        output_dir: Directory to save log file
+        output_dir: Directory to save log files
         level: Logging level
 
     Returns:
         Configured logger
     """
+    global console
+
     # Create output dir if needed
     os.makedirs(output_dir, exist_ok=True)
+
+    # Configure console to write all output to file
+    console_log_path = os.path.join(output_dir, "console_output.log")
+    console.set_log_file(console_log_path)
 
     # Configure root logger with Rich handler
     logging.basicConfig(
@@ -83,7 +178,7 @@ def setup_rich_logging(output_dir: str, level: int = logging.INFO) -> logging.Lo
         datefmt="[%X]",
         handlers=[
             RichHandler(
-                console=console,
+                console=console._terminal,  # Use underlying terminal console
                 show_time=True,
                 show_path=True,
                 markup=True,

@@ -1,17 +1,19 @@
 """
-Tiny GPT-2 test training pipeline.
+Test training pipeline with small models.
 
-Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with tiny-gpt2 (~50K params).
+Uses SmolLM2-135M-Instruct for SFT (requires chat template) and
+tiny-gpt2 (~50K params) for Reward, DPO, and GRPO algorithms.
+
 This is the test configuration for fast validation of the training pipeline.
-
-Expected runtime: ~1-2 minutes for all algorithms.
 """
+
+import cache_config  # noqa: F401 - Configure HF cache before imports
 
 from algorithms import TrainingConfig
 from algorithms.grpo import GRPOExtraConfig
 from pipeline import run_pipeline
 
-# Tiny GPT-2 model for testing
+# Tiny GPT-2 model for algorithms that don't need chat templates
 MODEL = "sshleifer/tiny-gpt2"
 
 # Test training configuration
@@ -37,7 +39,7 @@ TEST_SETTINGS = {
 
 configs = {
     "sft": TrainingConfig(
-        model_name=MODEL,
+        model_name="HuggingFaceTB/SmolLM2-135M-Instruct",  # Needs chat template
         output_dir="test-model-sft",
         dataset_name="trl-lib/Capybara",
         **TEST_SETTINGS,

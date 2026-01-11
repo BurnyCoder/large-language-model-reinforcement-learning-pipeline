@@ -5,6 +5,8 @@ Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with Qwen 2.5 0.5B models.
 This is the production configuration optimized for 6GB+ VRAM GPUs.
 """
 
+import cache_config  # noqa: F401 - Configure HF cache before imports
+
 from algorithms import TrainingConfig
 from pipeline import run_pipeline
 

@@ -2,3 +2,10 @@
 Qwen*/
 test-model-*/
 __pycache__/
+
+# HuggingFace cache (models and datasets)
+cache/
+
+# Environment variables (contains API keys)
+.env
+runs/

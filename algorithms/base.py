@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import List, Optional
 
 from datasets import load_dataset
+from dotenv import load_dotenv
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TaskProgressColumn
 
 from utils import (
@@ -28,6 +29,9 @@ from utils import (
     get_training_callbacks,
     format_duration,
 )
+
+# Load environment variables from .env file (for API keys)
+load_dotenv()
 
 
 @dataclass

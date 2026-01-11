@@ -9,6 +9,8 @@ Features:
 - Unique run IDs to prevent output overwrites
 """
 
+import cache_config  # noqa: F401 - Configure HF cache before imports
+
 import os
 import time
 from typing import Dict, List, Tuple

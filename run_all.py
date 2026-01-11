@@ -2,7 +2,7 @@
 Run all training pipelines with Rich visualization.
 
 Usage:
-    python run_all.py              # Run both test (tiny_gpt2) and production (qwen2.5_0.5)
+    python run_all.py              # Run both test and production pipelines
     python run_all.py --test       # Run only test pipeline (fast)
     python run_all.py --prod       # Run only production pipeline
 
@@ -17,10 +17,10 @@ import argparse
 import subprocess
 import sys
 import time
+from datetime import datetime
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 
-from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn, TimeElapsedColumn
@@ -28,7 +28,13 @@ from rich.text import Text
 from rich.rule import Rule
 from rich.live import Live
 
-console = Console()
+# Import DualConsole for file logging support
+from utils.logging import DualConsole
+
+console = DualConsole()
+
+# Log directory for this run (set in main())
+_log_dir: Optional[Path] = None
 
 
 def print_header(mode: str, scripts: List[str]) -> None:
@@ -204,16 +210,16 @@ def main():
 
     # Determine which pipelines to run
     if args.test and args.prod:
-        scripts = ["tiny_gpt2.py", "qwen2.5_0.5.py"]
+        scripts = ["test_models.py", "qwen2.5_0.5.py"]
         mode = "ALL"
     elif args.test:
-        scripts = ["tiny_gpt2.py"]
+        scripts = ["test_models.py"]
         mode = "TEST"
     elif args.prod:
         scripts = ["qwen2.5_0.5.py"]
         mode = "PRODUCTION"
     else:
-        scripts = ["tiny_gpt2.py", "qwen2.5_0.5.py"]
+        scripts = ["test_models.py", "qwen2.5_0.5.py"]
         mode = "ALL"
 
     # Print header
