@@ -1,0 +1,528 @@
+2026-01-12 20:22:13.535357: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-12 20:22:14.001744: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2026-01-12 20:22:16.639079: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                     │
+│  Training Pipeline                                                                                                  │
+│  Run ID: 20260112_202224_vtn8 | Running 1 algorithm(s): grpo                                                        │
+│                                                                                                                     │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+───────────────────────────────────────────────── System Information ──────────────────────────────────────────────────
+
+                                 System Information                                 
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Component         ┃ Details                                                      ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Platform          │ Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39 │
+│ Python            │ 3.12.3                                                       │
+│ Working Directory │ /home/burny/projects/ml-playground/llmrl                     │
+│ Timestamp         │ 2026-01-12 20:22:24                                          │
+│ GPU 0             │ NVIDIA GeForce RTX 5070 Laptop GPU (8.0 GB)                  │
+│ CUDA Version      │ 12.8                                                         │
+│ RAM               │ 15.3 GB (50.4% used)                                         │
+│ Disk              │ 1006.9 GB (14.0% used)                                       │
+│ CPU Cores         │ 16                                                           │
+└───────────────────┴──────────────────────────────────────────────────────────────┘
+
+
+─────────────────────────────────────────────── Pipeline Configuration ────────────────────────────────────────────────
+
+GRPO
+                                 GRPO Config                                 
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                   ┃ Value                                       ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ model_name                  │ Qwen/Qwen2.5-0.5B-Instruct                  │
+│ output_dir                  │ runs/20260112_202224_vtn8/Qwen2.5-0.5B-GRPO │
+│ dataset_name                │ trl-lib/DeepMath-103K                       │
+│ dataset_split               │ train                                       │
+│ max_samples                 │ None                                        │
+│ per_device_train_batch_size │ 2                                           │
+│ gradient_accumulation_steps │ 4                                           │
+│ max_steps                   │ -1                                          │
+│ gradient_checkpointing      │ Yes                                         │
+│ bf16                        │ Yes                                         │
+│ use_liger_kernel            │ Yes                                         │
+│ dataloader_pin_memory       │ Yes                                         │
+│ dataloader_num_workers      │ 4                                           │
+│ logging_steps               │ 1                                           │
+│ logging_strategy            │ steps                                       │
+│ log_level                   │ info                                        │
+│ report_to                   │ wandb                                       │
+│ save_steps                  │ 1073                                        │
+│ save_strategy               │ steps                                       │
+│ save_total_limit            │ 12                                          │
+│ clean_output_dir            │ No                                          │
+│ verbose                     │ Yes                                         │
+└─────────────────────────────┴─────────────────────────────────────────────┘
+
+
+────────────────────────────────────────────────── Training Progress ──────────────────────────────────────────────────
+
+
+
+──────────────────────────────────────────────────── GRPO Training ────────────────────────────────────────────────────
+
+ℹ Model: Qwen/Qwen2.5-0.5B-Instruct
+ℹ Dataset: trl-lib/DeepMath-103K
+ℹ Output: runs/20260112_202224_vtn8/Qwen2.5-0.5B-GRPO
+ℹ Output directory ready: runs/20260112_202224_vtn8/Qwen2.5-0.5B-GRPO
+[20:22:24] INFO     Starting GRPO training with model=Qwen/Qwen2.5-0.5B-Instruct                             grpo.py:65
+        GRPO Extra Config        
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Parameter             ┃ Value ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+│ reward_func           │ None  │
+│ num_generations       │ 4     │
+│ max_completion_length │ 256   │
+└───────────────────────┴───────┘
+
+ℹ Using model name directly: Qwen/Qwen2.5-0.5B-Instruct
+Loading dataset: trl-lib/DeepMath-103K (split: train)
+
+          Dataset Information          
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property    ┃ Value                 ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Dataset     │ trl-lib/DeepMath-103K │
+│ Samples     │ 97,870                │
+│ Columns     │ prompt, solution      │
+│ Sample Keys │ prompt, solution      │
+└─────────────┴───────────────────────┘
+
+ℹ Using accuracy_reward function
+ℹ Adjusting per_device_train_batch_size from 2 to 4 (must be divisible by num_generations=4)
+ℹ Creating GRPO trainer...
+  num_generations: 4
+  max_completion_length: 256
+[20:34:43] INFO     Applying Liger kernels to model instance with model type: qwen2 with kwargs:   monkey_patch.py:2847
+                    {}                                                                                                 
+The model is already on multiple devices. Skipping the move to device specified in `args`.
+Using auto half precision backend
+Starting GRPO training loop...
+Note: GRPO generates multiple completions per sample, which may take longer.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': None, 'pad_token_id': 151643}.
+***** Running training *****
+  Num examples = 97,870
+  Num Epochs = 3
+  Instantaneous batch size per device = 4
+  Total train batch size (w. parallel, distributed & accumulation) = 16
+  Gradient Accumulation steps = 4
+  Total optimization steps = 73,401
+  Number of trainable parameters = 494,032,768
+Automatic Weights & Biases logging enabled, to disable set os.environ["WANDB_DISABLED"] = "true"
+wandb: Currently logged in as: burny (burny-burny) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /home/burny/projects/ml-playground/llmrl/wandb/run-20260112_203445-ml6ce4if
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run dark-grass-7
+wandb: ⭐️ View project at https://wandb.ai/burny-burny/huggingface
+wandb: 🚀 View run at https://wandb.ai/burny-burny/huggingface/runs/ml6ce4if
+
+──────────────────────────────────────────────── GRPO Training Started ────────────────────────────────────────────────
+
+ Max Steps:        Full epoch                      
+ Batch Size:       4                               
+ Gradient Accum:   4                               
+ Effective Batch:  16                              
+ Learning Rate:    1.00e-06                        
+ Warmup Steps:     0                               
+ Save Strategy:    SaveStrategy.STEPS (every 1073) 
+
+
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ GRPO Training Initialized                                                                                           │
+╰────────────────────────────────────────────────── Max steps: auto ──────────────────────────────────────────────────╯
+
+───────────────────────────────────────────────── Training Arguments ──────────────────────────────────────────────────
+
+                                                   TrainingArguments                                                   
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                               ┃ Value                                                                     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ output_dir                              │ runs/20260112_202224_vtn8/Qwen2.5-0.5B-GRPO                               │
+│ overwrite_output_dir                    │ No                                                                        │
+│ do_train                                │ No                                                                        │
+│ do_eval                                 │ No                                                                        │
+│ do_predict                              │ No                                                                        │
+│ eval_strategy                           │ IntervalStrategy.NO                                                       │
+│ prediction_loss_only                    │ No                                                                        │
+│ per_device_train_batch_size             │ 4                                                                         │
+│ per_device_eval_batch_size              │ 8                                                                         │
+│ per_gpu_train_batch_size                │ None                                                                      │
+│ per_gpu_eval_batch_size                 │ None                                                                      │
+│ gradient_accumulation_steps             │ 4                                                                         │
+│ eval_accumulation_steps                 │ None                                                                      │
+│ eval_delay                              │ 0                                                                         │
+│ torch_empty_cache_steps                 │ None                                                                      │
+│ learning_rate                           │ 1e-06                                                                     │
+│ weight_decay                            │ 0.0                                                                       │
+│ adam_beta1                              │ 0.9                                                                       │
+│ adam_beta2                              │ 0.999                                                                     │
+│ adam_epsilon                            │ 1e-08                                                                     │
+│ max_grad_norm                           │ 1.0                                                                       │
+│ num_train_epochs                        │ 3.0                                                                       │
+│ max_steps                               │ -1                                                                        │
+│ lr_scheduler_type                       │ SchedulerType.LINEAR                                                      │
+│ lr_scheduler_kwargs                     │ None                                                                      │
+│ warmup_ratio                            │ 0.0                                                                       │
+│ warmup_steps                            │ 0                                                                         │
+│ log_level                               │ info                                                                      │
+│ log_level_replica                       │ warning                                                                   │
+│ log_on_each_node                        │ Yes                                                                       │
+│ logging_dir                             │ runs/20260112_202224_vtn8/Qwen2.5-0.5B-GRPO/logs                          │
+│ logging_strategy                        │ IntervalStrategy.STEPS                                                    │
+│ logging_first_step                      │ No                                                                        │
+│ logging_steps                           │ 1                                                                         │
+│ logging_nan_inf_filter                  │ Yes                                                                       │
+│ save_strategy                           │ SaveStrategy.STEPS                                                        │
+│ save_steps                              │ 1073                                                                      │
+│ save_total_limit                        │ 12                                                                        │
+│ save_safetensors                        │ Yes                                                                       │
+│ save_on_each_node                       │ No                                                                        │
+│ save_only_model                         │ No                                                                        │
+│ restore_callback_states_from_checkpoint │ No                                                                        │
+│ no_cuda                                 │ No                                                                        │
+│ use_cpu                                 │ No                                                                        │
+│ use_mps_device                          │ No                                                                        │
+│ seed                                    │ 42                                                                        │
+│ data_seed                               │ None                                                                      │
+│ jit_mode_eval                           │ No                                                                        │
+│ bf16                                    │ Yes                                                                       │
+│ fp16                                    │ No                                                                        │
+│ fp16_opt_level                          │ O1                                                                        │
+│ half_precision_backend                  │ auto                                                                      │
+│ bf16_full_eval                          │ No                                                                        │
+│ fp16_full_eval                          │ No                                                                        │
+│ tf32                                    │ None                                                                      │
+│ local_rank                              │ 0                                                                         │
+│ ddp_backend                             │ None                                                                      │
+│ tpu_num_cores                           │ None                                                                      │
+│ tpu_metrics_debug                       │ No                                                                        │
+│ debug                                   │                                                                           │
+│ dataloader_drop_last                    │ No                                                                        │
+│ eval_steps                              │ None                                                                      │
+│ dataloader_num_workers                  │ 4                                                                         │
+│ dataloader_prefetch_factor              │ None                                                                      │
+│ past_index                              │ -1                                                                        │
+│ run_name                                │ None                                                                      │
+│ disable_tqdm                            │ No                                                                        │
+│ remove_unused_columns                   │ No                                                                        │
+│ label_names                             │ None                                                                      │
+│ load_best_model_at_end                  │ No                                                                        │
+│ metric_for_best_model                   │ None                                                                      │
+│ greater_is_better                       │ None                                                                      │
+│ ignore_data_skip                        │ No                                                                        │
+│ fsdp                                    │                                                                           │
+│ fsdp_min_num_params                     │ 0                                                                         │
+│ fsdp_config                             │ {'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False,                 │
+│                                         │ 'xla_fsdp_grad_ckpt': False}                                              │
+│ fsdp_transformer_layer_cls_to_wrap      │ None                                                                      │
+│ accelerator_config                      │ AcceleratorConfig(split_batches=False, dispatch_batches=None,             │
+│                                         │ even_batches=True, use_seedable_sampler=True, non_blocking=False,         │
+│                                         │ gradient_accumulation_kwargs=None, use_configured_state=False)            │
+│ parallelism_config                      │ None                                                                      │
+│ deepspeed                               │ None                                                                      │
+│ label_smoothing_factor                  │ 0.0                                                                       │
+│ optim                                   │ OptimizerNames.ADAMW_TORCH_FUSED                                          │
+│ optim_args                              │ None                                                                      │
+│ adafactor                               │ No                                                                        │
+│ group_by_length                         │ No                                                                        │
+│ length_column_name                      │ length                                                                    │
+│ report_to                               │ wandb                                                                     │
+│ project                                 │ huggingface                                                               │
+│ trackio_space_id                        │ trackio                                                                   │
+│ ddp_find_unused_parameters              │ None                                                                      │
+│ ddp_bucket_cap_mb                       │ None                                                                      │
+│ ddp_broadcast_buffers                   │ None                                                                      │
+│ dataloader_pin_memory                   │ Yes                                                                       │
+│ dataloader_persistent_workers           │ No                                                                        │
+│ skip_memory_metrics                     │ Yes                                                                       │
+│ use_legacy_prediction_loop              │ No                                                                        │
+│ push_to_hub                             │ No                                                                        │
+│ resume_from_checkpoint                  │ None                                                                      │
+│ hub_model_id                            │ None                                                                      │
+│ hub_strategy                            │ HubStrategy.EVERY_SAVE                                                    │
+│ hub_token                               │ None                                                                      │
+│ hub_private_repo                        │ None                                                                      │
+│ hub_always_push                         │ No                                                                        │
+│ hub_revision                            │ None                                                                      │
+│ gradient_checkpointing                  │ Yes                                                                       │
+│ gradient_checkpointing_kwargs           │ None                                                                      │
+│ include_inputs_for_metrics              │ No                                                                        │
+│ include_for_metrics                     │                                                                           │
+│ eval_do_concat_batches                  │ Yes                                                                       │
+│ fp16_backend                            │ auto                                                                      │
+│ push_to_hub_model_id                    │ None                                                                      │
+│ push_to_hub_organization                │ None                                                                      │
+│ push_to_hub_token                       │ None                                                                      │
+│ mp_parameters                           │                                                                           │
+│ auto_find_batch_size                    │ No                                                                        │
+│ full_determinism                        │ No                                                                        │
+│ torchdynamo                             │ None                                                                      │
+│ ray_scope                               │ last                                                                      │
+│ ddp_timeout                             │ 1800                                                                      │
+│ torch_compile                           │ No                                                                        │
+│ torch_compile_backend                   │ None                                                                      │
+│ torch_compile_mode                      │ None                                                                      │
+│ include_tokens_per_second               │ No                                                                        │
+│ include_num_input_tokens_seen           │ no                                                                        │
+│ neftune_noise_alpha                     │ None                                                                      │
+│ optim_target_modules                    │ None                                                                      │
+│ batch_eval_metrics                      │ No                                                                        │
+│ eval_on_start                           │ No                                                                        │
+│ use_liger_kernel                        │ Yes                                                                       │
+│ liger_kernel_config                     │ None                                                                      │
+│ eval_use_gather_object                  │ No                                                                        │
+│ average_tokens_across_devices           │ Yes                                                                       │
+│ model_init_kwargs                       │ None                                                                      │
+│ disable_dropout                         │ No                                                                        │
+│ cast_lm_head_to_fp32                    │ No                                                                        │
+│ num_generations                         │ 4                                                                         │
+│ num_generations_eval                    │ None                                                                      │
+│ max_completion_length                   │ 256                                                                       │
+│ ds3_gather_for_generation               │ Yes                                                                       │
+│ shuffle_dataset                         │ Yes                                                                       │
+│ generation_batch_size                   │ 16                                                                        │
+│ steps_per_generation                    │ 4                                                                         │
+│ temperature                             │ 1.0                                                                       │
+│ top_p                                   │ 1.0                                                                       │
+│ top_k                                   │ None                                                                      │
+│ min_p                                   │ None                                                                      │
+│ generation_kwargs                       │ None                                                                      │
+│ chat_template_kwargs                    │ None                                                                      │
+│ repetition_penalty                      │ 1.0                                                                       │
+│ use_transformers_paged                  │ No                                                                        │
+│ cache_implementation                    │ None                                                                      │
+│ use_vllm                                │ No                                                                        │
+│ vllm_mode                               │ server                                                                    │
+│ vllm_model_impl                         │ vllm                                                                      │
+│ vllm_enable_sleep_mode                  │ No                                                                        │
+│ vllm_guided_decoding_regex              │ None                                                                      │
+│ vllm_server_base_url                    │ None                                                                      │
+│ vllm_server_host                        │ 0.0.0.0                                                                   │
+│ vllm_server_port                        │ 8000                                                                      │
+│ vllm_server_timeout                     │ 240.0                                                                     │
+│ vllm_gpu_memory_utilization             │ 0.3                                                                       │
+│ vllm_max_model_length                   │ None                                                                      │
+│ vllm_tensor_parallel_size               │ 1                                                                         │
+│ beta                                    │ 0.0                                                                       │
+│ num_iterations                          │ 1                                                                         │
+│ epsilon                                 │ 0.2                                                                       │
+│ delta                                   │ None                                                                      │
+│ epsilon_high                            │ None                                                                      │
+│ sapo_temperature_neg                    │ 1.05                                                                      │
+│ sapo_temperature_pos                    │ 1.0                                                                       │
+│ importance_sampling_level               │ token                                                                     │
+│ reward_weights                          │ None                                                                      │
+│ scale_rewards                           │ group                                                                     │
+│ loss_type                               │ dapo                                                                      │
+│ mask_truncated_completions              │ No                                                                        │
+│ sync_ref_model                          │ No                                                                        │
+│ ref_model_mixup_alpha                   │ 0.6                                                                       │
+│ ref_model_sync_steps                    │ 512                                                                       │
+│ top_entropy_quantile                    │ 1.0                                                                       │
+│ use_liger_loss                          │ None                                                                      │
+│ vllm_importance_sampling_correction     │ Yes                                                                       │
+│ vllm_importance_sampling_mode           │ sequence_mask                                                             │
+│ vllm_importance_sampling_cap            │ 3.0                                                                       │
+│ use_bias_correction_kl                  │ No                                                                        │
+│ log_completions                         │ No                                                                        │
+│ num_completions_to_print                │ None                                                                      │
+│ log_unique_prompts                      │ No                                                                        │
+│ max_prompt_length                       │ None                                                                      │
+│ wandb_log_unique_prompts                │ None                                                                      │
+│ distributed_state                       │ Distributed environment: DistributedType.NO                               │
+│                                         │ Num processes: 1                                                          │
+│                                         │ Process index: 0                                                          │
+│                                         │ Local process index: 0                                                    │
+│                                         │ Device: cuda                                                              │
+│                                         │                                                                           │
+│ deepspeed_plugin                        │ None                                                                      │
+└─────────────────────────────────────────┴───────────────────────────────────────────────────────────────────────────┘
+
+
+  0%|          | 0/73401 [00:00<?, ?it/s]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+╭─────────────────────────────── Traceback (most recent call last) ────────────────────────────────╮
+│ /home/burny/projects/ml-playground/llmrl/pipeline.py:119 in run_pipeline                         │
+│                                                                                                  │
+│   116 │   │   │   │   if algo == "grpo" and grpo_extra is not None:                              │
+│   117 │   │   │   │   │   train_grpo(config, grpo_extra)                                         │
+│   118 │   │   │   │   else:                                                                      │
+│ ❱ 119 │   │   │   │   │   TRAINERS[algo](config)                                                 │
+│   120 │   │   │   │   status = "PASSED"                                                          │
+│   121 │   │   │   │   print_success(f"{algo.upper()} completed in {format_duration(time.time()   │
+│   122 │   │   │   except Exception as e:                                                         │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/llmrl/algorithms/grpo.py:195 in train_grpo                    │
+│                                                                                                  │
+│   192 │   # Train                                                                                │
+│   193 │   console.print("[bold cyan]Starting GRPO training loop...[/bold cyan]")                 │
+│   194 │   console.print("[dim]Note: GRPO generates multiple completions per sample, which may    │
+│ ❱ 195 │   trainer.train()                                                                        │
+│   196 │                                                                                          │
+│   197 │   # Finalize                                                                             │
+│   198 │   finalize_training(trainer, config.output_dir, "GRPO")                                  │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/transformers/trainer.py:23 │
+│ 25 in train                                                                                      │
+│                                                                                                  │
+│   2322 │   │   │   finally:                                                                      │
+│   2323 │   │   │   │   hf_hub_utils.enable_progress_bars()                                       │
+│   2324 │   │   else:                                                                             │
+│ ❱ 2325 │   │   │   return inner_training_loop(                                                   │
+│   2326 │   │   │   │   args=args,                                                                │
+│   2327 │   │   │   │   resume_from_checkpoint=resume_from_checkpoint,                            │
+│   2328 │   │   │   │   trial=trial,                                                              │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/transformers/trainer.py:26 │
+│ 74 in _inner_training_loop                                                                       │
+│                                                                                                  │
+│   2671 │   │   │   │   │   │   else contextlib.nullcontext                                       │
+│   2672 │   │   │   │   │   )                                                                     │
+│   2673 │   │   │   │   │   with context():                                                       │
+│ ❱ 2674 │   │   │   │   │   │   tr_loss_step = self.training_step(model, inputs, num_items_in_ba  │
+│   2675 │   │   │   │   │                                                                         │
+│   2676 │   │   │   │   │   if (                                                                  │
+│   2677 │   │   │   │   │   │   args.logging_nan_inf_filter                                       │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/trainer/grpo_trainer.p │
+│ y:1127 in training_step                                                                          │
+│                                                                                                  │
+│   1124 │                                                                                         │
+│   1125 │   def training_step(self, model, inputs, num_items_in_batch):                           │
+│   1126 │   │   time_before = time.perf_counter()                                                 │
+│ ❱ 1127 │   │   output = super().training_step(model, inputs, num_items_in_batch)                 │
+│   1128 │   │   self._step += 1                                                                   │
+│   1129 │   │   time_after = time.perf_counter()                                                  │
+│   1130 │   │   self._current_train_step_time += time_after - time_before                         │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/transformers/trainer.py:40 │
+│ 14 in training_step                                                                              │
+│                                                                                                  │
+│   4011 │   │   │   if hasattr(self.optimizer, "train") and callable(self.optimizer.train):       │
+│   4012 │   │   │   │   self.optimizer.train()                                                    │
+│   4013 │   │   │                                                                                 │
+│ ❱ 4014 │   │   │   inputs = self._prepare_inputs(inputs)                                         │
+│   4015 │   │   │   if is_sagemaker_mp_enabled():                                                 │
+│   4016 │   │   │   │   loss_mb = smp_forward_backward(model, inputs, self.args.gradient_accumul  │
+│   4017 │   │   │   │   return loss_mb.reduce_mean().detach().to(self.args.device)                │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/extras/profiling.py:98 │
+│ in wrapper                                                                                       │
+│                                                                                                  │
+│    95 │   @functools.wraps(func)                                                                 │
+│    96 │   def wrapper(self, *args, **kwargs):                                                    │
+│    97 │   │   with profiling_context(self, func.__name__):                                       │
+│ ❱  98 │   │   │   return func(self, *args, **kwargs)                                             │
+│    99 │                                                                                          │
+│   100 │   return wrapper                                                                         │
+│   101                                                                                            │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/trainer/grpo_trainer.p │
+│ y:1156 in _prepare_inputs                                                                        │
+│                                                                                                  │
+│   1153 │   │   │   generate_every = self.args.steps_per_generation * self.num_iterations         │
+│   1154 │   │   │   if self._step % generate_every == 0 or self._buffered_inputs is None:         │
+│   1155 │   │   │   │   # self._buffered_inputs=None can occur when resuming from a checkpoint    │
+│ ❱ 1156 │   │   │   │   generation_batch = self._generate_and_score_completions(generation_batch  │
+│   1157 │   │   │   │   generation_batch = split_pixel_values_by_grid(generation_batch)           │
+│   1158 │   │   │   │   generation_batch = shuffle_sequence_dict(generation_batch)                │
+│   1159 │   │   │   │   generation_batches = split_tensor_dict(generation_batch, self.args.steps  │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/trainer/grpo_trainer.p │
+│ y:1937 in _generate_and_score_completions                                                        │
+│                                                                                                  │
+│   1934 │   │   # Calculate rewards for each reward function. rewards_per_func aggregates reward  │
+│   1935 │   │   # important because rewards will be normalized per group, and completions are di  │
+│   1936 │   │   # rewards_per_func to extract each process's subset.                              │
+│ ❱ 1937 │   │   rewards_per_func = self._calculate_rewards(inputs, prompts, completions, complet  │
+│   1938 │   │                                                                                     │
+│   1939 │   │   # Apply weights to each reward function's output and sum                          │
+│   1940 │   │   rewards = (rewards_per_func * self.reward_weights.to(device).unsqueeze(0)).nansu  │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/extras/profiling.py:98 │
+│ in wrapper                                                                                       │
+│                                                                                                  │
+│    95 │   @functools.wraps(func)                                                                 │
+│    96 │   def wrapper(self, *args, **kwargs):                                                    │
+│    97 │   │   with profiling_context(self, func.__name__):                                       │
+│ ❱  98 │   │   │   return func(self, *args, **kwargs)                                             │
+│    99 │                                                                                          │
+│   100 │   return wrapper                                                                         │
+│   101                                                                                            │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/trainer/grpo_trainer.p │
+│ y:1200 in _calculate_rewards                                                                     │
+│                                                                                                  │
+│   1197 │   │   │   │   │   with torch.inference_mode():                                          │
+│   1198 │   │   │   │   │   │   rewards_per_func[:, i] = reward_func(**reward_inputs).logits[:,   │
+│   1199 │   │   │   │   else:                                                                     │
+│ ❱ 1200 │   │   │   │   │   output_reward_func = reward_func(                                     │
+│   1201 │   │   │   │   │   │   prompts=prompts, completions=completions, completion_ids=complet  │
+│   1202 │   │   │   │   │   )                                                                     │
+│   1203 │   │   │   │   │   # Convert None values to NaN                                          │
+│                                                                                                  │
+│ /home/burny/projects/ml-playground/.venv/lib/python3.12/site-packages/trl/rewards/accuracy_rewar │
+│ ds.py:52 in accuracy_reward                                                                      │
+│                                                                                                  │
+│    49 │   ```                                                                                    │
+│    50 │   """                                                                                    │
+│    51 │   if not is_math_verify_available():                                                     │
+│ ❱  52 │   │   raise ImportError("Please install the `math_verify` package to use accuracy_rewa   │
+│    53 │                                                                                          │
+│    54 │   contents = [completion[0]["content"] for completion in completions]                    │
+│    55 │   rewards = []                                                                           │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
+ImportError: Please install the `math_verify` package to use accuracy_reward
+✗ GRPO failed: Please install the `math_verify` package to use accuracy_reward
+ ✗ GRPO Training Failed 
+┏━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Metric   ┃ Value     ┃
+┡━━━━━━━━━━╇━━━━━━━━━━━┩
+│ Duration │ 13m 20.0s │
+└──────────┴───────────┘
+
+  Running GRPO... ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100% 1/1 0:12:45 0:00:00
+
+────────────────────────────────────────────────── Pipeline Results ───────────────────────────────────────────────────
+
+
+               Pipeline Results               
+┏━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓
+┃ Algorithm ┃       Status       ┃  Duration ┃
+┡━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━┩
+│ GRPO      │       FAILED       │ 13m 20.0s │
+│           │                    │           │
+│ TOTAL     │ 0 passed, 1 failed │ 13m 20.0s │
+└───────────┴────────────────────┴───────────┘
+
+
+✗ 1 algorithm(s) failed, 0 passed
+Total pipeline time: 13m 20.0s
+
+Traceback (most recent call last):
+  File "/home/burny/projects/ml-playground/llmrl/qwen2.5_0.5b.py", line 103, in <module>
+    run_pipeline(filtered_configs)
+  File "/home/burny/projects/ml-playground/llmrl/pipeline.py", line 160, in run_pipeline
+    raise RuntimeError(f"{failed} algorithm(s) failed")
+RuntimeError: 1 algorithm(s) failed
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mdark-grass-7[0m at: [34m[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260112_203445-ml6ce4if/logs[0m
