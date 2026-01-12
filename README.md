@@ -86,32 +86,13 @@ llmrl/
 
 ### Dependencies
 
-| Package | Version | Purpose |
-|---------|---------|---------|
-| trl | >=0.26.0 | Transformer Reinforcement Learning trainers |
-| transformers | >=4.47.0 | Model loading and tokenization |
-| datasets | latest | Hugging Face datasets |
-| accelerate | >=1.1.0 | Multi-GPU and mixed precision |
-| peft | >=0.13.0 | Parameter-efficient fine-tuning |
-| torch | >=2.2.0 | PyTorch framework |
-| tensorboard | latest | Training visualization |
-| liger-kernel | latest | Memory-efficient Triton kernels |
-| rich | >=13.0.0 | Beautiful console output and progress bars |
-| psutil | >=5.9.0 | System resource monitoring |
-| wandb | latest | Weights & Biases experiment tracking |
-| neptune | latest | Neptune experiment tracking |
-| python-dotenv | latest | Environment variable loading |
+trl, transformers, datasets, accelerate, peft, torch, tensorboard, liger-kernel, rich, psutil, wandb, neptune, python-dotenv
 
 ## Installation
 
 ### Using uv (Recommended)
 
-[uv](https://github.com/astral-sh/uv) is a fast Python package installer that can significantly speed up dependency installation.
-
 ```bash
-# Install uv (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
 # Clone the repository
 git clone <repository-url>
 cd llmrl
