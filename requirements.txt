@@ -6,6 +6,7 @@ peft>=0.13.0
 torch>=2.2.0
 tensorboard
 liger-kernel
+math_verify 
 
 # Logging and visualization
 rich>=13.0.0
