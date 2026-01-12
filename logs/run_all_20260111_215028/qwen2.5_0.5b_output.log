@@ -392,3 +392,344 @@ wandb: 🚀 View run at https://wandb.ai/burny-burny/huggingface/runs/ne3tdf1a
 
                                                     
 
+  0%|          | 2/1482 [05:05<72:30:28, 176.37s/it]
+  0%|          | 3/1482 [10:08<96:21:00, 234.52s/it]{'loss': 1.7773, 'grad_norm': 10.837627410888672, 'learning_rate': 1.998650472334683e-05, 'num_tokens': 46596.0, 'mean_token_accuracy': 0.6223782598972321, 'epoch': 0.0}
+    Step 3: loss: 1.9274 | lr: 2.00e-05 | grad: 5.16 | epoch: 0.01 | GPU: 5.5/8.0GB
+  Step 3/1,482 (0.2%) loss=1.9274 | lr=2.00e-05 | grad=5.157
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                    
+
+  0%|          | 3/1482 [10:08<96:21:00, 234.52s/it]
+  0%|          | 4/1482 [15:02<105:49:57, 257.78s/it]{'loss': 1.9274, 'grad_norm': 5.157018184661865, 'learning_rate': 1.9973009446693658e-05, 'num_tokens': 71542.0, 'mean_token_accuracy': 0.5814870595932007, 'epoch': 0.01}
+    Step 4: loss: 1.6163 | lr: 2.00e-05 | grad: 5.12 | epoch: 0.01 | GPU: 5.5/8.0GB
+  Step 4/1,482 (0.3%) loss=1.6163 | lr=2.00e-05 | grad=5.115
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                     
+
+  0%|          | 4/1482 [15:02<105:49:57, 257.78s/it]
+  0%|          | 5/1482 [20:11<113:24:32, 276.42s/it]{'loss': 1.6163, 'grad_norm': 5.115257263183594, 'learning_rate': 1.9959514170040488e-05, 'num_tokens': 90870.0, 'mean_token_accuracy': 0.6391739100217819, 'epoch': 0.01}
+    Step 5: loss: 1.5241 | lr: 1.99e-05 | grad: 4.29 | epoch: 0.01 | GPU: 5.5/8.0GB
+  Step 5/1,482 (0.3%) loss=1.5241 | lr=1.99e-05 | grad=4.290
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                     
+
+  0%|          | 5/1482 [20:11<113:24:32, 276.42s/it]
+  0%|          | 6/1482 [25:17<117:26:26, 286.44s/it]{'loss': 1.5241, 'grad_norm': 4.290038585662842, 'learning_rate': 1.9946018893387314e-05, 'num_tokens': 115219.0, 'mean_token_accuracy': 0.6456017643213272, 'epoch': 0.01}
+    Step 6: loss: 1.3630 | lr: 1.99e-05 | grad: 3.60 | epoch: 0.01 | GPU: 5.5/8.0GB
+  Step 6/1,482 (0.4%) loss=1.3630 | lr=1.99e-05 | grad=3.600
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                     
+
+  0%|          | 6/1482 [25:17<117:26:26, 286.44s/it]
+  0%|          | 7/1482 [30:22<119:48:46, 292.42s/it]{'loss': 1.363, 'grad_norm': 3.599583864212036, 'learning_rate': 1.9932523616734144e-05, 'num_tokens': 136447.0, 'mean_token_accuracy': 0.6773215681314468, 'epoch': 0.01}
+    Step 7: loss: 1.6063 | lr: 1.99e-05 | grad: 3.74 | epoch: 0.01 | GPU: 5.5/8.0GB
+  Step 7/1,482 (0.5%) loss=1.6063 | lr=1.99e-05 | grad=3.737
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                     
+
+  0%|          | 7/1482 [30:22<119:48:46, 292.42s/it]
+  1%|          | 8/1482 [35:31<121:58:27, 297.90s/it]{'loss': 1.6063, 'grad_norm': 3.737048625946045, 'learning_rate': 1.9919028340080974e-05, 'num_tokens': 159775.0, 'mean_token_accuracy': 0.6296929270029068, 'epoch': 0.01}
+    Step 8: loss: 1.5649 | lr: 1.99e-05 | grad: 3.61 | epoch: 0.02 | GPU: 5.5/8.0GB
+  Step 8/1,482 (0.5%) loss=1.5649 | lr=1.99e-05 | grad=3.609
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                     
+
+  1%|          | 8/1482 [35:32<121:58:27, 297.90s/it]
+  1%|          | 9/1482 [40:38<123:01:57, 300.69s/it]{'loss': 1.5649, 'grad_norm': 3.6092047691345215, 'learning_rate': 1.9905533063427804e-05, 'num_tokens': 184127.0, 'mean_token_accuracy': 0.639984205365181, 'epoch': 0.02}
+    Step 9: loss: 1.8535 | lr: 1.99e-05 | grad: 3.93 | epoch: 0.02 | GPU: 5.5/8.0GB
+  Step 9/1,482 (0.6%) loss=1.8535 | lr=1.99e-05 | grad=3.935
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                     
+
+  1%|          | 9/1482 [40:38<123:01:57, 300.69s/it]{'loss': 1.8535, 'grad_norm': 3.934776782989502, 'learning_rate': 1.989203778677463e-05, 'num_tokens': 206169.0, 'mean_token_accuracy': 0.594915583729744, 'epoch': 0.02}
+  Step 10 | 307.037s/step | avg: 274.421s | ETA: 0.0s
+
+  1%|          | 10/1482 [45:45<123:46:10, 302.70s/it]    Step 10: loss: 1.4936 | lr: 1.99e-05 | grad: 3.77 | epoch: 0.02 | GPU: 5.5/8.0GB
+  Step 10/1,482 (0.7%) loss=1.4936 | lr=1.99e-05 | grad=3.770
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                      
+
+  1%|          | 10/1482 [45:46<123:46:10, 302.70s/it]
+  1%|          | 11/1482 [50:54<124:23:50, 304.44s/it]{'loss': 1.4936, 'grad_norm': 3.7700464725494385, 'learning_rate': 1.987854251012146e-05, 'num_tokens': 226067.0, 'mean_token_accuracy': 0.6473288685083389, 'epoch': 0.02}
+    Step 11: loss: 1.5662 | lr: 1.99e-05 | grad: 3.74 | epoch: 0.02 | GPU: 5.5/8.0GB
+  Step 11/1,482 (0.7%) loss=1.5662 | lr=1.99e-05 | grad=3.743
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                      
+
+  1%|          | 11/1482 [50:54<124:23:50, 304.44s/it]
+  1%|          | 12/1482 [56:02<124:46:29, 305.57s/it]{'loss': 1.5662, 'grad_norm': 3.7429916858673096, 'learning_rate': 1.986504723346829e-05, 'num_tokens': 248812.0, 'mean_token_accuracy': 0.6233761757612228, 'epoch': 0.02}
+    Step 12: loss: 1.7484 | lr: 1.99e-05 | grad: 3.45 | epoch: 0.02 | GPU: 5.5/8.0GB
+  Step 12/1,482 (0.8%) loss=1.7484 | lr=1.99e-05 | grad=3.452
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                      
+
+  1%|          | 12/1482 [56:02<124:46:29, 305.57s/it]
+  1%|          | 13/1482 [1:01:12<125:15:51, 306.98s/it]{'loss': 1.7484, 'grad_norm': 3.451914072036743, 'learning_rate': 1.9851551956815116e-05, 'num_tokens': 272961.0, 'mean_token_accuracy': 0.6058520972728729, 'epoch': 0.02}
+    Step 13: loss: 1.4828 | lr: 1.98e-05 | grad: 3.71 | epoch: 0.03 | GPU: 5.5/8.0GB
+  Step 13/1,482 (0.9%) loss=1.4828 | lr=1.98e-05 | grad=3.706
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|          | 13/1482 [1:01:12<125:15:51, 306.98s/it]
+  1%|          | 14/1482 [1:06:21<125:22:05, 307.44s/it]{'loss': 1.4828, 'grad_norm': 3.706216335296631, 'learning_rate': 1.9838056680161946e-05, 'num_tokens': 293964.0, 'mean_token_accuracy': 0.6424361318349838, 'epoch': 0.03}
+    Step 14: loss: 1.6059 | lr: 1.98e-05 | grad: 3.40 | epoch: 0.03 | GPU: 5.5/8.0GB
+  Step 14/1,482 (0.9%) loss=1.6059 | lr=1.98e-05 | grad=3.402
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|          | 14/1482 [1:06:21<125:22:05, 307.44s/it]
+  1%|          | 15/1482 [1:11:30<125:30:10, 307.98s/it]{'loss': 1.6059, 'grad_norm': 3.402036428451538, 'learning_rate': 1.9824561403508773e-05, 'num_tokens': 314414.0, 'mean_token_accuracy': 0.6380074322223663, 'epoch': 0.03}
+    Step 15: loss: 1.6123 | lr: 1.98e-05 | grad: 3.59 | epoch: 0.03 | GPU: 5.5/8.0GB
+  Step 15/1,482 (1.0%) loss=1.6123 | lr=1.98e-05 | grad=3.593
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|          | 15/1482 [1:11:30<125:30:10, 307.98s/it]
+  1%|          | 16/1482 [1:16:39<125:34:06, 308.35s/it]{'loss': 1.6123, 'grad_norm': 3.5934112071990967, 'learning_rate': 1.9811066126855602e-05, 'num_tokens': 338761.0, 'mean_token_accuracy': 0.6258052587509155, 'epoch': 0.03}
+    Step 16: loss: 1.5093 | lr: 1.98e-05 | grad: 3.28 | epoch: 0.03 | GPU: 5.5/8.0GB
+  Step 16/1,482 (1.1%) loss=1.5093 | lr=1.98e-05 | grad=3.283
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|          | 16/1482 [1:16:39<125:34:06, 308.35s/it]
+  1%|          | 17/1482 [1:21:48<125:30:50, 308.43s/it]{'loss': 1.5093, 'grad_norm': 3.2826409339904785, 'learning_rate': 1.979757085020243e-05, 'num_tokens': 364154.0, 'mean_token_accuracy': 0.647676095366478, 'epoch': 0.03}
+    Step 17: loss: 1.5875 | lr: 1.98e-05 | grad: 3.41 | epoch: 0.03 | GPU: 5.5/8.0GB
+  Step 17/1,482 (1.1%) loss=1.5875 | lr=1.98e-05 | grad=3.412
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|          | 17/1482 [1:21:48<125:30:50, 308.43s/it]
+  1%|          | 18/1482 [1:26:19<120:54:16, 297.31s/it]{'loss': 1.5875, 'grad_norm': 3.411837339401245, 'learning_rate': 1.978407557354926e-05, 'num_tokens': 387522.0, 'mean_token_accuracy': 0.6337466537952423, 'epoch': 0.03}
+    Step 18: loss: 1.6839 | lr: 1.98e-05 | grad: 3.54 | epoch: 0.04 | GPU: 5.5/8.0GB
+  Step 18/1,482 (1.2%) loss=1.6839 | lr=1.98e-05 | grad=3.537
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|          | 18/1482 [1:26:19<120:54:16, 297.31s/it]
+  1%|▏         | 19/1482 [1:31:28<122:11:57, 300.70s/it]{'loss': 1.6839, 'grad_norm': 3.537415027618408, 'learning_rate': 1.977058029689609e-05, 'num_tokens': 410636.0, 'mean_token_accuracy': 0.6119341999292374, 'epoch': 0.04}
+    Step 19: loss: 1.3929 | lr: 1.98e-05 | grad: 3.62 | epoch: 0.04 | GPU: 5.5/8.0GB
+  Step 19/1,482 (1.3%) loss=1.3929 | lr=1.98e-05 | grad=3.617
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|▏         | 19/1482 [1:31:28<122:11:57, 300.70s/it]{'loss': 1.3929, 'grad_norm': 3.6170666217803955, 'learning_rate': 1.9757085020242915e-05, 'num_tokens': 430858.0, 'mean_token_accuracy': 0.6720004975795746, 'epoch': 0.04}
+  Step 20 | 309.452s/step | avg: 305.056s | ETA: 0.0s
+
+  1%|▏         | 20/1482 [1:36:37<123:11:59, 303.36s/it]    Step 20: loss: 1.3478 | lr: 1.97e-05 | grad: 3.73 | epoch: 0.04 | GPU: 5.5/8.0GB
+  Step 20/1,482 (1.3%) loss=1.3478 | lr=1.97e-05 | grad=3.726
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|▏         | 20/1482 [1:36:37<123:11:59, 303.36s/it]
+  1%|▏         | 21/1482 [1:41:44<123:31:53, 304.39s/it]{'loss': 1.3478, 'grad_norm': 3.725717782974243, 'learning_rate': 1.9743589743589745e-05, 'num_tokens': 451526.0, 'mean_token_accuracy': 0.6779870688915253, 'epoch': 0.04}
+    Step 21: loss: 1.5027 | lr: 1.97e-05 | grad: 3.74 | epoch: 0.04 | GPU: 5.5/8.0GB
+  Step 21/1,482 (1.4%) loss=1.5027 | lr=1.97e-05 | grad=3.741
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|▏         | 21/1482 [1:41:44<123:31:53, 304.39s/it]
+  1%|▏         | 22/1482 [1:46:39<122:20:45, 301.67s/it]{'loss': 1.5027, 'grad_norm': 3.7410740852355957, 'learning_rate': 1.9730094466936575e-05, 'num_tokens': 472555.0, 'mean_token_accuracy': 0.6415430754423141, 'epoch': 0.04}
+    Step 22: loss: 1.3805 | lr: 1.97e-05 | grad: 3.84 | epoch: 0.04 | GPU: 5.5/8.0GB
+  Step 22/1,482 (1.5%) loss=1.3805 | lr=1.97e-05 | grad=3.838
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  1%|▏         | 22/1482 [1:46:40<122:20:45, 301.67s/it]
+  2%|▏         | 23/1482 [1:51:46<122:51:11, 303.13s/it]{'loss': 1.3805, 'grad_norm': 3.8375744819641113, 'learning_rate': 1.9716599190283405e-05, 'num_tokens': 492412.0, 'mean_token_accuracy': 0.6554747521877289, 'epoch': 0.04}
+    Step 23: loss: 1.3993 | lr: 1.97e-05 | grad: 3.43 | epoch: 0.05 | GPU: 5.5/8.0GB
+  Step 23/1,482 (1.6%) loss=1.3993 | lr=1.97e-05 | grad=3.431
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 23/1482 [1:51:46<122:51:11, 303.13s/it]
+  2%|▏         | 24/1482 [1:56:54<123:23:20, 304.66s/it]{'loss': 1.3993, 'grad_norm': 3.4310216903686523, 'learning_rate': 1.970310391363023e-05, 'num_tokens': 517688.0, 'mean_token_accuracy': 0.6516353040933609, 'epoch': 0.05}
+    Step 24: loss: 1.4144 | lr: 1.97e-05 | grad: 3.41 | epoch: 0.05 | GPU: 5.5/8.0GB
+  Step 24/1,482 (1.6%) loss=1.4144 | lr=1.97e-05 | grad=3.407
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 24/1482 [1:56:54<123:23:20, 304.66s/it]
+  2%|▏         | 25/1482 [2:02:03<123:49:48, 305.96s/it]{'loss': 1.4144, 'grad_norm': 3.4065134525299072, 'learning_rate': 1.968960863697706e-05, 'num_tokens': 539605.0, 'mean_token_accuracy': 0.6639417558908463, 'epoch': 0.05}
+    Step 25: loss: 1.6237 | lr: 1.97e-05 | grad: 3.44 | epoch: 0.05 | GPU: 5.5/8.0GB
+  Step 25/1,482 (1.7%) loss=1.6237 | lr=1.97e-05 | grad=3.442
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 25/1482 [2:02:03<123:49:48, 305.96s/it]
+  2%|▏         | 26/1482 [2:07:11<123:55:09, 306.39s/it]{'loss': 1.6237, 'grad_norm': 3.4423940181732178, 'learning_rate': 1.9676113360323887e-05, 'num_tokens': 563276.0, 'mean_token_accuracy': 0.6199875771999359, 'epoch': 0.05}
+    Step 26: loss: 1.4059 | lr: 1.97e-05 | grad: 3.21 | epoch: 0.05 | GPU: 5.5/8.0GB
+  Step 26/1,482 (1.8%) loss=1.4059 | lr=1.97e-05 | grad=3.212
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 26/1482 [2:07:11<123:55:09, 306.39s/it]
+  2%|▏         | 27/1482 [2:12:19<124:05:50, 307.04s/it]{'loss': 1.4059, 'grad_norm': 3.211747407913208, 'learning_rate': 1.9662618083670717e-05, 'num_tokens': 586603.0, 'mean_token_accuracy': 0.6552923172712326, 'epoch': 0.05}
+    Step 27: loss: 1.2644 | lr: 1.96e-05 | grad: 3.12 | epoch: 0.05 | GPU: 5.5/8.0GB
+  Step 27/1,482 (1.8%) loss=1.2644 | lr=1.96e-05 | grad=3.115
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 27/1482 [2:12:19<124:05:50, 307.04s/it]
+  2%|▏         | 28/1482 [2:17:30<124:29:43, 308.24s/it]{'loss': 1.2644, 'grad_norm': 3.1153526306152344, 'learning_rate': 1.9649122807017544e-05, 'num_tokens': 612691.0, 'mean_token_accuracy': 0.6816990375518799, 'epoch': 0.05}
+    Step 28: loss: 1.4524 | lr: 1.96e-05 | grad: 3.25 | epoch: 0.06 | GPU: 5.5/8.0GB
+  Step 28/1,482 (1.9%) loss=1.4524 | lr=1.96e-05 | grad=3.247
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 28/1482 [2:17:30<124:29:43, 308.24s/it]
+  2%|▏         | 29/1482 [2:22:39<124:25:14, 308.27s/it]{'loss': 1.4524, 'grad_norm': 3.2474708557128906, 'learning_rate': 1.9635627530364373e-05, 'num_tokens': 636325.0, 'mean_token_accuracy': 0.6650048345327377, 'epoch': 0.06}
+    Step 29: loss: 1.3588 | lr: 1.96e-05 | grad: 3.52 | epoch: 0.06 | GPU: 5.5/8.0GB
+  Step 29/1,482 (2.0%) loss=1.3588 | lr=1.96e-05 | grad=3.521
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 29/1482 [2:22:39<124:25:14, 308.27s/it]{'loss': 1.3588, 'grad_norm': 3.521009683609009, 'learning_rate': 1.9622132253711203e-05, 'num_tokens': 657410.0, 'mean_token_accuracy': 0.6608386486768723, 'epoch': 0.06}
+  Step 30 | 305.401s/step | avg: 306.533s | ETA: 0.0s
+
+  2%|▏         | 30/1482 [2:27:44<124:00:19, 307.45s/it]    Step 30: loss: 1.6196 | lr: 1.96e-05 | grad: 3.24 | epoch: 0.06 | GPU: 5.5/8.0GB
+  Step 30/1,482 (2.0%) loss=1.6196 | lr=1.96e-05 | grad=3.240
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 30/1482 [2:27:44<124:00:19, 307.45s/it]
+  2%|▏         | 31/1482 [2:32:53<124:05:49, 307.89s/it]{'loss': 1.6196, 'grad_norm': 3.240419387817383, 'learning_rate': 1.960863697705803e-05, 'num_tokens': 678587.0, 'mean_token_accuracy': 0.634381040930748, 'epoch': 0.06}
+    Step 31: loss: 1.5370 | lr: 1.96e-05 | grad: 3.07 | epoch: 0.06 | GPU: 5.5/8.0GB
+  Step 31/1,482 (2.1%) loss=1.5370 | lr=1.96e-05 | grad=3.068
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 31/1482 [2:32:53<124:05:49, 307.89s/it]
+  2%|▏         | 32/1482 [2:37:58<123:38:20, 306.97s/it]{'loss': 1.537, 'grad_norm': 3.0680091381073, 'learning_rate': 1.959514170040486e-05, 'num_tokens': 700383.0, 'mean_token_accuracy': 0.6444396674633026, 'epoch': 0.06}
+    Step 32: loss: 1.6414 | lr: 1.96e-05 | grad: 3.09 | epoch: 0.06 | GPU: 5.5/8.0GB
+  Step 32/1,482 (2.2%) loss=1.6414 | lr=1.96e-05 | grad=3.088
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 32/1482 [2:37:58<123:38:20, 306.97s/it]
+  2%|▏         | 33/1482 [2:43:06<123:38:49, 307.20s/it]{'loss': 1.6414, 'grad_norm': 3.087522029876709, 'learning_rate': 1.958164642375169e-05, 'num_tokens': 723769.0, 'mean_token_accuracy': 0.6257035434246063, 'epoch': 0.06}
+    Step 33: loss: 1.5166 | lr: 1.96e-05 | grad: 3.24 | epoch: 0.07 | GPU: 5.5/8.0GB
+  Step 33/1,482 (2.2%) loss=1.5166 | lr=1.96e-05 | grad=3.243
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 33/1482 [2:43:06<123:38:49, 307.20s/it]
+  2%|▏         | 34/1482 [2:48:10<123:15:57, 306.46s/it]{'loss': 1.5166, 'grad_norm': 3.2430222034454346, 'learning_rate': 1.9568151147098516e-05, 'num_tokens': 747387.0, 'mean_token_accuracy': 0.6486149281263351, 'epoch': 0.07}
+    Step 34: loss: 1.4071 | lr: 1.96e-05 | grad: 3.19 | epoch: 0.07 | GPU: 5.5/8.0GB
+  Step 34/1,482 (2.3%) loss=1.4071 | lr=1.96e-05 | grad=3.189
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 34/1482 [2:48:10<123:15:57, 306.46s/it]
+  2%|▏         | 35/1482 [2:53:15<122:59:09, 305.98s/it]{'loss': 1.4071, 'grad_norm': 3.1888442039489746, 'learning_rate': 1.9554655870445346e-05, 'num_tokens': 771537.0, 'mean_token_accuracy': 0.6582628488540649, 'epoch': 0.07}
+    Step 35: loss: 1.4723 | lr: 1.95e-05 | grad: 2.98 | epoch: 0.07 | GPU: 5.5/8.0GB
+  Step 35/1,482 (2.4%) loss=1.4723 | lr=1.95e-05 | grad=2.982
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 35/1482 [2:53:15<122:59:09, 305.98s/it]
+  2%|▏         | 36/1482 [2:58:20<122:47:07, 305.69s/it]{'loss': 1.4723, 'grad_norm': 2.9818553924560547, 'learning_rate': 1.9541160593792176e-05, 'num_tokens': 794954.0, 'mean_token_accuracy': 0.6373147964477539, 'epoch': 0.07}
+    Step 36: loss: 1.5494 | lr: 1.95e-05 | grad: 2.81 | epoch: 0.07 | GPU: 5.5/8.0GB
+  Step 36/1,482 (2.4%) loss=1.5494 | lr=1.95e-05 | grad=2.808
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 36/1482 [2:58:20<122:47:07, 305.69s/it]
+  2%|▏         | 37/1482 [3:03:25<122:33:48, 305.35s/it]{'loss': 1.5494, 'grad_norm': 2.8076112270355225, 'learning_rate': 1.9527665317139005e-05, 'num_tokens': 820451.0, 'mean_token_accuracy': 0.6327401697635651, 'epoch': 0.07}
+    Step 37: loss: 1.5983 | lr: 1.95e-05 | grad: 3.31 | epoch: 0.07 | GPU: 5.5/8.0GB
+  Step 37/1,482 (2.5%) loss=1.5983 | lr=1.95e-05 | grad=3.306
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  2%|▏         | 37/1482 [3:03:25<122:33:48, 305.35s/it]
+  3%|▎         | 38/1482 [3:08:30<122:25:25, 305.21s/it]{'loss': 1.5983, 'grad_norm': 3.305832862854004, 'learning_rate': 1.9514170040485832e-05, 'num_tokens': 840241.0, 'mean_token_accuracy': 0.6266501545906067, 'epoch': 0.07}
+    Step 38: loss: 1.4127 | lr: 1.95e-05 | grad: 2.95 | epoch: 0.08 | GPU: 5.5/8.0GB
+  Step 38/1,482 (2.6%) loss=1.4127 | lr=1.95e-05 | grad=2.953
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  3%|▎         | 38/1482 [3:08:30<122:25:25, 305.21s/it]
+  3%|▎         | 39/1482 [3:13:38<122:41:08, 306.08s/it]{'loss': 1.4127, 'grad_norm': 2.9532933235168457, 'learning_rate': 1.9500674763832662e-05, 'num_tokens': 862831.0, 'mean_token_accuracy': 0.6481295526027679, 'epoch': 0.08}
+    Step 39: loss: 1.4085 | lr: 1.95e-05 | grad: 2.74 | epoch: 0.08 | GPU: 5.5/8.0GB
+  Step 39/1,482 (2.6%) loss=1.4085 | lr=1.95e-05 | grad=2.736
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  3%|▎         | 39/1482 [3:13:38<122:41:08, 306.08s/it]{'loss': 1.4085, 'grad_norm': 2.7358744144439697, 'learning_rate': 1.9487179487179488e-05, 'num_tokens': 887709.0, 'mean_token_accuracy': 0.6563303023576736, 'epoch': 0.08}
+  Step 40 | 304.969s/step | avg: 305.730s | ETA: 0.0s
+
+  3%|▎         | 40/1482 [3:18:43<122:29:04, 305.79s/it]    Step 40: loss: 1.3980 | lr: 1.95e-05 | grad: 2.55 | epoch: 0.08 | GPU: 5.5/8.0GB
+  Step 40/1,482 (2.7%) loss=1.3980 | lr=1.95e-05 | grad=2.550
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  3%|▎         | 40/1482 [3:18:43<122:29:04, 305.79s/it]
+  3%|▎         | 41/1482 [3:23:48<122:21:13, 305.67s/it]{'loss': 1.398, 'grad_norm': 2.550145149230957, 'learning_rate': 1.9473684210526318e-05, 'num_tokens': 914680.0, 'mean_token_accuracy': 0.6520788222551346, 'epoch': 0.08}
+    Step 41: loss: 1.6180 | lr: 1.95e-05 | grad: 2.69 | epoch: 0.08 | GPU: 5.5/8.0GB
+  Step 41/1,482 (2.8%) loss=1.6180 | lr=1.95e-05 | grad=2.693
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  3%|▎         | 41/1482 [3:23:48<122:21:13, 305.67s/it]
+  3%|▎         | 42/1482 [3:28:53<122:11:40, 305.49s/it]{'loss': 1.618, 'grad_norm': 2.6927826404571533, 'learning_rate': 1.9460188933873144e-05, 'num_tokens': 939210.0, 'mean_token_accuracy': 0.624066486954689, 'epoch': 0.08}
+    Step 42: loss: 1.3058 | lr: 1.94e-05 | grad: 2.73 | epoch: 0.09 | GPU: 5.5/8.0GB
+  Step 42/1,482 (2.8%) loss=1.3058 | lr=1.94e-05 | grad=2.726
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
+  3%|▎         | 42/1482 [3:28:53<122:11:40, 305.49s/it]Saving model checkpoint to runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42
+Configuration saved in runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42/config.json
+Configuration saved in runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42/generation_config.json
+Model weights saved in runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42/model.safetensors
+chat template saved in runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42/chat_template.jinja
+tokenizer config file saved in runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42/tokenizer_config.json
+Special tokens file saved in runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT/checkpoint-42/special_tokens_map.json
+{'loss': 1.3058, 'grad_norm': 2.7264392375946045, 'learning_rate': 1.9446693657219974e-05, 'num_tokens': 960279.0, 'mean_token_accuracy': 0.6675033718347549, 'epoch': 0.09}
+    ✓ Checkpoint saved at step 42
+  ✓ Checkpoint saved at step 42 → runs/20260111_215045_tddz/Qwen2.5-0.5B-SFT
+
+  3%|▎         | 43/1482 [3:35:27<132:38:34, 331.84s/it]    Step 43: loss: 1.7078 | lr: 1.94e-05 | grad: 2.74 | epoch: 0.09 | GPU: 5.5/8.0GB
+  Step 43/1,482 (2.9%) loss=1.7078 | lr=1.94e-05 | grad=2.737
+  GPU 0: 5.54GB allocated / 10.84GB reserved / 8.0GB total
+
+                                                        
+
