@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Callable, Optional
 
 from trl import GRPOTrainer, GRPOConfig
-from trl.rewards import accuracy_reward
+from trl.rewards import accuracy_reward as _accuracy_reward
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from rich.progress import Progress, SpinnerColumn, TextColumn
 
@@ -31,6 +31,88 @@ from .base import (
     load_and_limit_dataset,
     finalize_training,
 )
+
+
+def safe_accuracy_reward(completions: list, solution: list, **kwargs) -> list:
+    """
+    Wrapper around TRL's accuracy_reward that handles errors gracefully.
+
+    Processes each completion individually to avoid one bad sample crashing the batch.
+    Falls back to simple text matching for non-parseable solutions (e.g., "Yes", "No").
+    """
+    rewards = []
+    for i, (completion, sol) in enumerate(zip(completions, solution)):
+        try:
+            # Ensure completion has valid content
+            if not completion or len(completion) == 0:
+                rewards.append(0.0)  # Return 0.0 instead of None to avoid batch failures
+                continue
+
+            content = completion[0].get("content")
+            if content is None:
+                rewards.append(0.0)
+                continue
+
+            # Process single completion
+            single_completion = [completion]
+            single_solution = [sol]
+            result = _accuracy_reward(single_completion, single_solution, **kwargs)
+
+            # If accuracy_reward returned None (non-parseable), fall back to text matching
+            if result is None or result[0] is None:
+                reward = _fallback_text_match(content, sol)
+                rewards.append(reward)
+            else:
+                rewards.append(result[0])
+        except Exception as e:
+            # Any error for this sample -> try fallback
+            try:
+                content = completion[0].get("content", "")
+                reward = _fallback_text_match(content, sol)
+                rewards.append(reward)
+            except Exception:
+                rewards.append(0.0)
+
+    return rewards
+
+
+def _fallback_text_match(content: str, solution: str) -> float:
+    """
+    Fallback reward for non-parseable math solutions (e.g., "Yes", "No", simple text).
+
+    Returns 1.0 if the solution appears in the content, 0.0 otherwise.
+    """
+    if not content or not solution:
+        return 0.0
+
+    content_lower = content.lower().strip()
+    solution_lower = solution.lower().strip()
+
+    # Check for exact match or boxed match
+    if solution_lower in content_lower:
+        return 1.0
+
+    # Check if answer is in a \boxed{} format
+    import re
+    boxed_pattern = r'\\boxed\{([^}]*)\}'
+    matches = re.findall(boxed_pattern, content)
+    for match in matches:
+        if match.lower().strip() == solution_lower:
+            return 1.0
+
+    # Check for common yes/no patterns
+    if solution_lower in ['yes', 'no', 'true', 'false']:
+        # Look for explicit answer statements
+        answer_patterns = [
+            rf'\b{solution_lower}\b',
+            rf'answer is {solution_lower}',
+            rf'answer: {solution_lower}',
+        ]
+        for pattern in answer_patterns:
+            if re.search(pattern, content_lower):
+                return 1.0
+
+    return 0.0
 
 
 @dataclass
@@ -119,8 +201,8 @@ def train_grpo(
             return [len(c) / 100.0 for c in completions]
         print_info("Using test reward function (length-based)")
     else:
-        reward_func = accuracy_reward
-        print_info("Using accuracy_reward function")
+        reward_func = safe_accuracy_reward
+        print_info("Using safe_accuracy_reward function")
 
     # Build trainer kwargs
     trainer_kwargs = {
