@@ -5,6 +5,7 @@ Usage:
     python run_all.py              # Run both test and production pipelines
     python run_all.py --test       # Run only test pipeline (fast)
     python run_all.py --prod       # Run only production pipeline
+    python run_all.py --grpo       # Run only GRPO stage on qwen2.5_0.5b
 
 Features:
 - Rich console output with colors and progress bars
@@ -101,17 +102,26 @@ def format_duration(seconds: float) -> str:
         return f"{hours}h {minutes}m {secs:.0f}s"
 
 
-def run_script(script_name: str, script_dir: Path) -> Tuple[str, int, float]:
+def run_script(script_name: str, script_dir: Path, extra_args: Optional[List[str]] = None) -> Tuple[str, int, float]:
     """Run a script and return (name, return_code, duration).
 
     Captures all subprocess output to both console (terminal + master log)
     and an individual script log file.
+
+    Args:
+        script_name: Name of the script to run
+        script_dir: Directory containing the script
+        extra_args: Optional list of extra arguments to pass to the script
     """
     console.print()
     console.print(Rule(f"[bold cyan]Running {script_name}[/bold cyan]", style="cyan"))
     console.print()
 
-    console.print(f"[dim]Command:[/dim] python {script_dir / script_name}")
+    cmd = [sys.executable, script_dir / script_name]
+    if extra_args:
+        cmd.extend(extra_args)
+
+    console.print(f"[dim]Command:[/dim] {' '.join(str(c) for c in cmd)}")
     console.print(f"[dim]Working directory:[/dim] {script_dir}")
     console.print()
 
@@ -119,7 +129,7 @@ def run_script(script_name: str, script_dir: Path) -> Tuple[str, int, float]:
 
     # Run with real-time output
     process = subprocess.Popen(
-        [sys.executable, script_dir / script_name],
+        cmd,
         cwd=script_dir,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -204,6 +214,7 @@ Examples:
   python run_all.py          # Run both test and production pipelines
   python run_all.py --test   # Run only test pipeline (fast)
   python run_all.py --prod   # Run only production pipeline
+  python run_all.py --grpo   # Run only GRPO stage on qwen2.5_0.5b
         """
     )
     parser.add_argument(
@@ -217,6 +228,12 @@ Examples:
         "-p",
         action="store_true",
         help="Run only production pipeline (qwen2.5_0.5b)",
+    )
+    parser.add_argument(
+        "--grpo",
+        "-g",
+        action="store_true",
+        help="Run only GRPO stage on qwen2.5_0.5b",
     )
     return parser.parse_args()
 
@@ -236,21 +253,28 @@ def main():
     console.set_log_file(str(master_log))
 
     # Determine which pipelines to run
-    if args.test and args.prod:
-        scripts = ["smollm2_135m.py", "qwen2.5_0.5b.py"]
+    # Each entry is (script_name, extra_args)
+    if args.grpo:
+        scripts = [("qwen2.5_0.5b.py", ["--stage", "grpo"])]
+        mode = "GRPO"
+    elif args.test and args.prod:
+        scripts = [("smollm2_135m.py", None), ("qwen2.5_0.5b.py", None)]
         mode = "ALL"
     elif args.test:
-        scripts = ["smollm2_135m.py"]
+        scripts = [("smollm2_135m.py", None)]
         mode = "TEST"
     elif args.prod:
-        scripts = ["qwen2.5_0.5b.py"]
+        scripts = [("qwen2.5_0.5b.py", None)]
         mode = "PRODUCTION"
     else:
-        scripts = ["smollm2_135m.py", "qwen2.5_0.5b.py"]
+        scripts = [("smollm2_135m.py", None), ("qwen2.5_0.5b.py", None)]
         mode = "ALL"
 
+    # Extract just the script names for display
+    script_names = [s[0] for s in scripts]
+
     # Print header
-    print_header(mode, scripts)
+    print_header(mode, script_names)
 
     # Print system info
     print_system_info()
@@ -269,17 +293,17 @@ def main():
     ) as progress:
         overall_task = progress.add_task(f"[cyan]Running {mode} pipelines...", total=len(scripts))
 
-        for script in scripts:
-            progress.update(overall_task, description=f"[cyan]Running {script}...")
+        for script_name, extra_args in scripts:
+            progress.update(overall_task, description=f"[cyan]Running {script_name}...")
 
-            name, returncode, duration = run_script(script, script_dir)
+            name, returncode, duration = run_script(script_name, script_dir, extra_args)
             status = "PASSED" if returncode == 0 else "FAILED"
             results.append((name, status, duration))
 
             progress.advance(overall_task)
 
             if returncode != 0:
-                console.print(f"[bold red]Error:[/bold red] {script} failed with return code {returncode}")
+                console.print(f"[bold red]Error:[/bold red] {script_name} failed with return code {returncode}")
 
     total_duration = time.time() - start_time
 

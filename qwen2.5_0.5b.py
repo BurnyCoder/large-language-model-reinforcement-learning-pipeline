@@ -3,7 +3,13 @@ Qwen 2.5 0.5B training pipeline.
 
 Runs all 4 algorithms (SFT, Reward, DPO, GRPO) with Qwen 2.5 0.5B models.
 This is the production configuration optimized for 6GB+ VRAM GPUs.
+
+Usage:
+    python qwen2.5_0.5b.py              # Run all 4 stages
+    python qwen2.5_0.5b.py --stage grpo # Run only GRPO stage
 """
+
+import argparse
 
 import cache_config  # noqa: F401 - Configure HF cache before imports
 
@@ -76,5 +82,24 @@ configs = {
     ),
 }
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Qwen 2.5 0.5B training pipeline",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument(
+        "--stage",
+        "-s",
+        choices=["sft", "reward", "dpo", "grpo"],
+        help="Run only a specific stage (default: run all)",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    run_pipeline(configs)
+    args = parse_args()
+    if args.stage:
+        filtered_configs = {args.stage: configs[args.stage]}
+        run_pipeline(filtered_configs)
+    else:
+        run_pipeline(configs)
