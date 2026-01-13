@@ -77,7 +77,7 @@ configs = {
         use_liger_kernel=False,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=50,
+        save_steps=120,
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
 }

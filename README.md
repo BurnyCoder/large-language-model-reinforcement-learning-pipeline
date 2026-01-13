@@ -118,6 +118,14 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+### System Dependencies
+
+Install CUDA toolkit (required for Liger Kernel):
+
+```bash
+sudo apt install nvidia-cuda-toolkit
+```
+
 ## Quick Start
 
 ### Run Test Pipeline (Fast Validation)
