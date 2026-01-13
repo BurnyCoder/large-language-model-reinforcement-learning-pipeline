@@ -70,11 +70,11 @@ configs = {
         model_name=INSTRUCT_MODEL,
         output_dir="Qwen2.5-0.5B-GRPO",
         dataset_name="trl-lib/DeepMath-103K",
-        per_device_train_batch_size=2,  # Reduced for 8GB VRAM (generation overhead)
+        per_device_train_batch_size=2,  # Liger kernel enables batch=2 with 2048 tokens
         gradient_accumulation_steps=4,
         gradient_checkpointing=True,
         bf16=True,
-        use_liger_kernel=False,
+        use_liger_kernel=True,  # ~60% memory reduction on training ops
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
         save_steps=120,
