@@ -150,6 +150,14 @@ python run_all.py --prod
 python run_all.py
 ```
 
+### Run GRPO Only
+
+Skip SFT/Reward/DPO and run only the GRPO stage on Qwen 2.5 0.5B:
+
+```bash
+python run_all.py --grpo
+```
+
 ### Run Individual Model Pipelines
 
 ```bash
