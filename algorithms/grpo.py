@@ -38,8 +38,8 @@ class GRPOExtraConfig:
     """GRPO-specific configuration beyond the base TrainingConfig."""
 
     reward_func: Optional[Callable] = None  # Will default to accuracy_reward
-    num_generations: int = 4
-    max_completion_length: int = 256
+    num_generations: int = 4  # Keep low for 8GB VRAM
+    max_completion_length: int = 512  # 2x original, fits in 8GB  
 
 
 def train_grpo(
