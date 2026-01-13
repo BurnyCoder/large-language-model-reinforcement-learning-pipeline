@@ -70,7 +70,7 @@ configs = {
         model_name=INSTRUCT_MODEL,
         output_dir="Qwen2.5-0.5B-GRPO",
         dataset_name="trl-lib/DeepMath-103K",
-        per_device_train_batch_size=2,  # Liger kernel enables batch=2 with 2048 tokens
+        per_device_train_batch_size=3,  # Must match num_generations=3
         gradient_accumulation_steps=4,
         gradient_checkpointing=True,
         bf16=True,
