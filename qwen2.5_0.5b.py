@@ -35,7 +35,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=42,  # ~500 steps / 12 checkpoints
+        save_steps=50,  
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "reward": TrainingConfig(
@@ -49,7 +49,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=156,  # ~1875 steps / 12 checkpoints
+        save_steps=50, 
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "dpo": TrainingConfig(
@@ -63,7 +63,7 @@ configs = {
         use_liger_kernel=True,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=625,  # ~7500 steps / 12 checkpoints
+        save_steps=50,  
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
     "grpo": TrainingConfig(
@@ -74,10 +74,10 @@ configs = {
         gradient_accumulation_steps=4,
         gradient_checkpointing=True,
         bf16=True,
-        use_liger_kernel=True,
+        use_liger_kernel=False,
         dataloader_pin_memory=True,
         dataloader_num_workers=4,
-        save_steps=1073,  # ~12875 steps / 12 checkpoints
+        save_steps=50,
         save_total_limit=SAVE_TOTAL_LIMIT,
     ),
 }
