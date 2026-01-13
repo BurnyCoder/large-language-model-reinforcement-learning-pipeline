@@ -1,0 +1,56 @@
+
+╭────────────────────────────────────────────────────── Run All ───────────────────────────────────────────────────────╮
+│                                                                                                                      │
+│  LLM RL Training Pipelines                                                                                           │
+│                                                                                                                      │
+│  Mode: GRPO                                                                                                          │
+│  Scripts: qwen2.5_0.5b.py                                                                                            │
+│                                                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                 System Information                                 
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property          ┃ Value                                                        ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Platform          │ Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39 │
+│ Python            │ 3.12.3                                                       │
+│ Working Directory │ /home/burny/projects/ml-playground/llmrl                     │
+│ Timestamp         │ 2026-01-13 06:29:51                                          │
+│ GPU 0             │ NVIDIA GeForce RTX 5070 Laptop GPU (8.0 GB)                  │
+└───────────────────┴──────────────────────────────────────────────────────────────┘
+
+
+─────────────────────────────────────────────── Running qwen2.5_0.5b.py ────────────────────────────────────────────────
+
+Command: /home/burny/projects/ml-playground/.venv/bin/python3 /home/burny/projects/ml-playground/llmrl/qwen2.5_0.5b.py 
+--stage grpo
+Working directory: /home/burny/projects/ml-playground/llmrl
+
+2026-01-13 06:29:59.943871: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly 
+different numerical results due to floating-point round-off errors from different computation orders. To turn them off, 
+set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-13 06:30:00.076965: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to 
+use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow 
+with the appropriate compiler flags.
+2026-01-13 06:30:02.163180: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly 
+different numerical results due to floating-point round-off errors from different computation orders. To turn them off, 
+set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────╮
+│                                                                                                                       
+│
+│  Training Pipeline                                                                                                    
+│
+│  Run ID: 20260113_063010_nl5l | Running 1 algorithm(s): grpo                                                          
+│
+│                                                                                                                       
+│
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────╯
+
+
+─────────────────────────────────────────────────────────────────────────── System Information 
+────────────────────────────────────────────────────────────────────────────
+

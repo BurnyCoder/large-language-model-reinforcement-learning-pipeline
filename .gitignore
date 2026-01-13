@@ -2,8 +2,9 @@
 Qwen*/
 __pycache__/
 
-# Ignore checkpoints in runs folder (but keep logs and metrics)
+# Ignore checkpoints (but keep logs and metrics)
 runs/**/checkpoint-*/
+logs/**/checkpoint-*/
 
 # HuggingFace cache (models and datasets)
 cache/
@@ -14,4 +15,3 @@ cache/
 # Experiment tracking (local cache)
 .neptune/
 wandb/
-runs/

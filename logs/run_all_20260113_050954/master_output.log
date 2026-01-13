@@ -1,0 +1,1283 @@
+
+╭────────────────────────────────────────────────────── Run All ───────────────────────────────────────────────────────╮
+│                                                                                                                      │
+│  LLM RL Training Pipelines                                                                                           │
+│                                                                                                                      │
+│  Mode: GRPO                                                                                                          │
+│  Scripts: qwen2.5_0.5b.py                                                                                            │
+│                                                                                                                      │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+                                 System Information                                 
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property          ┃ Value                                                        ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Platform          │ Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39 │
+│ Python            │ 3.12.3                                                       │
+│ Working Directory │ /home/burny/projects/ml-playground/llmrl                     │
+│ Timestamp         │ 2026-01-13 05:09:54                                          │
+│ GPU 0             │ NVIDIA GeForce RTX 5070 Laptop GPU (8.0 GB)                  │
+└───────────────────┴──────────────────────────────────────────────────────────────┘
+
+
+─────────────────────────────────────────────── Running qwen2.5_0.5b.py ────────────────────────────────────────────────
+
+Command: /home/burny/projects/ml-playground/.venv/bin/python3 /home/burny/projects/ml-playground/llmrl/qwen2.5_0.5b.py 
+--stage grpo
+Working directory: /home/burny/projects/ml-playground/llmrl
+
+2026-01-13 05:10:04.587934: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly 
+different numerical results due to floating-point round-off errors from different computation orders. To turn them off, 
+set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-13 05:10:04.753306: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to 
+use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 FMA, in other operations, rebuild TensorFlow 
+with the appropriate compiler flags.
+2026-01-13 05:10:06.935569: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly 
+different numerical results due to floating-point round-off errors from different computation orders. To turn them off, 
+set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────╮
+│                                                                                                                       
+│
+│  Training Pipeline                                                                                                    
+│
+│  Run ID: 20260113_051016_p0sj | Running 1 algorithm(s): grpo                                                          
+│
+│                                                                                                                       
+│
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────╯
+
+
+─────────────────────────────────────────────────────────────────────────── System Information 
+────────────────────────────────────────────────────────────────────────────
+
+                                 System Information
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Component         ┃ Details                                                      ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Platform          │ Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39 │
+│ Python            │ 3.12.3                                                       │
+│ Working Directory │ /home/burny/projects/ml-playground/llmrl                     │
+│ Timestamp         │ 2026-01-13 05:10:16                                          │
+│ GPU 0             │ NVIDIA GeForce RTX 5070 Laptop GPU (8.0 GB)                  │
+│ CUDA Version      │ 12.8                                                         │
+│ RAM               │ 15.3 GB (53.6% used)                                         │
+│ Disk              │ 1006.9 GB (13.6% used)                                       │
+│ CPU Cores         │ 16                                                           │
+└───────────────────┴──────────────────────────────────────────────────────────────┘
+
+
+───────────────────────────────────────────────────────────────────────── Pipeline Configuration 
+──────────────────────────────────────────────────────────────────────────
+
+GRPO
+                                 GRPO Config
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                   ┃ Value                                       ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ model_name                  │ Qwen/Qwen2.5-0.5B-Instruct                  │
+│ output_dir                  │ runs/20260113_051016_p0sj/Qwen2.5-0.5B-GRPO │
+│ dataset_name                │ trl-lib/DeepMath-103K                       │
+│ dataset_split               │ train                                       │
+│ max_samples                 │ None                                        │
+│ per_device_train_batch_size │ 2                                           │
+│ gradient_accumulation_steps │ 4                                           │
+│ max_steps                   │ -1                                          │
+│ gradient_checkpointing      │ Yes                                         │
+│ bf16                        │ Yes                                         │
+│ use_liger_kernel            │ No                                          │
+│ dataloader_pin_memory       │ Yes                                         │
+│ dataloader_num_workers      │ 4                                           │
+│ logging_steps               │ 1                                           │
+│ logging_strategy            │ steps                                       │
+│ log_level                   │ info                                        │
+│ report_to                   │ wandb                                       │
+│ save_steps                  │ 120                                         │
+│ save_strategy               │ steps                                       │
+│ save_total_limit            │ 12                                          │
+│ clean_output_dir            │ No                                          │
+│ verbose                     │ Yes                                         │
+└─────────────────────────────┴─────────────────────────────────────────────┘
+
+
+──────────────────────────────────────────────────────────────────────────── Training Progress 
+────────────────────────────────────────────────────────────────────────────
+
+
+
+────────────────────────────────────────────────────────────────────────────── GRPO Training 
+──────────────────────────────────────────────────────────────────────────────
+
+ℹ Model: Qwen/Qwen2.5-0.5B-Instruct
+ℹ Dataset: trl-lib/DeepMath-103K
+ℹ Output: runs/20260113_051016_p0sj/Qwen2.5-0.5B-GRPO
+ℹ Output directory ready: runs/20260113_051016_p0sj/Qwen2.5-0.5B-GRPO
+[05:10:16] INFO     Starting GRPO training with model=Qwen/Qwen2.5-0.5B-Instruct                                        
+grpo.py:65
+        GRPO Extra Config
+┏━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+┃ Parameter             ┃ Value ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+│ reward_func           │ None  │
+│ num_generations       │ 4     │
+│ max_completion_length │ 256   │
+└───────────────────────┴───────┘
+
+ℹ Using model name directly: Qwen/Qwen2.5-0.5B-Instruct
+Loading dataset: trl-lib/DeepMath-103K (split: train)
+
+          Dataset Information
+┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Property    ┃ Value                 ┃
+┡━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Dataset     │ trl-lib/DeepMath-103K │
+│ Samples     │ 97,870                │
+│ Columns     │ prompt, solution      │
+│ Sample Keys │ prompt, solution      │
+└─────────────┴───────────────────────┘
+
+ℹ Using accuracy_reward function
+ℹ Adjusting per_device_train_batch_size from 2 to 4 (must be divisible by num_generations=4)
+ℹ Creating GRPO trainer...
+  num_generations: 4
+  max_completion_length: 256
+The model is already on multiple devices. Skipping the move to device specified in `args`.
+Using auto half precision backend
+Starting GRPO training loop...
+Note: GRPO generates multiple completions per sample, which may take longer.
+The tokenizer has new PAD/BOS/EOS tokens that differ from the model config and generation config. The model config and 
+generation config were aligned accordingly, being updated with the tokenizer's values. Updated tokens: {'bos_token_id': 
+None, 'pad_token_id': 151643}.
+***** Running training *****
+  Num examples = 97,870
+  Num Epochs = 3
+  Instantaneous batch size per device = 4
+  Total train batch size (w. parallel, distributed & accumulation) = 16
+  Gradient Accumulation steps = 4
+  Total optimization steps = 73,401
+  Number of trainable parameters = 494,032,768
+Automatic Weights & Biases logging enabled, to disable set os.environ["WANDB_DISABLED"] = "true"
+wandb: Currently logged in as: burny (burny-burny) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /home/burny/projects/ml-playground/llmrl/wandb/run-20260113_051027-h7dn8qvc
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run giddy-snowball-17
+wandb: ⭐️ View project at https://wandb.ai/burny-burny/huggingface
+wandb: 🚀 View run at https://wandb.ai/burny-burny/huggingface/runs/h7dn8qvc
+
+────────────────────────────────────────────────────────────────────────── GRPO Training Started 
+──────────────────────────────────────────────────────────────────────────
+
+ Max Steps:        Full epoch
+ Batch Size:       4
+ Gradient Accum:   4
+ Effective Batch:  16
+ Learning Rate:    1.00e-06
+ Warmup Steps:     0
+ Save Strategy:    SaveStrategy.STEPS (every 120)
+
+
+╭───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────╮
+│ GRPO Training Initialized                                                                                             
+│
+╰──────────────────────────────────────────────────────────────────────────── Max steps: auto 
+────────────────────────────────────────────────────────────────────────────╯
+
+─────────────────────────────────────────────────────────────────────────── Training Arguments 
+────────────────────────────────────────────────────────────────────────────
+
+                                                                             TrainingArguments
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Parameter                               ┃ Value                                                                       
+┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ output_dir                              │ runs/20260113_051016_p0sj/Qwen2.5-0.5B-GRPO                                 
+│
+│ overwrite_output_dir                    │ No                                                                          
+│
+│ do_train                                │ No                                                                          
+│
+│ do_eval                                 │ No                                                                          
+│
+│ do_predict                              │ No                                                                          
+│
+│ eval_strategy                           │ IntervalStrategy.NO                                                         
+│
+│ prediction_loss_only                    │ No                                                                          
+│
+│ per_device_train_batch_size             │ 4                                                                           
+│
+│ per_device_eval_batch_size              │ 8                                                                           
+│
+│ per_gpu_train_batch_size                │ None                                                                        
+│
+│ per_gpu_eval_batch_size                 │ None                                                                        
+│
+│ gradient_accumulation_steps             │ 4                                                                           
+│
+│ eval_accumulation_steps                 │ None                                                                        
+│
+│ eval_delay                              │ 0                                                                           
+│
+│ torch_empty_cache_steps                 │ None                                                                        
+│
+│ learning_rate                           │ 1e-06                                                                       
+│
+│ weight_decay                            │ 0.0                                                                         
+│
+│ adam_beta1                              │ 0.9                                                                         
+│
+│ adam_beta2                              │ 0.999                                                                       
+│
+│ adam_epsilon                            │ 1e-08                                                                       
+│
+│ max_grad_norm                           │ 1.0                                                                         
+│
+│ num_train_epochs                        │ 3.0                                                                         
+│
+│ max_steps                               │ -1                                                                          
+│
+│ lr_scheduler_type                       │ SchedulerType.LINEAR                                                        
+│
+│ lr_scheduler_kwargs                     │ None                                                                        
+│
+│ warmup_ratio                            │ 0.0                                                                         
+│
+│ warmup_steps                            │ 0                                                                           
+│
+│ log_level                               │ info                                                                        
+│
+│ log_level_replica                       │ warning                                                                     
+│
+│ log_on_each_node                        │ Yes                                                                         
+│
+│ logging_dir                             │ runs/20260113_051016_p0sj/Qwen2.5-0.5B-GRPO/logs                            
+│
+│ logging_strategy                        │ IntervalStrategy.STEPS                                                      
+│
+│ logging_first_step                      │ No                                                                          
+│
+│ logging_steps                           │ 1                                                                           
+│
+│ logging_nan_inf_filter                  │ Yes                                                                         
+│
+│ save_strategy                           │ SaveStrategy.STEPS                                                          
+│
+│ save_steps                              │ 120                                                                         
+│
+│ save_total_limit                        │ 12                                                                          
+│
+│ save_safetensors                        │ Yes                                                                         
+│
+│ save_on_each_node                       │ No                                                                          
+│
+│ save_only_model                         │ No                                                                          
+│
+│ restore_callback_states_from_checkpoint │ No                                                                          
+│
+│ no_cuda                                 │ No                                                                          
+│
+│ use_cpu                                 │ No                                                                          
+│
+│ use_mps_device                          │ No                                                                          
+│
+│ seed                                    │ 42                                                                          
+│
+│ data_seed                               │ None                                                                        
+│
+│ jit_mode_eval                           │ No                                                                          
+│
+│ bf16                                    │ Yes                                                                         
+│
+│ fp16                                    │ No                                                                          
+│
+│ fp16_opt_level                          │ O1                                                                          
+│
+│ half_precision_backend                  │ auto                                                                        
+│
+│ bf16_full_eval                          │ No                                                                          
+│
+│ fp16_full_eval                          │ No                                                                          
+│
+│ tf32                                    │ None                                                                        
+│
+│ local_rank                              │ 0                                                                           
+│
+│ ddp_backend                             │ None                                                                        
+│
+│ tpu_num_cores                           │ None                                                                        
+│
+│ tpu_metrics_debug                       │ No                                                                          
+│
+│ debug                                   │                                                                             
+│
+│ dataloader_drop_last                    │ No                                                                          
+│
+│ eval_steps                              │ None                                                                        
+│
+│ dataloader_num_workers                  │ 4                                                                           
+│
+│ dataloader_prefetch_factor              │ None                                                                        
+│
+│ past_index                              │ -1                                                                          
+│
+│ run_name                                │ None                                                                        
+│
+│ disable_tqdm                            │ No                                                                          
+│
+│ remove_unused_columns                   │ No                                                                          
+│
+│ label_names                             │ None                                                                        
+│
+│ load_best_model_at_end                  │ No                                                                          
+│
+│ metric_for_best_model                   │ None                                                                        
+│
+│ greater_is_better                       │ None                                                                        
+│
+│ ignore_data_skip                        │ No                                                                          
+│
+│ fsdp                                    │                                                                             
+│
+│ fsdp_min_num_params                     │ 0                                                                           
+│
+│ fsdp_config                             │ {'min_num_params': 0, 'xla': False, 'xla_fsdp_v2': False, 
+'xla_fsdp_grad_ckpt': False}                                        │
+│ fsdp_transformer_layer_cls_to_wrap      │ None                                                                        
+│
+│ accelerator_config                      │ AcceleratorConfig(split_batches=False, dispatch_batches=None, 
+even_batches=True, use_seedable_sampler=True,                   │
+│                                         │ non_blocking=False, gradient_accumulation_kwargs=None, 
+use_configured_state=False)                                            │
+│ parallelism_config                      │ None                                                                        
+│
+│ deepspeed                               │ None                                                                        
+│
+│ label_smoothing_factor                  │ 0.0                                                                         
+│
+│ optim                                   │ OptimizerNames.ADAMW_TORCH_FUSED                                            
+│
+│ optim_args                              │ None                                                                        
+│
+│ adafactor                               │ No                                                                          
+│
+│ group_by_length                         │ No                                                                          
+│
+│ length_column_name                      │ length                                                                      
+│
+│ report_to                               │ wandb                                                                       
+│
+│ project                                 │ huggingface                                                                 
+│
+│ trackio_space_id                        │ trackio                                                                     
+│
+│ ddp_find_unused_parameters              │ None                                                                        
+│
+│ ddp_bucket_cap_mb                       │ None                                                                        
+│
+│ ddp_broadcast_buffers                   │ None                                                                        
+│
+│ dataloader_pin_memory                   │ Yes                                                                         
+│
+│ dataloader_persistent_workers           │ No                                                                          
+│
+│ skip_memory_metrics                     │ Yes                                                                         
+│
+│ use_legacy_prediction_loop              │ No                                                                          
+│
+│ push_to_hub                             │ No                                                                          
+│
+│ resume_from_checkpoint                  │ None                                                                        
+│
+│ hub_model_id                            │ None                                                                        
+│
+│ hub_strategy                            │ HubStrategy.EVERY_SAVE                                                      
+│
+│ hub_token                               │ None                                                                        
+│
+│ hub_private_repo                        │ None                                                                        
+│
+│ hub_always_push                         │ No                                                                          
+│
+│ hub_revision                            │ None                                                                        
+│
+│ gradient_checkpointing                  │ Yes                                                                         
+│
+│ gradient_checkpointing_kwargs           │ None                                                                        
+│
+│ include_inputs_for_metrics              │ No                                                                          
+│
+│ include_for_metrics                     │                                                                             
+│
+│ eval_do_concat_batches                  │ Yes                                                                         
+│
+│ fp16_backend                            │ auto                                                                        
+│
+│ push_to_hub_model_id                    │ None                                                                        
+│
+│ push_to_hub_organization                │ None                                                                        
+│
+│ push_to_hub_token                       │ None                                                                        
+│
+│ mp_parameters                           │                                                                             
+│
+│ auto_find_batch_size                    │ No                                                                          
+│
+│ full_determinism                        │ No                                                                          
+│
+│ torchdynamo                             │ None                                                                        
+│
+│ ray_scope                               │ last                                                                        
+│
+│ ddp_timeout                             │ 1800                                                                        
+│
+│ torch_compile                           │ No                                                                          
+│
+│ torch_compile_backend                   │ None                                                                        
+│
+│ torch_compile_mode                      │ None                                                                        
+│
+│ include_tokens_per_second               │ No                                                                          
+│
+│ include_num_input_tokens_seen           │ no                                                                          
+│
+│ neftune_noise_alpha                     │ None                                                                        
+│
+│ optim_target_modules                    │ None                                                                        
+│
+│ batch_eval_metrics                      │ No                                                                          
+│
+│ eval_on_start                           │ No                                                                          
+│
+│ use_liger_kernel                        │ No                                                                          
+│
+│ liger_kernel_config                     │ None                                                                        
+│
+│ eval_use_gather_object                  │ No                                                                          
+│
+│ average_tokens_across_devices           │ Yes                                                                         
+│
+│ model_init_kwargs                       │ None                                                                        
+│
+│ disable_dropout                         │ No                                                                          
+│
+│ cast_lm_head_to_fp32                    │ No                                                                          
+│
+│ num_generations                         │ 4                                                                           
+│
+│ num_generations_eval                    │ None                                                                        
+│
+│ max_completion_length                   │ 256                                                                         
+│
+│ ds3_gather_for_generation               │ Yes                                                                         
+│
+│ shuffle_dataset                         │ Yes                                                                         
+│
+│ generation_batch_size                   │ 16                                                                          
+│
+│ steps_per_generation                    │ 4                                                                           
+│
+│ temperature                             │ 1.0                                                                         
+│
+│ top_p                                   │ 1.0                                                                         
+│
+│ top_k                                   │ None                                                                        
+│
+│ min_p                                   │ None                                                                        
+│
+│ generation_kwargs                       │ None                                                                        
+│
+│ chat_template_kwargs                    │ None                                                                        
+│
+│ repetition_penalty                      │ 1.0                                                                         
+│
+│ use_transformers_paged                  │ No                                                                          
+│
+│ cache_implementation                    │ None                                                                        
+│
+│ use_vllm                                │ No                                                                          
+│
+│ vllm_mode                               │ server                                                                      
+│
+│ vllm_model_impl                         │ vllm                                                                        
+│
+│ vllm_enable_sleep_mode                  │ No                                                                          
+│
+│ vllm_guided_decoding_regex              │ None                                                                        
+│
+│ vllm_server_base_url                    │ None                                                                        
+│
+│ vllm_server_host                        │ 0.0.0.0                                                                     
+│
+│ vllm_server_port                        │ 8000                                                                        
+│
+│ vllm_server_timeout                     │ 240.0                                                                       
+│
+│ vllm_gpu_memory_utilization             │ 0.3                                                                         
+│
+│ vllm_max_model_length                   │ None                                                                        
+│
+│ vllm_tensor_parallel_size               │ 1                                                                           
+│
+│ beta                                    │ 0.0                                                                         
+│
+│ num_iterations                          │ 1                                                                           
+│
+│ epsilon                                 │ 0.2                                                                         
+│
+│ delta                                   │ None                                                                        
+│
+│ epsilon_high                            │ None                                                                        
+│
+│ sapo_temperature_neg                    │ 1.05                                                                        
+│
+│ sapo_temperature_pos                    │ 1.0                                                                         
+│
+│ importance_sampling_level               │ token                                                                       
+│
+│ reward_weights                          │ None                                                                        
+│
+│ scale_rewards                           │ group                                                                       
+│
+│ loss_type                               │ dapo                                                                        
+│
+│ mask_truncated_completions              │ No                                                                          
+│
+│ sync_ref_model                          │ No                                                                          
+│
+│ ref_model_mixup_alpha                   │ 0.6                                                                         
+│
+│ ref_model_sync_steps                    │ 512                                                                         
+│
+│ top_entropy_quantile                    │ 1.0                                                                         
+│
+│ use_liger_loss                          │ None                                                                        
+│
+│ vllm_importance_sampling_correction     │ Yes                                                                         
+│
+│ vllm_importance_sampling_mode           │ sequence_mask                                                               
+│
+│ vllm_importance_sampling_cap            │ 3.0                                                                         
+│
+│ use_bias_correction_kl                  │ No                                                                          
+│
+│ log_completions                         │ No                                                                          
+│
+│ num_completions_to_print                │ None                                                                        
+│
+│ log_unique_prompts                      │ No                                                                          
+│
+│ max_prompt_length                       │ None                                                                        
+│
+│ wandb_log_unique_prompts                │ None                                                                        
+│
+│ distributed_state                       │ Distributed environment: DistributedType.NO                                 
+│
+│                                         │ Num processes: 1                                                            
+│
+│                                         │ Process index: 0                                                            
+│
+│                                         │ Local process index: 0                                                      
+│
+│                                         │ Device: cuda                                                                
+│
+│                                         │                                                                             
+│
+│ deepspeed_plugin                        │ None                                                                        
+│
+└─────────────────────────────────────────┴─────────────────────────────────────────────────────────────────────────────
+──────────────────────────────────────────────────┘
+
+
+  0%|          | 0/73401 [00:00<?, ?it/s]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+[05:10:58] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'Yes', 'prompt': [{'content': "Determine whether there exists an invertible matrix $P$ 
+such that for the quadratic
+                    form $Q(v) = v'Av$, where $v = \\begin{pmatrix} x & y & z & w \\end{pmatrix}$ and $A = 
+\\begin{pmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 &
+                    0 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 0 \\end{pmatrix}$, the expression $Q(Pv)$ equals $x^2 + 
+y^2 - zw$. Assume all terms are
+                    in $\\mathbb{R}$. Provide a justification for your answer.", 'role': 'user'}], 'completion': 
+[{'role': 'assistant', 'content': "To
+                    determine whether there exists an invertible matrix \\( P \\) such that for the quadratic form \\( 
+Q(v) = v'Av \\), the expression
+                    \\( Q(Pv) \\) equals \\( x^2 + y^2 - zw \\), we start by writing down the quadratic form \\( Q(v) 
+\\) explicitly. Given \\( v =
+                    \\begin{pmatrix} x \\\\ y \\\\ z \\\\ w \\end{pmatrix} \\) and \\( A = \\begin{pmatrix} 1 & 0 & 0 & 
+0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 &
+                    0 & 0 & 1 \\\\ 0 & 0 & 1 & 0 \\end{pmatrix} \\), we have:\n\n[\nQ(v) = v'Av = \\begin{pmatrix} 1 & 0
+& 0 & 0 \\\\ 0 & 1 & 0 & 0
+                    \\\\ 0 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 0 \\end{pmatrix} \\begin{pmatrix} x \\\\ y \\\\ z \\\\ w 
+\\end{pmatrix} \\begin{pmatrix} 1"}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 1/73401 [00:32<670:12:30, 32.87s/it]    Step 1: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 
+| GPU: 5.5/8.0GB
+  Step 1/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 7.73GB reserved / 8.0GB total
+
+
+
+  0%|          | 1/73401 [00:32<670:12:30, 32.87s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 2/73401 [01:47<1165:11:04, 57.15s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 1e-06, 
+'num_tokens': 5908.0, 'completions/mean_length': 244.0, 'completions/min_length': 104.0, 'completions/max_length': 
+256.0, 'completions/clipped_ratio': 0.875, 'completions/mean_terminated_length': 160.0, 
+'completions/min_terminated_length': 104.0, 'completions/max_terminated_length': 216.0, 'rewards/accuracy_reward/mean': 
+0.0, 'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.3464984558522701, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 29.629825296997296, 'epoch': 0.0}
+    Step 2: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 2/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.82GB reserved / 8.0GB total
+
+
+
+  0%|          | 2/73401 [01:47<1165:11:04, 57.15s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 3/73401 [02:57<1292:14:58, 63.38s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.999863762074086e-07, 'num_tokens': 11336.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.2802553176879883, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 68.80605071500395, 'epoch': 0.0}
+    Step 3: loss: 0.0029 | lr: 1.00e-06 | grad: 1.61 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 3/73,401 (0.0%) loss=0.0029 | lr=1.00e-06 | grad=1.606
+  GPU 0: 5.54GB allocated / 10.82GB reserved / 8.0GB total
+
+
+
+  0%|          | 3/73401 [02:57<1292:14:58, 63.38s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 4/73401 [04:16<1414:01:04, 69.36s/it]{'loss': 0.0029, 'grad_norm': 1.6059592962265015, 'learning_rate':
+9.999727524148172e-07, 'num_tokens': 16776.0, 'completions/mean_length': 255.5, 'completions/min_length': 248.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 0.9375, 'completions/mean_terminated_length': 248.0, 
+'completions/min_terminated_length': 248.0, 'completions/max_terminated_length': 248.0, 'rewards/accuracy_reward/mean': 
+0.0625, 'rewards/accuracy_reward/std': 0.25, 'reward': 0.0625, 'reward_std': 0.125, 'frac_reward_zero_std': 0.75, 
+'entropy': 0.3370436280965805, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 65.48159926900189, 'epoch': 0.0}
+    Step 4: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 4/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 4/73401 [04:16<1414:01:04, 69.36s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 9.999591286222257e-07, 'num_tokens': 22148.0, 
+'completions/mean_length': 256.0, 'completions/min_length': 256.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 'completions/min_terminated_length': 0.0, 
+'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0, 'rewards/accuracy_reward/std': 0.0, 
+'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 0.3216956928372383, 'clip_ratio/low_mean': 
+0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 
+'step_time': 69.16530095399503, 'epoch': 0.0}
+[05:15:11] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'Yes', 'prompt': [{'content': 'Suppose there is a path $g(t) = (p(t), q(t))$ in a 
+plane, where $p(t)$ and $q(t)$ are
+                    polynomials. Is there always a non-zero polynomial $f(x,y)$ such that the image of $g$ is contained 
+in the set $\\{(x,y) \\mid
+                    f(x,y) = 0\\}$?', 'role': 'user'}], 'completion': [{'role': 'assistant', 'content': 'To determine 
+whether there is always a
+                    non-zero polynomial \\( f(x, y) \\) such that the image of the path \\( g(t) = (p(t), q(t)) \\) is 
+contained in the set \\( \\{(x,
+                    y) \\mid f(x, y) = 0\\} \\), we need to analyze the relationship between the path and the set of 
+solutions to the polynomial
+                    equation \\( f(x, y) = 0 \\).\n\nGiven a path \\( g(t) = (p(t), q(t)) \\) in the plane, where \\( 
+p(t) \\) and \\( q(t) \\) are
+                    polynomials, we want to find a non-zero polynomial \\( f(x, y) \\) such that \\( f(p(t), q(t)) = 0 
+\\) for all \\( t \\).\n\nFor
+                    an invertible automorphism of the plane (i.e., \\( p(t) \\) and \\( q(t) \\) must be relatively 
+prime polynomials), \\( f(x, y)
+                    \\) can be written as:\n[ f(x, y) = h(y) \\bar{p}(y) \\]\nwhere \\( h(y) \\) is a non-zero 
+polynomial, and \\( \\bar{p}(y'}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 5/73401 [05:23<1398:01:45, 68.57s/it]    Step 5: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00
+| GPU: 5.5/8.0GB
+  Step 5/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 5/73401 [05:23<1398:01:45, 68.57s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 9.999455048296345e-07, 'num_tokens': 27492.0, 
+'completions/mean_length': 256.0, 'completions/min_length': 256.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 'completions/min_terminated_length': 0.0, 
+'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0, 'rewards/accuracy_reward/std': 0.0, 
+'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 0.4553329050540924, 'clip_ratio/low_mean': 
+0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 
+'step_time': 62.278888894001284, 'epoch': 0.0}
+[05:16:17] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'Yes', 'prompt': [{'content': "Does Niven's theorem apply to the cosine function? 
+Provide a justification for your
+                    answer.", 'role': 'user'}], 'completion': [{'role': 'assistant', 'content': "Niven's Theorem 
+provides a necessary and sufficient
+                    condition for the algebraic norm (also known as the arithmetic norm or length) of an element \\( 
+\\alpha \\) in a finite field to
+                    be trivial, meaning that \\( \\alpha \\) is thus a scalar multiple of the identity element of the 
+field. For the cosine function,
+                    which is a function defined over a finite field, we need to consider the characteristic of that 
+field. The characteristic of a
+                    field is the smallest positive integer \\( k \\) such that \\( k \\cdot 1 = 0 \\), where \\( 1 \\) 
+is the multiplicative
+                    identity.\n\nThe cosine function is defined over a field \\( F \\) of characteristic zero, where \\(
+\\operatorname{char} F = 0
+                    \\). In characteristic zero, we have the identity element \\( 1 \\) for multiplication, and the 
+basic arithmetic operations reduce
+                    to addition and subtraction modulo a prime number.\n\nWhen \\( n \\) is an odd prime (i.e., \\( 
+\\operatorname{char} F = p \\)
+                    where \\( p \\) is a prime number), we have:\n[\np \\cdot \\operatorname{char} F = p \\neq 
+0\n\\]\n\nThe only element \\( \\alpha
+                    \\in"}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 6/73401 [06:27<1369:22:16, 67.17s/it]    Step 6: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00
+| GPU: 5.5/8.0GB
+  Step 6/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 6/73401 [06:28<1369:22:16, 67.17s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 7/73401 [07:44<1428:46:35, 70.08s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.999318810370432e-07, 'num_tokens': 32786.0, 'completions/mean_length': 253.375, 'completions/min_length': 214.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 0.9375, 'completions/mean_terminated_length': 214.0, 
+'completions/min_terminated_length': 214.0, 'completions/max_terminated_length': 214.0, 'rewards/accuracy_reward/mean': 
+0.0, 'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.5985834002494812, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 61.60545581099723, 'epoch': 0.0}
+    Step 7: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 7/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 7/73401 [07:44<1428:46:35, 70.08s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 8/73401 [08:50<1403:39:26, 68.85s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.999182572444516e-07, 'num_tokens': 38406.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.47777561843395233, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 69.17571301499993, 'epoch': 0.0}
+    Step 8: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 8/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 8/73401 [08:50<1403:39:26, 68.85s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 9/73401 [10:10<1477:23:01, 72.47s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.999046334518602e-07, 'num_tokens': 43922.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.3391561657190323, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 61.41296835900357, 'epoch': 0.0}
+    Step 9: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 9/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 9/73401 [10:10<1477:23:01, 72.47s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 9.998910096592689e-07, 'num_tokens': 49510.0, 
+'completions/mean_length': 256.0, 'completions/min_length': 256.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 'completions/min_terminated_length': 0.0, 
+'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0, 'rewards/accuracy_reward/std': 0.0, 
+'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 0.4201885163784027, 'clip_ratio/low_mean': 
+0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 
+'step_time': 74.35584295600347, 'epoch': 0.0}
+  Step 10 | 71.741s/step | avg: 68.121s | ETA: 0.0s
+
+  0%|          | 10/73401 [11:22<1473:37:34, 72.28s/it]    Step 10: loss: -0.0000 | lr: 1.00e-06 | grad: 1.78 | epoch: 
+0.00 | GPU: 5.5/8.0GB
+  Step 10/73,401 (0.0%) loss=-0.0000 | lr=1.00e-06 | grad=1.777
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 10/73401 [11:22<1473:37:34, 72.28s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': -0.0, 'grad_norm': 1.7770111560821533, 'learning_rate': 9.998773858666775e-07, 'num_tokens': 54946.0, 
+'completions/mean_length': 256.0, 'completions/min_length': 256.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 0.9375, 'completions/mean_terminated_length': 256.0, 'completions/min_terminated_length': 
+256.0, 'completions/max_terminated_length': 256.0, 'rewards/accuracy_reward/mean': 0.0625, 
+'rewards/accuracy_reward/std': 0.25, 'reward': 0.0625, 'reward_std': 0.125, 'frac_reward_zero_std': 0.75, 'entropy': 
+0.3428241237998009, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 66.96422323200022, 'epoch': 0.0}
+[05:22:17] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'Yes', 'prompt': [{'content': 'Is \\( \\frac{22}{7} \\) the closest approximation to 
+\\( \\pi \\) among fractions
+                    with denominators at most 50?', 'role': 'user'}], 'completion': [{'role': 'assistant', 'content': 
+'To determine which fraction
+                    among fractions with denominators at most 50 is the closest approximation to \\(\\pi\\), we need to 
+compare \\(\\frac{22}{7}\\)
+                    with other fractions whose denominators are up to 50. One useful way to do this is to convert the 
+square root of 15 to a fraction,
+                    which is close in value to \\(\\pi\\).\n\nThe square root of 15 is approximately 3.87298. Therefore,
+\\(\\frac{15}{3.87298}\\) is
+                    a fraction with a larger numerator but the same denominator as \\(\\frac{15}{3.87298}\\). So, we
+                    calculate:\n\n[\n\\frac{15}{3.87298} \\approx 3.97181\n\\]\n\nNext, we calculate 
+\\(\\frac{22}{7}\\):\n\n[\n\\frac{22}{7}
+                    \\approx 3.14286\n\\]\n\nThis value is very close to 3.14286, but we need to check if it is a closer
+approximation than \\(\\pi =
+                    3.14159'}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 11/73401 [12:30<1447:10:31, 70.99s/it]    Step 11: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 
+0.00 | GPU: 5.5/8.0GB
+  Step 11/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 11/73401 [12:30<1447:10:31, 70.99s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 9.998637620740862e-07, 'num_tokens': 60458.0, 
+'completions/mean_length': 256.0, 'completions/min_length': 256.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 'completions/min_terminated_length': 0.0, 
+'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0, 'rewards/accuracy_reward/std': 0.0, 
+'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 0.49838174134492874, 'clip_ratio/low_mean': 
+0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 
+'step_time': 63.17190772300091, 'epoch': 0.0}
+[05:23:26] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'No', 'prompt': [{'content': 'Let $A$ be a finite-dimensional $k$-algebra that does not
+necessarily have a
+                    multiplicative identity. If the map \\( \\mu: A \\otimes A \\rightarrow A, \\ x \\otimes y \\mapsto 
+xy \\) is surjective, does $A$
+                    have a multiplicative identity?', 'role': 'user'}], 'completion': [{'role': 'assistant', 'content': 
+"To determine whether the
+                    finite-dimensional \\( k \\)-algebra \\( A \\) with the map \\( \\mu: A \\otimes A \\rightarrow A, 
+\\ x \\otimes y \\mapsto xy \\)
+                    surjective has a multiplicative identity, let's analyze the conditions given.\n\n1. **Understanding 
+the Surjective Map**: The map
+                    \\( \\mu \\) maps the tensor product of \\( A \\) with itself to the tensor product of \\( A \\) 
+with itself. That is, \\( \\mu(x
+                    \\otimes y) = xy \\) for all \\( x, y \\in A \\).\n\n2. **Surjectivity of \\( \\mu \\)**: The 
+surjective condition implies that
+                    for any \\( z \\in A \\), there exists some \\( x \\otimes y \\in A \\otimes A \\) such that \\( 
+\\mu(x \\otimes y) = z \\). This
+                    means that for any \\( z \\in A \\), there must exist some \\( xy \\in A \\) such that \\( x(z y) = 
+z\\).\n\n3. **Non-Negativity
+                    of \\( \\mu \\)**: Since \\( \\mu \\) is surjective, it is also injective. For any \\( z \\in"}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 12/73401 [13:42<1454:15:21, 71.34s/it]    Step 12: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 
+0.00 | GPU: 5.5/8.0GB
+  Step 12/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 12/73401 [13:42<1454:15:21, 71.34s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 13/73401 [15:08<1542:34:16, 75.67s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.998501382814948e-07, 'num_tokens': 66434.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.46481311321258545, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 66.93572047700582, 'epoch': 0.0}
+    Step 13: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 13/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 13/73401 [15:08<1542:34:16, 75.67s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 14/73401 [16:18<1509:35:31, 74.05s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.998365144889034e-07, 'num_tokens': 72422.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.3147696405649185, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 78.54189393300112, 'epoch': 0.0}
+    Step 14: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 14/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 14/73401 [16:18<1509:35:31, 74.05s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 15/73401 [17:35<1524:26:26, 74.78s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.99822890696312e-07, 'num_tokens': 77826.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.3470586761832237, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 65.44800355099869, 'epoch': 0.0}
+    Step 15: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 15/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 15/73401 [17:35<1524:26:26, 74.78s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 16/73401 [18:42<1477:42:42, 72.49s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.998092669037205e-07, 'num_tokens': 83278.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.5793282836675644, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 70.28295701599563, 'epoch': 0.0}
+    Step 16: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 16/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 16/73401 [18:42<1477:42:42, 72.49s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 9.997956431111292e-07, 'num_tokens': 88814.0, 
+'completions/mean_length': 253.0, 'completions/min_length': 216.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 0.875, 'completions/mean_terminated_length': 232.0, 'completions/min_terminated_length': 
+216.0, 'completions/max_terminated_length': 248.0, 'rewards/accuracy_reward/mean': 0.0, 'rewards/accuracy_reward/std': 
+0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 0.5229886695742607, 
+'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 
+'clip_ratio/region_mean': 0.0, 'step_time': 62.01279577999958, 'epoch': 0.0}
+[05:29:38] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'Yes', 'prompt': [{'content': 'Is it possible to arrange six pairwise non-intersecting 
+opaque parallelepipeds in
+                    space such that there exists a point in space, not belonging to any of them, from which none of 
+their vertices are visible?',
+                    'role': 'user'}], 'completion': [{'role': 'assistant', 'content': 'To determine whether the problem 
+statement is feasible, we need
+                    to analyze the constraints and requirements given:\n\n1. We have six pairwise non-intersecting 
+opaque parallelepipeds.\n2. There
+                    exists a point in space, not belonging to any of these parallelepipeds, from which none of their 
+vertices are visible.\n3. We need
+                    to ensure that there is no such point in before analyzing the constraints.\n\nThe problem can be 
+approached as follows:\n\n- Each
+                    of the six parallelepipeds has three vertices.\n- Extending these parallelepipeds outward, we can 
+see that even the farthest point
+                    we can consider from any of the parallelepipeds does not affect any of the points where their 
+vertices are visible.\n\nTo
+                    understand why such a configuration is valid:\n\n- The farthest point from any parallelepiped V that
+does not affect any of the
+                    visible vertices from parallelepipeds with a direct viewpoint must be the very center V of each 
+parallelepiped.\n- Since the
+                    original parallelepipeds have three vertices, a point in space that is not the farthest point shared
+by any parallelepiped (axis
+                    of symmetry) and not within the bounds of any parallelepiped would have a plane projection that does
+not intersect any
+                    parallelepiped.\n\nHence'}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 17/73401 [19:56<1490:24:40, 73.12s/it]    Step 17: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 
+0.00 | GPU: 5.5/8.0GB
+  Step 17/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 17/73401 [19:57<1490:24:40, 73.12s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 9.997820193185378e-07, 'num_tokens': 94134.0, 
+'completions/mean_length': 256.0, 'completions/min_length': 256.0, 'completions/max_length': 256.0, 
+'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 'completions/min_terminated_length': 0.0, 
+'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0, 'rewards/accuracy_reward/std': 0.0, 
+'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 0.5739341005682945, 'clip_ratio/low_mean': 
+0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 
+'step_time': 66.7409196869994, 'epoch': 0.0}
+[05:30:51] WARNING  All reward functions returned None for the following kwargs:                                        
+grpo_trainer.py:1216
+                    {'solution': 'No', 'prompt': [{'content': 'Suppose that a monic rational polynomial \\(f(x)\\) of 
+degree \\(p-1\\) has a
+                    \\(p\\)-th root of unity as a root, where \\(p\\) is a prime number. Is \\(f(x)\\) necessarily the 
+cyclotomic polynomial
+                    \\(x^{p-1} + x^{p-2} + \\cdots + x + 1\\)? Answer "Yes" or "No".', 'role': 'user'}], 'completion': 
+[{'role': 'assistant',
+                    'content': 'To determine whether the monic rational polynomial \\( f(x) \\) with a rational \\( p 
+\\)-th root of unity as a root,
+                    where \\( p \\) is a prime number, is necessarily the cyclotomic polynomial \\( x^{p-1} + x^{p-2} + 
+\\cdots + x + 1 \\), we will
+                    proceed step by step.\n\nLet \\( \\omega \\) be a primitive \\( d \\)-th root of unity, where \\( d 
+= p-1 \\). This means that \\(
+                    \\omega \\) is a complex number such that \\( \\omega^d = 1 \\) and \\( \\omega \\) satisfies the 
+polynomial congruence:\n[
+                    f(\\omega) = 0. \\]\nFrom the definition of \\( \\omega \\), we have:\n[ \\omega^n = \\omega^{n 
+\\mod d}. \\]\nThus, the
+                    polynomial equation \\( f(\\omega) = 0 \\) becomes:\n[ f^n(\\omega) = 0. \\]\nThis implies that \\( 
+\\omega \\) is also a root of
+                    the polynomial \\( f(x) \\), so \\( f(\\omega) = 0 \\).\n\nThe polynomial \\( f(x) \\) is monic and 
+of degree \\('}]}
+                    Please ensure that at least one reward function returns a valid reward.
+
+  0%|          | 18/73401 [21:06<1470:46:01, 72.15s/it]    Step 18: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 
+0.00 | GPU: 5.5/8.0GB
+  Step 18/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 18/73401 [21:06<1470:46:01, 72.15s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
+
+  0%|          | 19/73401 [22:13<1437:22:54, 70.52s/it]{'loss': 0.0, 'grad_norm': 0.0, 'learning_rate': 
+9.997683955259464e-07, 'num_tokens': 100474.0, 'completions/mean_length': 256.0, 'completions/min_length': 256.0, 
+'completions/max_length': 256.0, 'completions/clipped_ratio': 1.0, 'completions/mean_terminated_length': 0.0, 
+'completions/min_terminated_length': 0.0, 'completions/max_terminated_length': 0.0, 'rewards/accuracy_reward/mean': 0.0,
+'rewards/accuracy_reward/std': 0.0, 'reward': 0.0, 'reward_std': 0.0, 'frac_reward_zero_std': 1.0, 'entropy': 
+0.41328518092632294, 'clip_ratio/low_mean': 0.0, 'clip_ratio/low_min': 0.0, 'clip_ratio/high_mean': 0.0, 
+'clip_ratio/high_max': 0.0, 'clip_ratio/region_mean': 0.0, 'step_time': 64.60796771700552, 'epoch': 0.0}
+    Step 19: loss: 0.0000 | lr: 1.00e-06 | grad: 0.00 | epoch: 0.00 | GPU: 5.5/8.0GB
+  Step 19/73,401 (0.0%) loss=0.0000 | lr=1.00e-06 | grad=0.000
+  GPU 0: 5.54GB allocated / 10.83GB reserved / 8.0GB total
+
+
+
+  0%|          | 19/73401 [22:13<1437:22:54, 70.52s/it]Generate config GenerationConfig {
+  "do_sample": true,
+  "eos_token_id": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "repetition_penalty": 1.1,
+  "temperature": 0.7,
+  "top_k": 20,
+  "top_p": 0.8
+}
+
